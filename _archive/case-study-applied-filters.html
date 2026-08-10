@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applied Filters QA — David Boston</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap">
+    <div class="brand">David Boston <span>/ Product Design</span></div>
+    <nav>
+      <a href="index.html">Index</a>
+      <a href="mailto:dboston1208@gmail.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="cs-header">
+    <a class="cs-back" href="index.html">← Index</a>
+    <h1>Applied Filters QA</h1>
+    <p class="subtitle">Closing the gap between what was designed and what shipped.</p>
+  </div>
+
+  <div class="title-block">
+    <div class="title-block-row">
+      <div class="title-block-cell"><span class="label">Company</span><span class="value">ConstructConnect</span></div>
+      <div class="title-block-cell"><span class="label">Product</span><span class="value">CCPI</span></div>
+      <div class="title-block-cell"><span class="label">Squad</span><span class="value">OptiSearch</span></div>
+      <div class="title-block-cell"><span class="label">Status</span><span class="value">QA complete — triaged</span></div>
+    </div>
+    <div class="title-block-row">
+      <div class="title-block-cell"><span class="label">Role</span><span class="value">Spec authorship, cross-breakpoint QA, issue triage</span></div>
+      <div class="title-block-cell"><span class="label">Timeline</span><span class="value tbd">TBD</span></div>
+      <div class="title-block-cell"><span class="label">Breakpoints</span><span class="value">1440 / 768 / 600 / 375</span></div>
+      <div class="title-block-cell"><span class="label">Issues found</span><span class="value">8</span></div>
+    </div>
+  </div>
+
+  <section class="cs-section">
+    <p class="kicker">The Problem</p>
+    <h2>Design debt rarely announces itself.</h2>
+    <p>It accumulates quietly — a pill background color that's close but not quite right, a filter button that uses text where the spec calls for an icon, a mobile drawer behavior that was never implemented. Individually minor. Together, they erode the credibility of the design system.</p>
+    <p>This was a systematic audit of the live CCPI search results experience against updated Figma specs — across desktop, tablet, and mobile — to document exactly where live behavior diverged from design intent.</p>
+    <div class="callout">When a feature ships, does what users experience match what the design specified? If not, what's different — and does it matter?</div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">My Role</p>
+    <h2>Owned specs through triage</h2>
+    <ul>
+      <li>Authored updated Figma specs for the applied filters component across all breakpoints</li>
+      <li>Conducted a systematic live-vs-spec comparison using computed style inspection, not visual eyeballing</li>
+      <li>Documented and severity-rated every discrepancy found</li>
+      <li>Triaged findings with PM Darcy to separate intentional deviations from implementation gaps</li>
+      <li>Produced a structured issue list for engineering prioritization</li>
+    </ul>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Approach</p>
+    <h2>Computed values, not eyeballs</h2>
+    <p>Rather than a visual comparison, the audit extracted exact CSS values from the live application and compared them directly against spec. This removed ambiguity: either the values matched or they didn't.</p>
+    <table>
+      <tr><th>Breakpoint</th><th>Coverage</th></tr>
+      <tr><td>1440px — Desktop</td><td>Default and sidebar states</td></tr>
+      <tr><td>768px — Tablet portrait</td><td>Layout row structure</td></tr>
+      <tr><td>600px — Tablet small</td><td>Layout row structure</td></tr>
+      <tr><td>375px — Mobile</td><td>Filter panel behavior</td></tr>
+    </table>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">What We Found</p>
+    <h2>8 discrepancies, three severity levels</h2>
+
+    <h3><span class="sev sev-critical">Critical</span>Mobile filter panel opens as desktop sidebar</h3>
+    <p>Spec calls for a right-edge drawer overlay at 375px — 300px wide, with header, close button, active filter count, Clear All, section headers, and a sticky Apply button. Live implementation opens the full desktop sidebar at every viewport width.</p>
+
+    <h3><span class="sev sev-critical">Critical</span>Sidebar doesn't auto-collapse at smaller viewports</h3>
+    <p>When the sidebar defaults open at 768px or 375px, it covers the filter pills row, search bar, and left portion of the results table. A functional regression — applied filters are invisible on load.</p>
+
+    <h3><span class="sev sev-critical">Critical</span>Pills render with category label at mobile</h3>
+    <p>Spec strips the category prefix at 375px to save space (<code>Last 90 Days ×</code>). Live keeps the full label (<code>Last Updated: Last 90 Days ×</code>) regardless of breakpoint.</p>
+
+    <h3><span class="sev sev-critical">Incorrect</span>Filter button format doesn't match spec</h3>
+    <p>Spec: funnel icon + filled blue counter badge. Live: text button reading "Filters (1)" — a different component pattern entirely, not a styling mismatch.</p>
+
+    <h3><span class="sev sev-critical">Incorrect</span>Clear All missing from inline position</h3>
+    <p>Spec places Clear All inline in the pills row. Live only shows it inside the sidebar — invisible when the sidebar is closed.</p>
+
+    <h3><span class="sev sev-minor">Minor</span>Pill background color mismatch</h3>
+    <p>Spec: <code>#e7e6e5</code>. Live: <code>rgb(244, 244, 244)</code> — slightly lighter, present across all breakpoints.</p>
+
+    <h3><span class="sev sev-minor">Minor</span>Layout row structure at tablet</h3>
+    <p>At 600–768px, spec consolidates filter button, context selector, and search input into one row with pills below. Live stacks them into separate rows.</p>
+
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Section headers (COMPANY FILTERS / PROJECT FILTERS) — confirm with Darcy whether omission was intentional or an oversight.
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Triage with Darcy</p>
+    <h2>Not every discrepancy is a bug</h2>
+    <p>Some reflect intentional decisions made during build that weren't backported to the spec. The triage session separated ship-blocking issues, backlog issues, and intentional deviations requiring a spec update.</p>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Outcome of Darcy triage — which issues became Jira tickets, which were accepted as intentional, which were spec updates.
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Key Screens</p>
+    <h2>Spec vs. live, side by side</h2>
+    <div class="shot-grid">
+      <div class="shot-frame">Pill background — spec vs. live (desktop)</div>
+      <div class="shot-frame">Filter button — icon+badge vs. text</div>
+      <div class="shot-frame">Mobile drawer vs. sidebar behavior</div>
+      <div class="shot-frame">Pill label at 375px</div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Outcome</p>
+    <h2>8 discrepancies documented across 4 breakpoints</h2>
+    <p><strong>5</strong> critical / functional &nbsp;·&nbsp; <strong>3</strong> minor / visual</p>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Jira ticket count created from this audit. Issues resolved at time of writing — what shipped correctly after the audit.
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Reflection</p>
+    <h2>What worked</h2>
+    <p>Computed style inspection rather than visual comparison removed subjectivity from the process. When you can show <code>rgb(244,244,244)</code> vs <code>#e7e6e5</code> side by side, the conversation with engineering is faster and cleaner.</p>
+    <h3>What I'd do differently</h3>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      e.g. establish a QA checkpoint earlier in the build cycle, create a shared breakpoint checklist with engineering, involve Activators earlier on mobile behavior expectations.
+    </div>
+  </section>
+
+  <div class="cs-footer-nav">
+    <a href="case-study-onboarding-flow.html">← Onboarding Flow</a>
+    <a href="case-study-search-assist.html">Search Assist →</a>
+  </div>
+</div>
+
+</body>
+</html>

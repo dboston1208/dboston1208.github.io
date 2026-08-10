@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Assist — David Boston</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="wrap">
+    <div class="brand">David Boston <span>/ Product Design</span></div>
+    <nav>
+      <a href="index.html">Index</a>
+      <a href="mailto:dboston1208@gmail.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="cs-header">
+    <a class="cs-back" href="index.html">← Index</a>
+    <h1>Search Assist</h1>
+    <p class="subtitle">Helping construction professionals find the right projects — in their own words.</p>
+  </div>
+
+  <div class="title-block">
+    <div class="title-block-row">
+      <div class="title-block-cell"><span class="label">Company</span><span class="value">ConstructConnect</span></div>
+      <div class="title-block-cell"><span class="label">Product</span><span class="value">CCPI</span></div>
+      <div class="title-block-cell"><span class="label">Squad</span><span class="value">OptiSearch</span></div>
+      <div class="title-block-cell"><span class="label">Status</span><span class="value">Closed Beta — Phase 1</span></div>
+    </div>
+    <div class="title-block-row">
+      <div class="title-block-cell"><span class="label">Role</span><span class="value">Senior PD — end-to-end ownership</span></div>
+      <div class="title-block-cell"><span class="label">Timeline</span><span class="value tbd">TBD</span></div>
+      <div class="title-block-cell"><span class="label">Partners</span><span class="value">PM Darcy · Dev Lead Dennis</span></div>
+      <div class="title-block-cell"><span class="label">Target metric</span><span class="value">89% → 95% conversion</span></div>
+    </div>
+  </div>
+
+  <section class="cs-section">
+    <p class="kicker">The Problem</p>
+    <h2>Powerful, but invisible</h2>
+    <p>CCPI's search was built for power users who already knew how to translate project intent into filter logic. Everyone else needed a rep, or hours of trial and error.</p>
+    <p><strong>89%</strong> of paid users who searched took meaningful action. The other 11% abandoned before getting there — a gap with clear revenue implications at scale. A competitor's AI-powered search launch shifted market expectations and added urgency.</p>
+    <div class="callout">CCPI's filter system was powerful but invisible to users who didn't already know how to use it.</div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">My Role</p>
+    <h2>End-to-end ownership</h2>
+    <ul>
+      <li>Translated the product brief into a design direction</li>
+      <li>Ran discovery to validate the core assumption</li>
+      <li>Prototyped the NL query parser for usability testing</li>
+      <li>Defined UX copy standards differentiating Search Assist from hybrid vector search</li>
+      <li>Presented the workflow internally as a model for AI-assisted design at ConstructConnect</li>
+    </ul>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Discovery</p>
+    <h2>The leap-of-faith assumption</h2>
+    <p>Would users want natural language search <em>alongside</em> filters — not instead of them?</p>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Discovery interview count, segments (trade contractors, GCs, building product manufacturers), key questions asked, and CDH-framework insights.
+    </div>
+    <h3>A signal that changed direction</h3>
+    <p>Named project lookups — searching for a specific project by name or partial description — accounted for roughly <strong>40%</strong> of queries. The existing filter UI couldn't serve these at all.</p>
+    <h3>Prior evidence</h3>
+    <p>Ask Documents, a separate AI panel feature, had already shown CCPI users respond to AI-assisted workflows when the interface feels conversational rather than transactional.</p>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Process</p>
+    <h2>From assumption to functional prototype</h2>
+    <ul>
+      <li><strong>Story mapping</strong> — mapped the end-to-end journey in Miro, surfacing where intent-to-action handoff was breaking down</li>
+      <li><strong>Assumption risk matrix</strong> — with PM Darcy, classified NL-to-filter mapping as the highest-risk, highest-value assumption</li>
+      <li><strong>Figma mocks</strong> — default, active, parsed results, Filtered By panel, suggestion states</li>
+      <li><strong>Prototype in Cursor</strong> — functional HTML/JS prototype mapping NL queries live to CCPI's filter taxonomy (trade/CSI, location, bid stage, timeline, project value); tested search-only vs. search + filters</li>
+    </ul>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Usability testing — participant count, method (UserTesting / moderated), key tasks tested, top 2–3 findings.
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Key Design Decisions</p>
+    <h2>Conversational, not transactional</h2>
+    <p>A chat-based interface that lets users build searches iteratively through natural language — clarifying questions, suggestions, visible reasoning. Users shouldn't need to know CCPI's filter taxonomy to get good results.</p>
+    <h3>Transparency over magic</h3>
+    <p>When Search Assist maps a query to filters, it shows its work. Users can see which filters were applied and why, and adjust them. AI that explains itself earns more adoption than AI that just produces results.</p>
+    <h3>Distinguishing two AI features</h3>
+    <p>A critical decision was separating Search Assist from hybrid vector search — a simultaneous, separate feature. Both touch the same search input but serve different mental models.</p>
+    <table>
+      <tr><th></th><th>Hybrid Vector Search</th><th>Search Assist</th></tr>
+      <tr><td>Input style</td><td>A keyword or project name</td><td>A description of intent</td></tr>
+      <tr><td>What changes</td><td>Results get smarter</td><td>The interface changes</td></tr>
+      <tr><td>Hint text</td><td>"Related terms work too"</td><td>"Describe what you're looking for"</td></tr>
+      <tr><td>Mental model</td><td>Smarter search box</td><td>Someone helping me set up my search</td></tr>
+    </table>
+    <h3>Phased rollout by design</h3>
+    <p>Built to support a controlled beta — closed to 10 customers first, then a percentage of new users — so learnings could inform prompt refinement and latency improvements before broad release.</p>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Key Screens</p>
+    <h2>The interaction loop</h2>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      2–3 sentence description of final design direction.
+    </div>
+    <div class="shot-grid">
+      <div class="shot-frame">Default / empty state</div>
+      <div class="shot-frame">User typing a natural language query</div>
+      <div class="shot-frame">Parsed results + Filtered By panel</div>
+      <div class="shot-frame">Suggestion state (results too broad)</div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Outcome</p>
+    <h2>Target: 89% → 95% conversion</h2>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Phase 1 beta results from Pendo — conversion movement, task completion, time-to-first-relevant-result, drop-off reduction, beta participant quotes, secondary metrics (support requests, time-to-saved-search, document downloads).
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <p class="kicker">Reflection</p>
+    <h2>What worked</h2>
+    <p>Prototyping early and testing the NL-to-filter mapping assumption before committing to full build saved significant engineering time.</p>
+    <div class="tbd-block">
+      <span class="tbd-tag">Needs data</span>
+      Specific finding that changed the design direction. What I'd do differently. What this unlocked for the next AI feature on the roadmap.
+    </div>
+  </section>
+
+  <div class="cs-footer-nav">
+    <a href="index.html">← Index</a>
+    <a href="case-study-onboarding-flow.html">Onboarding Flow →</a>
+  </div>
+</div>
+
+</body>
+</html>
