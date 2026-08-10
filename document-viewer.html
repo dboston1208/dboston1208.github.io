@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Viewer — David Boston</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <span class="brand">D. BOSTON / PORTFOLIO</span>
+    <div class="links">
+      <a href="index.html">← Index</a>
+      <a href="mailto:dboston1208@gmail.com">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="title-block">
+  <div class="title-block__top">
+    <div class="title-block__name">
+      <h1>Document Viewer</h1>
+      <p>Epic PM-1534 — "One Document Viewer to Rule Them All"</p>
+    </div>
+    <div class="title-block__stamp">
+      <span>Sheet</span>
+      <strong>CS-02</strong>
+      <span>Phase 1 Shipped</span>
+    </div>
+  </div>
+  <div class="title-block__fields">
+    <div>
+      <label>Role</label>
+      <strong>Sr. UI Designer</strong>
+    </div>
+    <div>
+      <label>Squad</label>
+      <strong class="tbd" style="display:inline; margin:0; padding:2px 6px;">confirm</strong>
+    </div>
+    <div>
+      <label>Timeline</label>
+      <strong>Jan 2024 – Ongoing</strong>
+    </div>
+    <div>
+      <label>Phase 1 shipped</label>
+      <strong>Oct 2024</strong>
+    </div>
+  </div>
+</header>
+
+<main class="case-body">
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">01</span> Overview</div>
+    <p>Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned interaction and visual design across the download and search experiences through multiple rounds of user testing.</p>
+    <p>Phase 1 (View &amp; Download) shipped October 2024, with all target metrics hit. Phase 2 (Search Within Viewer) and Phase 3 (sharing, takeoff integration) followed.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">02</span> The Problem</div>
+    <p>Customers wanted to qualify projects faster. The existing document viewer worked against that goal at nearly every step: large documents sometimes took minutes to load, scrolling and zooming were clunky, there was no multi-page PDF export, and the document tree only went two digits deep on CSI codes, forcing users to download an entire division to find one spec.</p>
+    <p>Users had built workarounds instead of reporting the problem as broken. Some downloaded from CCPI and re-uploaded into Bluebeam just to annotate. Others downloaded to a phone, then uploaded to SharePoint, because the desktop viewer was too unreliable to trust. In VOC interviews, multiple users independently described the experience as chaotic and unorganized.</p>
+    <p>The trigger to rebuild was infrastructure: a move to Elastic Search exposed use cases, like NOT/NEAR/AND keyword operators, the old viewer couldn't support. But the opportunity was bigger than a technical migration.</p>
+    <blockquote>The document viewer wasn't a standalone feature. It was the connecting app between the qualification workflow and the estimation workflow, and the surface Building Product Manufacturer accounts would need before they could migrate off the legacy platform onto CCPI. Fixing it had leverage across two initiatives, not one.</blockquote>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">03</span> My Role</div>
+    <p>Paired with a UX design partner who led discovery interviews and journey mapping. I owned interaction and visual design end to end across the search and download experiences, running multiple rounds of user testing on both.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">04</span> Discovery &amp; Research</div>
+    <span class="tbd">TBD — pull discovery specifics from the Miro board (VOC research, journey mapping) referenced in PM-1534.</span>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">05</span> Process</div>
+    <p>Design went through four rounds of search-design iteration and two rounds of download-experience iteration, documented in the PM-1534 phase-review deck.</p>
+    <span class="tbd">TBD — pull the round-by-round narrative and shell-layout composite from the phase-review deck.</span>
+  </section>
+
+  <img class="case-image" src="assets/dv-download-spec.png" alt="Download button component spec sheet showing default, hover, focus, disabled, and dropdown states">
+  <p class="case-caption">Download component spec — states covered across two rounds of iteration on the download experience.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">06</span> Key Design Decisions</div>
+
+    <h2>Tab layout won testing, but didn't ship</h2>
+    <p>Three layout directions were tested, including a tab layout, which won. It wasn't implemented; the shipped version was a single-document view, cut before ship due to technical feasibility constraints given the build timeline. Everything else validated in testing shipped intact.</p>
+
+    <h2>Purple over yellow: an accessibility fix nobody asked for</h2>
+    <p>Testing early let the team nail down the overall design as well as the keyword-highlight accessibility problem before shipping something that would draw complaints, or worse, go unused. Users had complained about the previous document viewer's yellow-on-white keyword highlighting for a long time. It's incredibly hard to see for people without any visual disabilities, let alone people with them.</p>
+    <p>Several web-accessible color combinations were tested with users who had typical color vision as well as users with color vision deficiencies. Purple won. The reaction, internally and externally, exceeded expectations for what looked like a minor detail from the outside.</p>
+  </section>
+
+  <img class="case-image" src="assets/dv-highlight.png" alt="Document viewer showing purple keyword highlighting replacing the original yellow highlight">
+  <p class="case-caption">The shipped purple highlight. <span class="tbd" style="display:inline; margin:0; padding:2px 6px;">need before/after against the original yellow highlight</span></p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">07</span> The Solution</div>
+    <span class="tbd">TBD — write the 2-3 sentence solution summary and give it a voice pass to match the rest of the site.</span>
+  </section>
+
+  <img class="case-image" src="assets/dv-matching-toggle.png" alt="Document viewer search results showing matching-only toggle with per-document match counts">
+  <p class="case-caption">Search within the viewer — toggling between all documents and matching-only results, with per-document match counts.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">08</span> Outcome</div>
+    <p>Phase 1 shipped October 2024. All three target metrics were hit.</p>
+    <div class="metric-row">
+      <div><strong>25%</strong><span>Smaller downloads</span></div>
+      <div><strong>10%+</strong><span>Faster performance</span></div>
+      <div><strong>&lt;3s</strong><span>Time to first document view</span></div>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">09</span> Reflection</div>
+    <p><strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a repeat of years of user complaints about the old viewer.</p>
+    <p><strong>What I'd do differently:</strong> Push harder for research-validated features to ship as designed, like the tab layout, or secure a committed fast-follow rather than an open-ended "later" that risks never happening.</p>
+    <p><strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the foundation for the Ask Documents AI panel, and the migration effort off the legacy platform.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 David Boston</span>
+    <span><a href="index.html">← Back to index</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

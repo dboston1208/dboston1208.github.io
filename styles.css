@@ -1,0 +1,450 @@
+/* ==========================================================================
+   David Boston — Portfolio Design System
+   Concept: the site as a set of construction documents. Every page is a
+   "sheet" with a real architectural title block. Section numbers are
+   sheet callouts, not decoration — they mirror how CDs are actually indexed.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Color */
+  --paper: #f6f7f5;
+  --paper-alt: #eef0ed;
+  --ink: #14171a;
+  --ink-soft: #4a5257;
+  --blue-deep: #163a5c;
+  --blue-line: #2e6da4;
+  --blue-tint: #e4edf4;
+  --orange: #e8541c;
+  --orange-dim: #b8410f;
+  --grid-line: #d3d9dc;
+  --tbd-amber: #f5c518;
+  --white: #ffffff;
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 2px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--blue-line); text-decoration: none; }
+a:hover { color: var(--orange); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+/* --------------------------------------------------------------------
+   Title block — the signature element. Used on every page, scaled
+   differently: full on the index, compact on case study sheets.
+   -------------------------------------------------------------------- */
+
+.title-block {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  margin: 24px auto 0;
+  max-width: 1040px;
+}
+
+.title-block__top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.title-block__name {
+  padding: 28px 28px 20px;
+}
+
+.title-block__name h1 {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.title-block__name p {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--blue-deep);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.title-block__stamp {
+  padding: 28px;
+  border-left: 1.5px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.title-block__stamp span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.title-block__stamp strong {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.title-block__fields {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.title-block__fields div {
+  padding: 12px 20px;
+  border-right: 1px solid var(--grid-line);
+}
+
+.title-block__fields div:last-child { border-right: none; }
+
+.title-block__fields label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.title-block__fields strong {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .title-block__top { grid-template-columns: 1fr; }
+  .title-block__stamp { border-left: none; border-top: 1.5px solid var(--ink); align-items: flex-start; }
+  .title-block__fields { grid-template-columns: repeat(2, 1fr); }
+  .title-block__fields div:nth-child(2) { border-right: none; }
+}
+
+/* --------------------------------------------------------------------
+   Nav
+   -------------------------------------------------------------------- */
+
+.site-nav {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
+.site-nav .wrap {
+  max-width: 1040px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.site-nav a { color: var(--white); opacity: 0.85; }
+.site-nav a:hover { opacity: 1; color: var(--white); text-decoration: underline; }
+.site-nav .brand { font-weight: 600; opacity: 1; }
+.site-nav .links { display: flex; gap: 24px; }
+
+/* --------------------------------------------------------------------
+   Sheet index (home page project grid)
+   -------------------------------------------------------------------- */
+
+.index-intro {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 24px 8px;
+}
+
+.index-intro p {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 0;
+}
+
+.sheet-grid {
+  max-width: 1040px;
+  margin: 24px auto 80px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .sheet-grid { grid-template-columns: 1fr; }
+}
+
+.sheet-card {
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sheet-card:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--blue-deep); }
+
+.sheet-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--grid-line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.sheet-card__num { color: var(--blue-deep); font-weight: 600; }
+
+.sheet-card__status {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: var(--radius);
+}
+
+.status-shipped { background: var(--blue-tint); color: var(--blue-deep); }
+.status-beta { background: #fdece3; color: var(--orange-dim); }
+
+.sheet-card__body { padding: 18px; flex: 1; }
+
+.sheet-card__body h2 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  margin: 0 0 8px;
+}
+
+.sheet-card__body p {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+.sheet-card__metrics {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.sheet-card__metrics div { font-family: var(--font-mono); }
+
+.sheet-card__metrics strong {
+  display: block;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.sheet-card__metrics span {
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sheet-card__link {
+  display: block;
+  padding: 12px 18px;
+  border-top: 1px solid var(--grid-line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sheet-card__link:hover { color: var(--orange); }
+
+/* --------------------------------------------------------------------
+   Case study sheet body
+   -------------------------------------------------------------------- */
+
+.case-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+
+.case-section { margin-bottom: 52px; }
+
+.case-section__label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.case-section__label .num {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.case-section__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--grid-line);
+}
+
+.case-section h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  margin: 0 0 16px;
+}
+
+.case-section p { margin: 0 0 16px; font-size: 16px; }
+
+.case-section blockquote {
+  margin: 24px 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--orange);
+  background: var(--blue-tint);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--blue-deep);
+}
+
+.case-section ul, .case-section ol {
+  padding-left: 22px;
+  margin: 0 0 16px;
+}
+
+.case-section li { margin-bottom: 8px; }
+
+.metric-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--grid-line);
+}
+
+.metric-row div { font-family: var(--font-mono); }
+
+.metric-row strong { display: block; font-size: 26px; color: var(--blue-deep); }
+.metric-row span { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+
+table.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+table.decision-table th, table.decision-table td {
+  border: 1px solid var(--grid-line);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+table.decision-table th {
+  background: var(--blue-tint);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--blue-deep);
+}
+
+/* TBD placeholder — visually flags data gaps rather than hiding them */
+
+.tbd {
+  display: block;
+  margin: 12px 0;
+  padding: 12px 16px;
+  background: repeating-linear-gradient(
+    135deg, var(--tbd-amber), var(--tbd-amber) 10px, #fff8e1 10px, #fff8e1 20px
+  );
+  border: 1px solid #c9a415;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: #6b5210;
+  font-weight: 600;
+}
+
+.case-image {
+  width: 100%;
+  border: 1px solid var(--ink);
+  margin: 20px 0;
+  display: block;
+}
+
+.case-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: -12px;
+  margin-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1.5px solid var(--ink);
+  background: var(--white);
+}
+
+.site-footer .wrap {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.site-footer a { color: var(--blue-deep); }
+
+@media (max-width: 640px) {
+  .site-footer .wrap { flex-direction: column; gap: 8px; align-items: flex-start; }
+}

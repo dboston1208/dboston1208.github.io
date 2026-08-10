@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Starter — David Boston</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <span class="brand">D. BOSTON / PORTFOLIO</span>
+    <div class="links">
+      <a href="index.html">← Index</a>
+      <a href="mailto:dboston1208@gmail.com">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="title-block">
+  <div class="title-block__top">
+    <div class="title-block__name">
+      <h1>Search Starter</h1>
+      <p>Onboarding wizard — CCPI Activation</p>
+    </div>
+    <div class="title-block__stamp">
+      <span>Sheet</span>
+      <strong>CS-01</strong>
+      <span>Shipped</span>
+    </div>
+  </div>
+  <div class="title-block__fields">
+    <div>
+      <label>Role</label>
+      <strong>Sr. Product Designer</strong>
+    </div>
+    <div>
+      <label>Squad</label>
+      <strong>CCPI Activation</strong>
+    </div>
+    <div>
+      <label>Timeline</label>
+      <strong>Dec 2025 – Jun 2026</strong>
+    </div>
+    <div>
+      <label>Shipped</label>
+      <strong>June 2026</strong>
+    </div>
+  </div>
+</header>
+
+<main class="case-body">
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">01</span> Overview</div>
+    <p>New CCPI users were struggling to get started on their own. The product's search and filtering capabilities are powerful, but only once you understand how to use them. Without guidance, new users either leaned heavily on ConstructConnect reps to set up their first saved searches, or they left before finding value.</p>
+    <p>I owned the design for Search Starter, a 7-screen guided onboarding wizard with role- and entitlement-based branching logic, in partnership with the CCPI Activation squad, outside my usual OptiSearch home base.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">02</span> The Problem</div>
+    <p>This created two problems. On the user side, a confusing first experience eroded trust before the product could prove its worth. On the business side, activation that depended on human intervention wasn't scalable.</p>
+    <p>The pattern was well established going in, surfaced through both support ticket volume and user interviews, not just anecdote.</p>
+    <blockquote>CCPI's value only becomes visible once a user successfully completes a meaningful search. Everything in onboarding needed to move them toward that moment faster.</blockquote>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">03</span> My Role</div>
+    <p>I owned the design end-to-end, including logic spanning 7 user roles and 6 entitlement tiers. My responsibilities included running usability testing to validate the flow before build, coordinating with engineering on the conditional logic driving what each user sees and where they land after onboarding, and partnering with PM Christina Rodriguez throughout.</p>
+    <p>I also co-ran usability testing with fellow designer Sandjar Kozubaev. ConstructConnect had just acquired its UserTesting license, and Search Starter became the team's first real deployment of it: a chance to build our research muscle on a live project rather than a hypothetical one.</p>
+  </section>
+
+  <img class="case-image" src="assets/ss-company-type.png" alt="Search Starter onboarding wizard, first screen: company type selection">
+  <p class="case-caption">Screen 1 of 7 — company type confirmation. Sets the branching path for the rest of the wizard.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">04</span> Discovery &amp; Research</div>
+    <p>The dependency on reps for search setup was identified through a combination of support ticket volume and user interviews. Evidence, not assumption, that new users were getting stuck.</p>
+    <p>Rather than relying on discovery alone, the design was pressure-tested through structured usability testing before launch.</p>
+    <ul>
+      <li><strong>Method:</strong> Unmoderated, think-aloud sessions via UserTesting</li>
+      <li><strong>Participants:</strong> 10, spanning 3 to 30+ years of construction industry experience across general contractors, plumbing, HVAC, and roofing trades</li>
+      <li><strong>Task:</strong> "You're a plumbing specialist in Atlanta looking for new projects to bid on. Complete the onboarding to set up your search."</li>
+    </ul>
+  </section>
+
+  <img class="case-image" src="assets/ss-trades.png" alt="Trade and specialty selection screen">
+  <p class="case-caption">Trade selection, with specialties pulled from CSI codes.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">05</span> Process</div>
+    <p>The role and entitlement logic was mapped across 7 roles and 6 entitlement tiers, a matrix of 42 combinations, each with different landing pages, auto-email behavior, and search scope.</p>
+    <p>The flow itself moves through 7 screens: Company Role, Trade Selection, Project Stage Preferences, Service Area, Project Category, Keywords, and Confirmation.</p>
+
+    <div class="metric-row">
+      <div><strong>100%</strong><span>Task completion</span></div>
+      <div><strong>4.6/5</strong><span>Ease rating</span></div>
+      <div><strong>0</strong><span>Critical errors</span></div>
+      <div><strong>80%</strong><span>Would use it</span></div>
+    </div>
+
+    <table class="decision-table">
+      <tr><th>Metric</th><th>Target</th><th>Actual</th></tr>
+      <tr><td>Recall search steps</td><td>60%</td><td>100%</td></tr>
+      <tr><td>Predicted results as next step</td><td>75%</td><td>90%</td></tr>
+      <tr><td>Confidence conducting search</td><td>75%</td><td>90%</td></tr>
+      <tr><td>Understood input → output link</td><td>75%</td><td>100%</td></tr>
+    </table>
+
+    <p>What testing surfaced went beyond pass/fail. Six of ten participants explicitly praised the natural-language summary screen, unprompted, calling it a "mad lib" and a "mission statement." One participant fundamentally misunderstood the flow's purpose, flagged and addressed before launch. A meaningful minority expected onboarding to set up a persistent profile, not a per-search configuration, which became the project's central design decision. Twenty percent wanted multi-role selection, and a trade-dropdown edit bug was caught in testing before it reached production.</p>
+  </section>
+
+  <img class="case-image" src="assets/ss-keywords.png" alt="Keyword selection screen with AI-suggested keywords">
+  <p class="case-caption">Keywords screen — AI-suggested terms capped at roughly 15, an explicit cost-versus-comprehensiveness tradeoff.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">06</span> Key Design Decisions</div>
+    <h2>Resolving the "profile vs. search" mental model gap</h2>
+    <p>Testing surfaced a real split in how users understood the flow. Most correctly treated it as configuring one saved search. A meaningful minority expected onboarding to set up a persistent company profile they'd never have to re-enter. This wasn't a copy problem, it was a genuine fork in product strategy: rebuild onboarding as a true profile, fix it through messaging alone, or land somewhere in between.</p>
+    <p>We shipped both, cheaply. The wizard updates the user's actual profile and creates a default saved search literally named "My Profile." Users get the language and mental model they expected while the underlying object stays a fully editable, reusable search. It's the hybrid the research pointed to, solved through naming rather than a heavier rebuild.</p>
+
+    <h2>Progressive reduction for low-fit roles</h2>
+    <p>Users who select "Other" as their role skip all 5 middle screens, moving straight from Company Role to Confirmation with no searches created. Rather than forcing irrelevant steps, the wizard still shows a consistent start and end, so the completion pattern stays uniform across every role.</p>
+
+    <h2>Caught our own assumption mid-build</h2>
+    <p>General Contractors were originally excluded from the Trade Selection screen. We caught that restriction ourselves during build and corrected it before it ever shipped, the kind of check that's easy to skip under deadline pressure.</p>
+
+    <h2>Entitlement-gated document search, not feature-hidden</h2>
+    <p>CCPI Starter users don't get Documents in keyword search results, but they still see the Keywords screen and get a working search, just narrower in scope. The design choice was to degrade gracefully rather than hide the step entirely.</p>
+  </section>
+
+  <img class="case-image" src="assets/ss-confirmation.png" alt="Confirmation screen showing My Profile Search and My Keywords saved searches">
+  <p class="case-caption">Confirmation screen. "My Profile Search" is the naming decision that resolved the mental model gap without an architecture change.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">07</span> The Solution</div>
+    <p>Search Starter walks new users through a 7-screen guided wizard covering role, trade, project stage, location, category, and optional keywords, then closes with a natural-language summary of the search it's about to create. Every field in that summary is directly editable before confirming, so the "black box" feeling of an AI-assisted flow never sets in.</p>
+  </section>
+
+  <img class="case-image" src="assets/ss-mobile.png" alt="Mobile version of the onboarding wizard" style="max-width:320px; margin-left:auto; margin-right:auto; display:block;">
+  <p class="case-caption" style="text-align:center;">The same flow, adapted for mobile.</p>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">08</span> Outcome</div>
+    <p>Shipped June 2026. Early results from Pendo, roughly two weeks post-launch (n=286):</p>
+    <div class="metric-row">
+      <div><strong>85.3%</strong><span>Completed onboarding</span></div>
+      <div><strong>25.8%</strong><span>Reached curated match</span></div>
+      <div><strong>12 min</strong><span>Median time to value</span></div>
+      <div><strong>38%</strong><span>Reached it within 5 min</span></div>
+    </div>
+    <p>25.8% of users who completed onboarding went on to view a curated project match afterward, the clearest signal that onboarding led to real value, not just flow completion. Sample size is still small, worth another pull once more time has passed post-launch for a sturdier read.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">09</span> Reflection</div>
+    <p><strong>What worked:</strong> Partnering outside my usual squad forced a cleaner handoff discipline than I'm used to. Nothing could depend on tribal knowledge specific to OptiSearch. The usability testing investment paid for itself directly: it surfaced the profile-vs-search tension before launch, not after, and gave us a cheap way to resolve it through naming instead of a rebuild.</p>
+    <p><strong>What I'd do differently:</strong> Instrument before you replace, not after. When I went looking for a baseline to measure Search Starter against, the old onboarding page had never been tagged in Pendo. There was no historical funnel to compare to. That's an easy trap: the moment you know something's getting replaced is exactly the moment to make sure you can still measure what it used to do.</p>
+    <p><strong>What this unlocked:</strong> Search Starter was the team's first real usability study on a newly acquired UserTesting license, proof that the tool earns its keep, and a template for testing future onboarding work before it ships rather than after.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 David Boston</span>
+    <span><a href="index.html">← Back to index</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
