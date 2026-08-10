@@ -34,7 +34,7 @@
     </div>
     <div class="title-block__stamp">
       <span>Case study 02</span>
-      <strong>Phase 1 shipped Oct 2024</strong>
+      <strong>Released Nov 2024</strong>
     </div>
   </div>
   <div class="title-block__fields">
@@ -44,15 +44,15 @@
     </div>
     <div>
       <label>Squad</label>
-      <strong class="tbd" style="display:inline; margin:0; padding:2px 6px;">confirm</strong>
+      <strong>Unassigned — floater</strong>
     </div>
     <div>
       <label>Timeline</label>
-      <strong>Jan 2024 – Ongoing</strong>
+      <strong>Jan 2024 – Jul 2025</strong>
     </div>
     <div>
-      <label>Phase 1 shipped</label>
-      <strong>Oct 2024</strong>
+      <label>Released</label>
+      <strong>Nov 2024</strong>
     </div>
   </div>
 </header>
@@ -62,7 +62,7 @@
   <section class="case-section">
     <div class="case-section__label"><span class="num">01</span> Overview</div>
     <p>Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned interaction and visual design across the download and search experiences through multiple rounds of user testing.</p>
-    <p>Phase 1 (View &amp; Download) shipped October 2024, with all target metrics hit. Phase 2 (Search Within Viewer) and Phase 3 (sharing, takeoff integration) followed.</p>
+    <p>All three phases released — View &amp; Download, Search Within Viewer, then sharing and takeoff integration — reaching CCPI Pro users in November 2024 with every target metric hit. The viewer was in daily use until July 2025, when it was rolled back at full exposure for reasons that had nothing to do with the design. More on that in the outcome.</p>
   </section>
 
   <section class="case-section">
@@ -80,13 +80,15 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">04</span> Discovery &amp; Research</div>
-    <span class="tbd">TBD — pull discovery specifics from the Miro board (VOC research, journey mapping) referenced in PM-1534.</span>
+    <p>My UX partner led VOC interviews and journey mapping; I sat in on sessions and worked from the output. The most useful finding wasn't anything users said directly — it was what they'd built around the problem.</p>
+    <p>Nobody filed the old viewer as broken. They'd routed around it instead: downloading from CCPI and re-uploading into Bluebeam to annotate, or pulling documents to a phone and pushing them to SharePoint because the desktop viewer couldn't be trusted to load. Workarounds that elaborate are a stronger signal than a complaint. They tell you how much the problem costs, because you can see what people are willing to pay to avoid it.</p>
+    <p>Journey mapping placed the viewer at the seam between qualification and estimation — the point where a user decides whether a project is worth pursuing. That reframed the work from "make the viewer faster" to "stop breaking the handoff between two workflows."</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">05</span> Process</div>
-    <p>Design went through four rounds of search-design iteration and two rounds of download-experience iteration, documented in the PM-1534 phase-review deck.</p>
-    <span class="tbd">TBD — pull the round-by-round narrative and shell-layout composite from the phase-review deck.</span>
+    <p>Design went through four rounds of search-design iteration and two rounds on the download experience, each round tested before the next began rather than batched into a single validation at the end.</p>
+    <p>The two tracks needed different things. Search was a comprehension problem — could users tell which documents matched, and why — so each round tested whether people could read the result set correctly. Download was a states problem: default, hover, focus, disabled, dropdown, multi-select, and every combination that showed up once export moved beyond one file at a time. That work is closer to specification than exploration, and it's the kind of detail that quietly determines whether a build matches its spec.</p>
   </section>
 
   <img class="case-image" src="assets/dv-download-spec.png" alt="Download button component spec sheet showing default, hover, focus, disabled, and dropdown states">
@@ -104,11 +106,12 @@
   </section>
 
   <img class="case-image" src="assets/dv-highlight.png" alt="Document viewer showing purple keyword highlighting replacing the original yellow highlight">
-  <p class="case-caption">The shipped purple highlight. <span class="tbd" style="display:inline; margin:0; padding:2px 6px;">need before/after against the original yellow highlight</span></p>
+  <p class="case-caption">The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision.</p>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">07</span> The Solution</div>
-    <span class="tbd">TBD — write the 2-3 sentence solution summary and give it a voice pass to match the rest of the site.</span>
+    <p>The rebuilt viewer opens large construction document sets in under three seconds, searches inside them with real keyword operators, and exports any combination of pages without leaving the app. Search results can be filtered to matching documents only, with per-document match counts, so a user scanning a hundred-file project sees where the answer is instead of hunting for it.</p>
+    <p>The parts users noticed most weren't the big ones. Purple highlighting instead of yellow. A document tree that goes deep enough to reach a single spec instead of an entire CSI division. Multi-page export where there had been none. Individually minor, collectively the difference between a tool people worked around and one they worked in.</p>
   </section>
 
   <img class="case-image" src="assets/dv-matching-toggle.png" alt="Document viewer search results showing matching-only toggle with per-document match counts">
@@ -116,26 +119,25 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">08</span> Outcome</div>
-    <p>Phase 1 shipped October 2024. All three target metrics were hit.</p>
+    <p>Released to CCPI Pro users in November 2024. All three target metrics were hit.</p>
     <div class="metric-row">
       <div><strong>25%</strong><span>Smaller downloads</span></div>
       <div><strong>10%+</strong><span>Faster performance</span></div>
       <div><strong>&lt;3s</strong><span>Time to first document view</span></div>
     </div>
+    <p>Then, in July 2025, after eight months at full exposure, the viewer was rolled back — not for anything in the design, but for networking and security failures in the underlying infrastructure.</p>
+    <blockquote>Shipping isn't the finish line, and hitting your metrics doesn't make the work permanent. A design can be validated, adopted, and still get pulled by a layer you don't own.</blockquote>
+    <p>I'm including it anyway. The eight months it was live are real, the metrics held, and the accessibility work in particular outlived the rollback. Portfolios that only show work still standing aren't showing the job.</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">09</span> Reflection</div>
     <p><strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a repeat of years of user complaints about the old viewer.</p>
     <p><strong>What I'd do differently:</strong> Push harder for research-validated features to ship as designed, like the tab layout, or secure a committed fast-follow rather than an open-ended "later" that risks never happening.</p>
-    <p><strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the foundation for the Ask Documents AI panel, and the migration effort off the legacy platform.</p>
+    <p><strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the foundation for the Ask Documents AI panel, and the migration effort off the legacy platform. Ask Documents later became the internal proof that conversational AI worked for this user base — the argument that made Search Assist fundable.</p>
   </section>
 
 </main>
-<footer class="page-footer">
-  <span>© 2026 David Boston</span>
-  <a href="index.html">← Back to work</a>
-</footer>
 
 </div>
 </div>
