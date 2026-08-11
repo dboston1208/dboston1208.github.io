@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Applied Filters QA — David Boston</title>
+<title>Applied Filters | David Boston</title>
 <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
@@ -16,7 +16,7 @@
     <span class="side-wordmark">DAVID<b>BOSTON</b></span>
   </a>
   <p class="side-role">Senior Product Designer</p>
-  <p class="side-bio">Building AI-native B2B software. Eight years at ConstructConnect, shipping construction tech in Atlanta, GA.</p>
+  <p class="side-bio">Senior Product Designer with 10+ years in digital product design and 8 years in B2B SaaS for construction. End-to-end ownership from discovery through ship, with recent focus on AI-assisted product experiences and the trust and transparency patterns that make them usable.</p>
   <nav class="side-nav">
     <a href="index.html" aria-current="page">Work</a>
     <a href="about.html">About</a>
@@ -29,30 +29,30 @@
 <header class="title-block">
   <div class="title-block__top">
     <div class="title-block__name">
-      <h1>Applied Filters QA</h1>
-      <p>Design QA audit — OptiSearch</p>
+      <h1>Applied Filters</h1>
+      <p>Checking what shipped against what was designed</p>
     </div>
     <div class="title-block__stamp">
       <span>Case study 04</span>
-      <strong>QA complete — in triage</strong>
+      <strong>Audit complete, in triage</strong>
     </div>
   </div>
   <div class="title-block__fields">
     <div>
       <label>Role</label>
-      <strong>Spec authorship, QA, triage</strong>
+      <strong>Spec authorship, audit, triage</strong>
     </div>
     <div>
-      <label>Squad</label>
-      <strong>OptiSearch</strong>
-    </div>
-    <div>
-      <label>Breakpoints</label>
+      <label>Screen sizes</label>
       <strong>1440 / 768 / 600 / 375</strong>
     </div>
     <div>
-      <label>Issues found</label>
+      <label>Gaps found</label>
       <strong>8</strong>
+    </div>
+    <div>
+      <label>Functional</label>
+      <strong>3 of 8</strong>
     </div>
   </div>
 </header>
@@ -61,66 +61,67 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">01</span> Overview</div>
-    <p>Design debt rarely announces itself. It accumulates quietly — a pill background that's close but not quite right, a filter button using text where the spec calls for an icon, a mobile drawer behavior that was never implemented. Individually minor. Together, they erode the credibility of the design system.</p>
-    <p>This was a systematic audit of the live CCPI search results experience against updated Figma specs, across desktop, tablet, and mobile, to document exactly where live behavior diverged from design intent.</p>
-    <blockquote>When a feature ships, does what users experience match what the design specified? If not, what's different — and does it matter?</blockquote>
+    <p>Design debt rarely announces itself. It accumulates quietly: a pill background that's close but not quite right, a filter button using text where the spec calls for an icon, a mobile drawer behavior that was never implemented. Individually minor. Together, they erode the credibility of the design system.</p>
+    <p>This was a systematic check of the live search results experience against updated Figma specs, across desktop, tablet, and mobile, to document exactly where the shipped product diverged from what was designed.</p>
+    <blockquote>When a feature ships, does what users experience match what the design specified? If not, what's different, and does it matter?</blockquote>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">02</span> My Role</div>
-    <p>I authored the updated Figma specs for the applied filters component across all breakpoints, conducted the live-vs-spec comparison, severity-rated every discrepancy, and triaged findings with PM Darcy to separate intentional deviations from implementation gaps. The output is a structured issue list engineering can prioritize directly.</p>
+    <p>I authored the updated Figma specs for the applied filters component across all screen sizes, ran the comparison against the live product, severity-rated every gap, and triaged the findings with the product manager to separate deliberate decisions from implementation misses. The output is a structured issue list engineering can prioritize directly.</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">03</span> Approach</div>
-    <h2>Computed values, not eyeballs</h2>
-    <p>Rather than a visual comparison, the audit extracted exact CSS values from the live application and compared them directly against spec. This removed ambiguity: either the values matched or they didn't. Coverage ran across four breakpoints — 1440px desktop (default and sidebar states), 768px and 600px tablet (layout row structure), and 375px mobile (filter panel behavior).</p>
+    <h2>Exact values, not impressions</h2>
+    <p>"That gray looks a little off" is not an actionable bug report. Instead of comparing by eye, I pulled the actual color, spacing, and sizing values the live product was rendering and set them beside the spec values. That turns a matter of opinion into a matter of fact: either the numbers match or they don't, and the conversation with engineering gets much shorter.</p>
+    <p>Coverage ran across four screen sizes: 1440px desktop (default and sidebar states), 768px and 600px tablet (layout row structure), and 375px mobile (filter panel behavior).</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">04</span> What the Audit Found</div>
-    <p>Eight discrepancies, severity-rated. The full set:</p>
+    <p>Eight gaps, severity-rated. The full set:</p>
     <table class="decision-table">
-      <tr><th>Severity</th><th>Discrepancy</th></tr>
+      <tr><th>Severity</th><th>Gap</th></tr>
       <tr><td>Critical</td><td>Mobile filter panel opens as the desktop sidebar instead of the specced 300px drawer overlay</td></tr>
       <tr><td>Critical</td><td>Sidebar doesn't auto-collapse at smaller viewports, covering pills, search bar, and results on load</td></tr>
       <tr><td>Critical</td><td>Pills keep the full category label at 375px instead of the specced short form</td></tr>
-      <tr><td>Incorrect</td><td>Filter button is a text button, not the specced funnel icon with counter badge — a different component, not a styling miss</td></tr>
+      <tr><td>Incorrect</td><td>Filter button is a text button instead of the specced funnel icon with counter badge. A different component, not a styling miss</td></tr>
       <tr><td>Incorrect</td><td>Clear All missing from its inline position in the pills row; only reachable inside the sidebar</td></tr>
-      <tr><td>Minor</td><td>Pill background <code>rgb(244,244,244)</code> vs specced <code>#e7e6e5</code>, all breakpoints</td></tr>
+      <tr><td>Minor</td><td>Pill background <code>rgb(244,244,244)</code> vs specced <code>#e7e6e5</code>, all screen sizes</td></tr>
       <tr><td>Minor</td><td>Tablet rows stack separately instead of consolidating into one row per spec</td></tr>
-      <tr><td>Minor</td><td>Section headers (Company / Project Filters) omitted — pending confirmation whether intentional</td></tr>
+      <tr><td>Minor</td><td>Section headers (Company / Project Filters) omitted, pending confirmation whether intentional</td></tr>
     </table>
 
     <h2>The one that matters most</h2>
-    <p>The mobile drawer is the audit's headline finding. The spec defines a right-edge drawer at 375px — 300px wide, with a header, close button, active filter count, Clear All, section headers, and a sticky Apply button. The live implementation opens the full desktop sidebar at every viewport width. Combined with the auto-collapse failure, applied filters are effectively invisible to a mobile user on load. That's not polish debt; it's a functional regression.</p>
+    <p>The mobile drawer is the headline finding. The spec defines a right-edge drawer at 375px: 300px wide, with a header, close button, active filter count, Clear All, section headers, and a sticky Apply button. The live implementation opens the full desktop sidebar at every viewport width. Combined with the auto-collapse failure, applied filters are effectively invisible to a mobile user on load.</p>
+    <p>That's the distinction worth drawing. Three of these eight are cosmetic and can wait. Three change whether a mobile user can see what they've filtered by. Sorting the list that way is the actual work; finding the gaps is the easy part.</p>
   </section>
 
   <section class="case-section">
-    <div class="case-section__label"><span class="num">05</span> Triage with the PM</div>
-    <p>Not every discrepancy is a bug. Some reflect intentional decisions made during build that were never backported to the spec. The triage session with PM Darcy separates three buckets: ship-blocking issues, backlog issues, and intentional deviations where the spec is what needs updating.</p>
-    <p>That third bucket is the underrated one. A spec that silently drifts from the product stops being a source of truth, and every future audit inherits the noise.</p>
-    <span class="tbd">TBD — triage outcome: which issues became Jira tickets, which were accepted as intentional, which resulted in spec updates.</span>
+    <div class="case-section__label"><span class="num">05</span> Triage</div>
+    <p>Not every gap is a bug. Some reflect deliberate decisions made during build that were never backported to the spec. Triage with the product manager sorts findings into three buckets: ship-blocking, backlog, and deliberate deviations where the spec is what needs updating.</p>
+    <p>That third bucket is the underrated one. A spec that silently drifts from the product stops being a source of truth, and every future audit inherits the noise. Triage is in progress; the ship-blocking mobile issues are the ones being argued for first.</p>
   </section>
 
   <section class="case-section">
-    <div class="case-section__label"><span class="num">06</span> Key Screens</div>
-    <span class="tbd">Needs screenshots — spec-vs-live side-by-sides: pill background at desktop, filter button icon+badge vs text, mobile drawer vs sidebar, pill label at 375px. Use af- filename prefix.</span>
+    <div class="case-section__label"><span class="num">06</span> Why This Is Design Work</div>
+    <p>Most portfolios show the work that goes into making something. This is the work that keeps it made. Checking the live build against the spec at every screen size, then driving the gaps to resolution with engineering and product, is what separates a designer who hands off Figma files from one who owns the outcome. The component isn't done when the spec is approved. It's done when what users see matches what was designed.</p>
+    <p>It also surfaced something true about design at scale: a spec is only as useful as the process for enforcing it. Finding these gaps was valuable. Having a repeatable method for finding them is more valuable.</p>
   </section>
 
   <section class="case-section">
-    <div class="case-section__label"><span class="num">07</span> Why This Is Design Work</div>
-    <p>Most portfolios show the work that goes into making something. This is the work that ensures it stays made. QA at this level — computed value comparison, breakpoint by breakpoint, triaged with stakeholders — is what separates a designer who hands off Figma files from one who takes ownership of the full outcome. The component isn't done when the spec is approved. It's done when what users see matches what was designed.</p>
-    <p>It also surfaced something true about design at scale: the spec is only as useful as the process for enforcing it. Finding these gaps was valuable. Having a repeatable method for finding them is more valuable.</p>
-  </section>
-
-  <section class="case-section">
-    <div class="case-section__label"><span class="num">08</span> Reflection</div>
-    <p><strong>What worked:</strong> Computed style inspection removed subjectivity from the process. When you can show <code>rgb(244,244,244)</code> next to <code>#e7e6e5</code>, the conversation with engineering is faster and cleaner.</p>
-    <span class="tbd">TBD — what I'd do differently (earlier QA checkpoint in the build cycle, shared breakpoint checklist with engineering) and downstream impact on spec documentation or QA process.</span>
+    <div class="case-section__label"><span class="num">07</span> Reflection</div>
+    <p><strong>What worked:</strong> Pulling exact values instead of comparing by eye took the subjectivity out of it. When you can put <code>rgb(244,244,244)</code> next to <code>#e7e6e5</code>, nobody has to debate whether it looks different.</p>
+    <p><strong>What I'd do differently:</strong> Run the check before the feature ships, not after. Every gap here was cheaper to fix during the build than it is now, and the mobile drawer never being implemented is something a shared breakpoint checklist between design and engineering would have caught in the first sprint.</p>
+    <p><strong>What this points at:</strong> The value isn't the eight issues. It's that the method is repeatable, and that a spec nobody checks against is just a picture.</p>
   </section>
 
 </main>
+<footer class="page-footer">
+  <span>© 2026 David Boston</span>
+  <a href="index.html">← Back to work</a>
+</footer>
 
 </div>
 </div>

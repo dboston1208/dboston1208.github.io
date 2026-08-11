@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document Viewer — David Boston</title>
+<title>Document Viewer | David Boston</title>
 <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
@@ -16,7 +16,7 @@
     <span class="side-wordmark">DAVID<b>BOSTON</b></span>
   </a>
   <p class="side-role">Senior Product Designer</p>
-  <p class="side-bio">Building AI-native B2B software. Eight years at ConstructConnect, shipping construction tech in Atlanta, GA.</p>
+  <p class="side-bio">Senior Product Designer with 10+ years in digital product design and 8 years in B2B SaaS for construction. End-to-end ownership from discovery through ship, with recent focus on AI-assisted product experiences and the trust and transparency patterns that make them usable.</p>
   <nav class="side-nav">
     <a href="index.html" aria-current="page">Work</a>
     <a href="about.html">About</a>
@@ -30,7 +30,7 @@
   <div class="title-block__top">
     <div class="title-block__name">
       <h1>Document Viewer</h1>
-      <p>Epic PM-1534 — "One Document Viewer to Rule Them All"</p>
+      <p>Epic PM-1534: "One Document Viewer to Rule Them All"</p>
     </div>
     <div class="title-block__stamp">
       <span>Case study 02</span>
@@ -44,7 +44,7 @@
     </div>
     <div>
       <label>Squad</label>
-      <strong>Unassigned — floater</strong>
+      <strong>Unassigned (floater)</strong>
     </div>
     <div>
       <label>Timeline</label>
@@ -62,15 +62,15 @@
   <section class="case-section">
     <div class="case-section__label"><span class="num">01</span> Overview</div>
     <p>Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned interaction and visual design across the download and search experiences through multiple rounds of user testing.</p>
-    <p>All three phases released — View &amp; Download, Search Within Viewer, then sharing and takeoff integration — reaching CCPI Pro users in November 2024 with every target metric hit. The viewer was in daily use until July 2025, when it was rolled back at full exposure for reasons that had nothing to do with the design. More on that in the outcome.</p>
+    <p>All three phases released: View &amp; Download, Search Within Viewer, then sharing and takeoff integration. It reached Project Intelligence Pro users in November 2024 with every target metric hit, and stayed in daily use until July 2025, when it was rolled back at full exposure for reasons that had nothing to do with the design. More on that in the outcome.</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">02</span> The Problem</div>
     <p>Customers wanted to qualify projects faster. The existing document viewer worked against that goal at nearly every step: large documents sometimes took minutes to load, scrolling and zooming were clunky, there was no multi-page PDF export, and the document tree only went two digits deep on CSI codes, forcing users to download an entire division to find one spec.</p>
-    <p>Users had built workarounds instead of reporting the problem as broken. Some downloaded from CCPI and re-uploaded into Bluebeam just to annotate. Others downloaded to a phone, then uploaded to SharePoint, because the desktop viewer was too unreliable to trust. In VOC interviews, multiple users independently described the experience as chaotic and unorganized.</p>
+    <p>Users had built workarounds instead of reporting the problem as broken. Some downloaded from Project Intelligence and re-uploaded into Bluebeam just to annotate. Others downloaded to a phone, then uploaded to SharePoint, because the desktop viewer was too unreliable to trust. In VOC interviews, multiple users independently described the experience as chaotic and unorganized.</p>
     <p>The trigger to rebuild was infrastructure: a move to Elastic Search exposed use cases, like NOT/NEAR/AND keyword operators, the old viewer couldn't support. But the opportunity was bigger than a technical migration.</p>
-    <blockquote>The document viewer wasn't a standalone feature. It was the connecting app between the qualification workflow and the estimation workflow, and the surface Building Product Manufacturer accounts would need before they could migrate off the legacy platform onto CCPI. Fixing it had leverage across two initiatives, not one.</blockquote>
+    <blockquote>The document viewer wasn't a standalone feature. It was the connecting app between the qualification workflow and the estimation workflow, and the surface Building Product Manufacturer accounts would need before they could migrate off the legacy platform onto Project Intelligence. Fixing it had leverage across two initiatives, not one.</blockquote>
   </section>
 
   <section class="case-section">
@@ -80,19 +80,22 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">04</span> Discovery &amp; Research</div>
-    <p>My UX partner led VOC interviews and journey mapping; I sat in on sessions and worked from the output. The most useful finding wasn't anything users said directly — it was what they'd built around the problem.</p>
-    <p>Nobody filed the old viewer as broken. They'd routed around it instead: downloading from CCPI and re-uploading into Bluebeam to annotate, or pulling documents to a phone and pushing them to SharePoint because the desktop viewer couldn't be trusted to load. Workarounds that elaborate are a stronger signal than a complaint. They tell you how much the problem costs, because you can see what people are willing to pay to avoid it.</p>
-    <p>Journey mapping placed the viewer at the seam between qualification and estimation — the point where a user decides whether a project is worth pursuing. That reframed the work from "make the viewer faster" to "stop breaking the handoff between two workflows."</p>
+    <p>My UX partner led VOC interviews and journey mapping; I sat in on sessions and worked from the output. The most useful finding wasn't anything users said directly. It was what they'd built around the problem.</p>
+    <p>Nobody had filed the viewer as broken. That mattered more than any single complaint. Workarounds as elaborate as the ones above tell you what the problem actually costs, because you can measure it in what people are willing to do to avoid it.</p>
+    <p>Journey mapping placed the viewer at the seam between qualification and estimation, the point where a user decides whether a project is worth pursuing. That reframed the work from "make the viewer faster" to "stop breaking the handoff between two workflows."</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">05</span> Process</div>
     <p>Design went through four rounds of search-design iteration and two rounds on the download experience, each round tested before the next began rather than batched into a single validation at the end.</p>
-    <p>The two tracks needed different things. Search was a comprehension problem — could users tell which documents matched, and why — so each round tested whether people could read the result set correctly. Download was a states problem: default, hover, focus, disabled, dropdown, multi-select, and every combination that showed up once export moved beyond one file at a time. That work is closer to specification than exploration, and it's the kind of detail that quietly determines whether a build matches its spec.</p>
+    <p>The two tracks needed different things. Search was a comprehension problem. Could users tell which documents matched, and why? Each round tested whether people could read the result set correctly. Download was the opposite kind of work. Once export moved beyond one file at a time, the button had to account for every condition it could be in: default, hover, focus, disabled, dropdown open, multiple documents selected, and the combinations of those. Specifying all of it is less exploratory than search design, and it is exactly the detail that decides whether the build matches the spec.</p>
   </section>
 
-  <img class="case-image" src="assets/dv-download-spec.png" alt="Download button component spec sheet showing default, hover, focus, disabled, and dropdown states">
-  <p class="case-caption">Download component spec — states covered across two rounds of iteration on the download experience.</p>
+  <img class="case-image" src="assets/dv-download-spec.png" alt="Download button spec sheet showing default, selected with counts, hover, tooltip hover, focus, disabled, mobile, and dropdown-active states, including the multi-page PDF versus zipped PDFs format choice">
+  <p class="case-caption">The download button, specified across every condition it can be in. The counts matter: a user selecting 2 documents and a user selecting 2,000 need the same control to behave sensibly.</p>
+
+  <img class="case-image" src="assets/dv-progress.png" alt="Progress bar component spec showing default, active with megabytes transferred, complete, and error states with cancel and retry actions">
+  <p class="case-caption">Large document sets take real time to download, so progress needed its own states. The error state carries a retry rather than dead-ending the user.</p>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">06</span> Key Design Decisions</div>
@@ -105,8 +108,8 @@
     <p>Several web-accessible color combinations were tested with users who had typical color vision as well as users with color vision deficiencies. Purple won. The reaction, internally and externally, exceeded expectations for what looked like a minor detail from the outside.</p>
   </section>
 
-  <img class="case-image" src="assets/dv-highlight.png" alt="Document viewer showing purple keyword highlighting replacing the original yellow highlight">
-  <p class="case-caption">The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision.</p>
+  <img class="case-image" src="assets/dv-highlight.png" alt="Document viewer showing keyword matches for the term facility highlighted in purple across the results list and the document body, with desktop and mobile views side by side">
+  <p class="case-caption">The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision. Matches stay legible in the results list and inside the document itself.</p>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">07</span> The Solution</div>
@@ -115,17 +118,17 @@
   </section>
 
   <img class="case-image" src="assets/dv-matching-toggle.png" alt="Document viewer search results showing matching-only toggle with per-document match counts">
-  <p class="case-caption">Search within the viewer — toggling between all documents and matching-only results, with per-document match counts.</p>
+  <p class="case-caption">Search within the viewer, toggling between all documents and matching-only results, with per-document match counts.</p>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">08</span> Outcome</div>
-    <p>Released to CCPI Pro users in November 2024. All three target metrics were hit.</p>
+    <p>Released to Project Intelligence Pro users in November 2024. All three target metrics were hit.</p>
     <div class="metric-row">
       <div><strong>25%</strong><span>Smaller downloads</span></div>
       <div><strong>10%+</strong><span>Faster performance</span></div>
       <div><strong>&lt;3s</strong><span>Time to first document view</span></div>
     </div>
-    <p>Then, in July 2025, after eight months at full exposure, the viewer was rolled back — not for anything in the design, but for networking and security failures in the underlying infrastructure.</p>
+    <p>Then, in July 2025, after eight months at full exposure, the viewer was rolled back, not for anything in the design, but for networking and security failures in the underlying infrastructure.</p>
     <blockquote>Shipping isn't the finish line, and hitting your metrics doesn't make the work permanent. A design can be validated, adopted, and still get pulled by a layer you don't own.</blockquote>
     <p>I'm including it anyway. The eight months it was live are real, the metrics held, and the accessibility work in particular outlived the rollback. Portfolios that only show work still standing aren't showing the job.</p>
   </section>
@@ -134,7 +137,7 @@
     <div class="case-section__label"><span class="num">09</span> Reflection</div>
     <p><strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a repeat of years of user complaints about the old viewer.</p>
     <p><strong>What I'd do differently:</strong> Push harder for research-validated features to ship as designed, like the tab layout, or secure a committed fast-follow rather than an open-ended "later" that risks never happening.</p>
-    <p><strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the foundation for the Ask Documents AI panel, and the migration effort off the legacy platform. Ask Documents later became the internal proof that conversational AI worked for this user base — the argument that made Search Assist fundable.</p>
+    <p><strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the foundation for the Ask Documents AI panel, and the migration effort off the legacy platform. Ask Documents later became the internal proof that conversational AI worked for this user base, the argument that made Search Assist fundable.</p>
   </section>
 
 </main>

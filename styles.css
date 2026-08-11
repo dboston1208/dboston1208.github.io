@@ -1,12 +1,12 @@
 /* ==========================================================================
-   David Boston — Portfolio (v4: sidebar layout)
+   David Boston, Portfolio (v4: sidebar layout)
    System: personal brand (stylesheet 2019). Navy #2B3748, sand #E1C599,
    near-black #2C2C2C, white. Lato everywhere. Signature device: the
    wordmark's light/bold pairing, echoed in the sidebar brand and section
    labels. Sand is the only accent and appears sparingly.
 
    Shell: persistent left sidebar (identity + nav) with content on the
-   right — grid of project tiles on the index, reading column on case
+   right, grid of project tiles on the index, reading column on case
    pages. Hover overlays are a desktop enhancement only; captions below
    each tile carry the essentials everywhere.
    ========================================================================== */
@@ -29,7 +29,7 @@
 html { scroll-behavior: smooth; }
 
 /* Cross-page fade via the View Transitions API. Browsers without support
-   navigate instantly — no fallback code needed. */
+   navigate instantly, no fallback code needed. */
 @view-transition { navigation: auto; }
 ::view-transition-old(root),
 ::view-transition-new(root) { animation-duration: 0.25s; }
@@ -69,7 +69,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
 .content { min-width: 0; }
 
 /* --------------------------------------------------------------------
-   Sidebar — identity + nav, sticky on desktop
+   Sidebar, identity + nav, sticky on desktop
    -------------------------------------------------------------------- */
 
 .sidebar {
@@ -134,7 +134,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
 .side-nav a[aria-current="page"] { color: var(--navy); }
 
 /* --------------------------------------------------------------------
-   Index — project tile grid
+   Index, project tile grid
    -------------------------------------------------------------------- */
 
 .sheet-grid {
@@ -158,7 +158,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
   box-shadow: 0 6px 20px rgba(43, 55, 72, 0.08);
 }
 
-/* Screenshot area — overlay parent */
+/* Screenshot area, overlay parent */
 
 .sheet-card__shot {
   position: relative;
@@ -190,7 +190,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
   padding: 0 24px;
 }
 
-/* Hover overlay — desktop enhancement only. Everything essential lives in
+/* Hover overlay, desktop enhancement only. Everything essential lives in
    the caption below, so touch devices lose nothing. */
 
 .sheet-card__ov {
@@ -222,7 +222,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
 
 .sheet-card__ov .ov-stat { font-size: 14px; color: var(--sand); }
 
-/* Caption below the screenshot — always visible, carries the essentials */
+/* Caption below the screenshot, always visible, carries the essentials */
 
 .sheet-card__body { padding: 18px 22px 20px; flex: 1; }
 
@@ -379,9 +379,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-
 .case-section li { margin-bottom: 8px; }
 
 .metric-row {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 24px 28px;
+  align-items: start;
   margin: 24px 0;
   padding: 22px 0;
   border-top: 1px solid var(--hairline);
@@ -426,7 +427,7 @@ table.decision-table th {
   color: var(--navy);
 }
 
-/* TBD placeholder — flags data gaps rather than hiding them */
+/* TBD placeholder, flags data gaps rather than hiding them */
 
 .tbd {
   display: block;
@@ -497,7 +498,7 @@ table.decision-table th {
 .contact-block a:hover { border-bottom: 2px solid var(--sand); }
 
 /* --------------------------------------------------------------------
-   Mobile — sidebar stacks on top, nav goes horizontal
+   Mobile, sidebar stacks on top, nav goes horizontal
    -------------------------------------------------------------------- */
 
 @media (max-width: 860px) {

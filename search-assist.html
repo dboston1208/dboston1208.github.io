@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Search Assist — David Boston</title>
+<title>Search Assist | David Boston</title>
 <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
@@ -16,7 +16,7 @@
     <span class="side-wordmark">DAVID<b>BOSTON</b></span>
   </a>
   <p class="side-role">Senior Product Designer</p>
-  <p class="side-bio">Building AI-native B2B software. Eight years at ConstructConnect, shipping construction tech in Atlanta, GA.</p>
+  <p class="side-bio">Senior Product Designer with 10+ years in digital product design and 8 years in B2B SaaS for construction. End-to-end ownership from discovery through ship, with recent focus on AI-assisted product experiences and the trust and transparency patterns that make them usable.</p>
   <nav class="side-nav">
     <a href="index.html" aria-current="page">Work</a>
     <a href="about.html">About</a>
@@ -30,11 +30,11 @@
   <div class="title-block__top">
     <div class="title-block__name">
       <h1>Search Assist</h1>
-      <p>Natural language search — OptiSearch</p>
+      <p>Natural language search for construction project data</p>
     </div>
     <div class="title-block__stamp">
       <span>Case study 03</span>
-      <strong>In active beta</strong>
+      <strong>In expanded beta</strong>
     </div>
   </div>
   <div class="title-block__fields">
@@ -43,16 +43,16 @@
       <strong>Sr. Product Designer</strong>
     </div>
     <div>
-      <label>Squad</label>
-      <strong>OptiSearch</strong>
+      <label>Timeline</label>
+      <strong>2026</strong>
     </div>
     <div>
-      <label>Timeline</label>
-      <strong class="tbd" style="display:inline; margin:0; padding:2px 6px;">TBD start – present</strong>
+      <label>First beta</label>
+      <strong>Jun 23 to Jul 31</strong>
     </div>
     <div>
       <label>Status</label>
-      <strong>Invited Beta</strong>
+      <strong>Expanding Aug 17</strong>
     </div>
   </div>
 </header>
@@ -61,14 +61,14 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">01</span> Overview</div>
-    <p>CCPI's search was built for power users — contractors and estimators who already knew how to translate project intent into filter logic. Search Assist lets everyone else describe what they're looking for in plain language, and it either starts a new search or modifies the one they already have.</p>
-    <p>I owned the end-to-end design on the OptiSearch squad, working in a triad with PM Darcy and Dev Lead Dennis, from discovery through prototype validation and into the current beta.</p>
+    <p>Project Intelligence's search was built for power users: contractors and estimators who already knew how to translate project intent into filter logic. Search Assist lets everyone else describe what they're looking for in plain language, and it either starts a new search or modifies the one they already have.</p>
+    <p>I owned the end-to-end design, working in a triad with the product manager and the dev lead, from discovery through prototype validation and into the current beta.</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">02</span> The Problem</div>
-    <p>89% of paid users who searched took meaningful action — project detail views, document access, watchlist additions. The other 11% abandoned before getting there, a gap with clear revenue implications at scale. At the same time, a direct competitor launched an AI-powered search experience that shifted user expectations across the market.</p>
-    <blockquote>CCPI's filter system was powerful but invisible to users who didn't already know how to use it.</blockquote>
+    <p>89% of paid users who searched took meaningful action: project detail views, document access, watchlist additions. The other 11% abandoned before getting there, a gap with clear revenue implications at scale. At the same time, a direct competitor launched an AI-powered search experience that shifted user expectations across the market.</p>
+    <blockquote>The filter system was powerful but invisible to users who didn't already know how to use it.</blockquote>
   </section>
 
   <section class="case-section">
@@ -80,20 +80,20 @@
     <div class="case-section__label"><span class="num">04</span> Discovery &amp; Research</div>
     <p>The leap-of-faith assumption we had to validate first: would users want natural language search <em>alongside</em> filters, not instead of them?</p>
     <p>Customer discovery said yes, with a condition. Users were increasingly open to AI-assisted workflows, but a persistent concern was fear of missing out on a project if search became too curated or fully chat-based. They were hopeful AI could save them time, and distrustful that it could replace their judgment at the quality bar they need. That tension shaped the entire design: Search Assist layers onto the existing filter interface rather than replacing it.</p>
-    <p>A signal that changed our scope: named project lookups — users searching for a specific project by name or partial description — accounted for roughly 40% of queries. The existing filter UI couldn't serve these at all.</p>
-    <p>We also had prior evidence. Ask Documents, a separate AI panel feature, had already demonstrated that CCPI users respond to AI-assisted workflows when the interface feels conversational rather than transactional.</p>
-    <span class="tbd">TBD — discovery interview count, segments, and key questions asked.</span>
+    <p>A signal that changed our scope: named project lookups, meaning users searching for a specific project by name or partial description, accounted for roughly 40% of queries. The existing filter UI couldn't serve these at all.</p>
+    <p>The customer discovery record made the problem concrete. Interviewees across trades described results that felt like noise ("a flood of garbage coming in every day," in one contractor's words), confusion about why irrelevant projects appeared, and searches that only worked after a ConstructConnect employee built them. One user summarized the dependency plainly: a rep set up her saved searches on a call, and she never touched search configuration again.</p>
+    <p>We also had prior evidence. An earlier AI document panel had already demonstrated that these users respond to AI-assisted workflows when the interface feels conversational rather than transactional.</p>
   </section>
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">05</span> Process</div>
-    <p>Story mapping in Miro surfaced where the handoff between intent and action was breaking down. With Darcy, an assumption risk matrix classified NL-to-filter mapping as our highest-risk, highest-value assumption — the thing to test before committing to build.</p>
-    <p>I designed five key states in Figma (default, active input, parsed results, the Filtered By panel, and suggestion states), then built a functional HTML/JS prototype in Cursor that accepted natural language queries and mapped them live to CCPI's real filter taxonomy: trade/CSI, location, bid stage, timeline, and project value. We tested two variants — search-only versus search plus filters.</p>
+    <p>Story mapping in Miro surfaced where the handoff between intent and action was breaking down. With the product manager, an assumption risk matrix classified natural-language-to-filter mapping as our highest-risk, highest-value assumption: the thing to test before committing to build.</p>
+    <p>I designed five key states in Figma (default, active input, parsed results, the Filtered By panel, and suggestion states), then built a functional HTML/JS prototype in Cursor that accepted natural language queries and mapped them live to the real filter taxonomy: trade/CSI, location, bid stage, timeline, and project value. We tested two variants, search-only versus search plus filters.</p>
     <p>Rather than a single usability round, validation is structured as a three-phase rollout, each phase gated by defined success criteria before advancing:</p>
     <ul>
-      <li><strong>Invited Beta</strong> — ~10 internal stakeholders plus ~10 invited customers across trade contractors and building product manufacturers. Gates: filters applied or removed correctly and out-of-scope questions refused at a 99% rate, and a 3.5+ average on internal Likert-scale feedback.</li>
-      <li><strong>Early Availability</strong> — scaled to 50% of new users for a clean baseline comparison against a control group.</li>
-      <li><strong>General Availability</strong> — full rollout once Early Availability clears its gates.</li>
+      <li><strong>Invited Beta:</strong> roughly 10 internal stakeholders plus 10 invited customers across trade contractors and building product manufacturers. Gates: filters applied or removed correctly and out-of-scope questions refused at a 99% rate, and a 3.5+ average on internal Likert-scale feedback.</li>
+      <li><strong>Early Availability:</strong> scaled to 50% of new users for a clean baseline comparison against a control group.</li>
+      <li><strong>General Availability:</strong> full rollout once Early Availability clears its gates.</li>
     </ul>
   </section>
 
@@ -101,19 +101,19 @@
     <div class="case-section__label"><span class="num">06</span> Key Design Decisions</div>
 
     <h2>Transparency over magic</h2>
-    <p>When Search Assist maps a query to filters, it shows its work. Users see which filters were applied and why, and can adjust them directly. This wasn't a stylistic preference — discovery found users distrustful that AI could replace their judgment at the quality they need. Visible reasoning and editable filters were the direct response to that distrust.</p>
+    <p>When Search Assist maps a query to filters, it shows its work. Users see which filters were applied and why, and can adjust them directly. This wasn't a stylistic preference. Discovery found users distrustful that AI could replace their judgment at the quality they need. Visible reasoning and editable filters were the direct response to that distrust.</p>
 
     <h2>Conversational, not transactional</h2>
-    <p>Search Assist builds searches iteratively through dialogue — clarifying questions, suggestions, visible reasoning. Users shouldn't have to know CCPI's filter taxonomy to get good results. Real interactions it handles:</p>
+    <p>Search Assist builds searches iteratively through dialogue: clarifying questions, suggestions, visible reasoning. Users shouldn't have to know the filter taxonomy to get good results. Real interactions it handles:</p>
     <ul>
-      <li><em>"I'm looking for hospital projects in Atlanta over $5M"</em> — starts a new search</li>
-      <li><em>"My search includes temporary fencing, but I'm only interested in permanent fencing"</em> — modifies an existing one</li>
-      <li><em>"Why am I seeing projects that are 5 years old?"</em> — surfaces suggested filters to narrow results</li>
-      <li><em>"Why isn't this project in my search results?"</em> — compares a project against the user's criteria and explains the gap</li>
+      <li><em>"I'm looking for hospital projects in Atlanta over $5M"</em> starts a new search</li>
+      <li><em>"My search includes temporary fencing, but I'm only interested in permanent fencing"</em> modifies an existing one</li>
+      <li><em>"Why am I seeing projects that are 5 years old?"</em> surfaces suggested filters to narrow results</li>
+      <li><em>"Why isn't this project in my search results?"</em> compares a project against the user's criteria and explains the gap</li>
     </ul>
 
     <h2>Two AI features, two mental models</h2>
-    <p>A critical decision was clearly separating Search Assist from hybrid vector search, a simultaneous but separate feature. Both touched the same search input; conflating them would have undermined the clarity of each.</p>
+    <p>A critical decision was clearly separating Search Assist from hybrid vector search, a simultaneous but separate effort. Both touched the same search input; conflating them would have undermined the clarity of each.</p>
     <table class="decision-table">
       <tr><th></th><th>Hybrid vector search</th><th>Search Assist</th></tr>
       <tr><td>Input style</td><td>A keyword or project name</td><td>A description of intent</td></tr>
@@ -128,30 +128,55 @@
 
   <section class="case-section">
     <div class="case-section__label"><span class="num">07</span> The Solution</div>
-    <p>Search Assist lets users describe what they're looking for in plain language, grounded in construction terminology and CCPI's own data — not a general-purpose chatbot bolted onto search. It starts new searches, modifies existing ones, explains filter definitions in place, and shows every filter it applies.</p>
-    <span class="tbd">Needs screenshots — the 5 key states: default, typing, parsed results, Filtered By panel, suggestion state. Use sa- filename prefix.</span>
+    <p>Search Assist lets users describe what they're looking for in plain language, grounded in construction terminology and the platform's own data, not a general-purpose chatbot bolted onto search. It starts new searches, modifies existing ones, explains filter definitions in place, and shows every filter it applies.</p>
   </section>
 
+  <img class="case-image" src="assets/sa-default.png" alt="Search Assist panel open beside the search results page, showing the empty state prompt: Let's build your search">
+  <p class="case-caption">The panel opens alongside search, not instead of it. The filter sidebar and results stay visible and editable throughout.</p>
+
+  <img class="case-image" src="assets/sa-clarify.png" alt="Search Assist asking which state Atlanta is in, offering Atlanta, Georgia and Atlanta, Texas as tappable options">
+  <p class="case-caption">Ambiguity becomes a question, not a guess. "Hospital projects in Atlanta over $5M" triggers a clarifying prompt instead of silently picking a state.</p>
+
+  <img class="case-image" src="assets/sa-filters-applied.png" alt="Filter pill row showing five applied filters: Last Updated, Keyword hospital, Project Value $5M and above, Category Medical, Location within 50 miles of Atlanta GA">
+  <p class="case-caption">Transparency over magic: every filter Search Assist applies lands in the standard pill row, visible and removable. Note the inferred Category of Medical and the 50-mile radius.</p>
+
+  <img class="case-image" src="assets/sa-suggestions.png" alt="Search Assist response showing zero projects found with suggested next steps: show projects in planning stage, newest projects, projects in my service area">
+  <p class="case-caption">The suggestion state turns zero results into a recovery moment, offering pivots in the panel instead of a dead end.</p>
+
   <section class="case-section">
-    <div class="case-section__label"><span class="num">08</span> Outcome</div>
-    <p>In active Invited Beta. What has real data behind it right now:</p>
+    <div class="case-section__label"><span class="num">08</span> What the Beta Surfaced</div>
+    <p>Internal beta ran expectation-first: participants wrote down real customer prompts and what they expected Search Assist to do <em>before</em> running them, so every response could be graded against a stated expectation instead of a vibe. Feedback was scored across five dimensions: filters, keywords, revisions, response length, and helpfulness.</p>
+    <p>Three themes came out of it:</p>
     <ul>
-      <li><strong>Customer usefulness</strong> — participants who say they'd use Search Assist again to build a search</li>
-      <li><strong>Quality</strong> — thumbs-down rate against the 5% ceiling</li>
-      <li><strong>Refinement adoption</strong> — % of users applying at least one suggested refinement</li>
-      <li><strong>Return usage</strong> — % using Search Assist in a second session</li>
+      <li><strong>Filters vs. keywords is a philosophy, not a bug.</strong> Search Assist leaned on the trades filter; trainers who work with customers daily reported keyword search consistently serves users better. That tension is now explicit guidance work, not a silent default.</li>
+      <li><strong>Iteration friction beats parsing errors.</strong> The most repeated complaint wasn't wrong filters. It was having to exit and restart to try a new prompt. The conversational loop mattered more than single-shot accuracy.</li>
+      <li><strong>Multilingual support over-delivered.</strong> Testers ran full sessions in Spanish and German. Search Assist parsed intent, applied correct filters, and responded in kind, a value prop for English-as-a-second-language users that cost nearly nothing to include.</li>
     </ul>
-    <span class="tbd">TBD — resolve the target metric first (Rollout Plan defines success as a 10% relative lift over control, which conflicts with the 89% → 95% framing in earlier docs; lean toward the sourced Rollout Plan number). Then pull beta data from Survey Responses, Hex question logs, and the Pendo replay playlist. No customer or company names in anything published.</span>
   </section>
 
   <section class="case-section">
-    <div class="case-section__label"><span class="num">09</span> Reflection</div>
-    <p><strong>What worked:</strong> Prototyping early and testing the NL-to-filter mapping assumption before committing to full build saved significant engineering time.</p>
-    <p><strong>Honest caveat worth keeping:</strong> beta participants are shown the feature directly and given a channel to ask questions, which could bias their responses relative to a cold, unassisted rollout.</p>
-    <span class="tbd">TBD — the specific prototype finding that changed direction, what I'd do differently, and whether the gated rollout structure became the template for the next AI feature.</span>
+    <div class="case-section__label"><span class="num">09</span> Outcome</div>
+    <p>The first Invited Beta round ran June 23 to July 31, 2026; an expanded invited beta with a larger audience begins August 17. Advancement is gated, not scheduled: 3 of 5 participants saying they'd use it again, a 3.5+ aggregated Likert score, and a thumbs-down rate under 5%. Early Availability follows, at 50% of new users measured against a control group, with success defined as a <strong>10%+ relative lift</strong> in the search-to-forward-action funnel.</p>
+    <div class="metric-row">
+      <div><strong>3.5+</strong><span>Likert gate</span></div>
+      <div><strong>&le;5%</strong><span>Thumbs-down ceiling</span></div>
+      <div><strong>+10%</strong><span>Lift target vs control</span></div>
+    </div>
+    <p>Final numbers land when the expanded beta closes. Writing this up mid-flight is deliberate: the gates were set before the data came in, which is the part I'd want a reader to judge.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section__label"><span class="num">10</span> Reflection</div>
+    <p><strong>What worked:</strong> Prototyping early and testing the natural-language-to-filter mapping assumption before committing to full build saved significant engineering time. The expectation-first beta format also earned its keep. Grading responses against stated expectations produced actionable themes instead of scattered opinions.</p>
+    <p><strong>Honest caveat worth keeping:</strong> beta participants are shown the feature directly and given a channel to ask questions, which could bias their responses relative to a cold, unassisted rollout. The Early Availability control-group comparison exists precisely to remove that bias.</p>
+    <p><strong>What I'd do differently:</strong> This is the first AI feature I've designed, and the honest lesson so far is to open testing earlier and more often. The expectation-first beta produced the sharpest learnings of the entire project, and there's no reason a version of it couldn't have run against the Cursor prototype months sooner. I'm writing this while the work is still live, which is its own answer: the project isn't done teaching me yet.</p>
   </section>
 
 </main>
+<footer class="page-footer">
+  <span>© 2026 David Boston</span>
+  <a href="index.html">← Back to work</a>
+</footer>
 
 </div>
 </div>
