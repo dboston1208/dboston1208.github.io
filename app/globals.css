@@ -375,16 +375,6 @@ table.decision-table th {
   margin-bottom: 24px;
 }
 
-/* Sticky pinned cover for the work section (components/work-sticky-scroll.tsx).
-   Clears the floating navbar pill, which — despite SiteNavbar passing
-   `top-0` — actually renders around y=100-146px (NavBody animates y:20 on
-   top of `.top-0`, and `cn` doesn't dedupe against a `.top-20` emitted
-   later in the compiled sheet). Falls back to vertical centering on tall
-   viewports once past that floor. */
-.work-media {
-  top: max(160px, calc(50vh - 170px));
-}
-
 /* --------------------------------------------------------------------
    Mobile overrides.
 
@@ -434,47 +424,23 @@ table.decision-table th {
     font-size: 17px;
   }
 
-  .work-scroll-grid {
+  .work-card {
     grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .work-media {
-    display: none;
-  }
-
-  .work-step {
-    display: block;
-    min-height: 0;
+    gap: 20px;
     padding-top: 36px;
     padding-bottom: 36px;
   }
 
-  .work-step-media {
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .work-step-title {
+  .work-card-title {
     font-size: 26px;
   }
 
-  /* Neutralize the desktop active/inactive color shift once steps are
-     stacked and read all at once rather than one-at-a-time via scroll. */
-  .work-step-title a {
-    color: var(--navy);
-  }
-
-  .work-step-stats {
+  .work-card-stats {
     gap: 20px;
   }
 
-  .work-step-stat-value {
+  .work-card-stat-value {
     font-size: 26px;
-  }
-
-  .work-step-text::before {
-    display: none;
   }
 
   .how-section {

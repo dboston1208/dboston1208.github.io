@@ -1,6 +1,6 @@
 import { SiteNavbar } from "@/components/site-navbar";
 import { Footer } from "@/components/footer";
-import { WorkStickyScroll } from "@/components/work-sticky-scroll";
+import { ProjectCard } from "@/components/project-card";
 import { HeroSection } from "@/components/hero-section";
 import { Recommendations } from "@/components/recommendations";
 
@@ -87,9 +87,13 @@ export default function Home() {
 
       <HeroSection />
 
-      <main>
-        <WorkStickyScroll steps={projects} />
-      </main>
+      <div className="page-container mx-auto max-w-[1080px] px-8 pb-16">
+        <main className="grid grid-cols-1">
+          {projects.map((project) => (
+            <ProjectCard key={project.href} {...project} />
+          ))}
+        </main>
+      </div>
 
       {/*
         Reference quote. Uncomment once Susan's quote is in hand.
