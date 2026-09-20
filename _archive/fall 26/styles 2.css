@@ -1,0 +1,780 @@
+/* ==========================================================================
+   David Boston, Portfolio (v5: stacked card index)
+   System: personal brand (stylesheet 2019). Navy #2B3748, sand #E1C599,
+   near-black #2C2C2C, white. Lato everywhere. Signature device: the
+   wordmark's light/bold pairing, echoed in the sidebar brand and section
+   labels. Sand is the only accent and appears sparingly.
+
+   Shell: persistent left sidebar (identity + nav) with content on the
+   right, grid of project tiles on the index, reading column on case
+   pages. Hover overlays are a desktop enhancement only; captions below
+   each tile carry the essentials everywhere.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+
+:root {
+  --navy: #2b3748;
+  --sand: #e1c599;
+  --sand-tint: #f7efe1;
+  --ink: #2c2c2c;
+  --ink-soft: #5c6470;
+  --hairline: #e6e3dd;
+  --white: #ffffff;
+  --surface: #f5f3ef;
+  --font: 'Lato', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Cross-page fade via the View Transitions API. Browsers without support
+   navigate instantly, no fallback code needed. */
+@view-transition { navigation: auto; }
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.25s; }
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--navy); text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  @view-transition { navigation: none; }
+}
+
+/* --------------------------------------------------------------------
+   Page: centered column (index)
+   -------------------------------------------------------------------- */
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+
+/* Top bar: full display width, content column aligned with .page */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--white);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.topbar__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 32px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.brand img { height: 32px; width: auto; display: block; }
+
+.wordmark {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+.wordmark b { font-weight: 900; }
+
+.topnav { display: flex; gap: 26px; }
+
+.topnav a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.topnav a:hover { color: var(--navy); border-bottom-color: var(--sand); }
+.topnav a[aria-current="page"] { color: var(--navy); }
+
+/* Hero */
+
+.hero {
+  padding: 72px 0 64px;
+  max-width: 780px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+  margin: 0 0 18px;
+}
+
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------
+   Index: stacked project cards
+   -------------------------------------------------------------------- */
+
+.work {
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 34%) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border-radius: 14px;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover { box-shadow: 0 10px 30px rgba(43, 55, 72, 0.08); }
+
+.card__col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.card__media {
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.card__media img,
+.card__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card__media img,
+.card:hover .card__media video { transform: scale(1.02); }
+
+.card__body {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card__body h2 {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.card__sub {
+  margin: 0 0 14px;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.card__stat {
+  margin: 0 0 18px;
+  padding-left: 12px;
+  border-left: 3px solid var(--sand);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.45;
+}
+
+.card__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin-top: auto;
+}
+
+.card__tags li {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--navy);
+  background: var(--sand-tint);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 10px 6px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--navy);
+}
+
+.card__arrow { transition: transform 0.15s ease; }
+
+.card:hover .card__arrow { transform: translateX(4px); }
+
+/* Footer */
+
+.foot {
+  display: flex;
+  gap: 28px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+}
+
+.foot a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.foot a:hover { color: var(--navy); border-bottom-color: var(--sand); }
+
+/* --------------------------------------------------------------------
+   LEGACY: sidebar shell. Still used by about.html and the case study
+   pages. Delete this block and the .sheet-* rules below once those
+   pages move to .page / .topbar.
+   -------------------------------------------------------------------- */
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 32px 72px;
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.content { min-width: 0; }
+
+/* --------------------------------------------------------------------
+   Sidebar, identity + nav, sticky on desktop
+   -------------------------------------------------------------------- */
+
+.sidebar {
+  position: sticky;
+  top: 56px;
+}
+
+.side-brand {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.side-brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.side-wordmark {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+.side-wordmark b { font-weight: 900; }
+
+.side-role {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+}
+
+.side-bio {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+}
+
+.side-nav { display: flex; flex-direction: column; gap: 2px; }
+
+.side-nav a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  align-self: flex-start;
+}
+
+.side-nav a:hover { color: var(--navy); border-bottom-color: var(--sand); }
+
+.side-nav a[aria-current="page"] { color: var(--navy); }
+
+/* --------------------------------------------------------------------
+   Index, project tile grid
+   -------------------------------------------------------------------- */
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.sheet-card {
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sheet-card:not(.sheet-card--soon):hover {
+  border-color: var(--navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(43, 55, 72, 0.08);
+}
+
+/* Screenshot area, overlay parent */
+
+.sheet-card__shot {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.sheet-card__cover {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  background: var(--sand-tint);
+}
+
+/* Placeholder cover for projects without exported screens yet */
+.sheet-card__cover--ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sand-tint);
+  color: #8a6d3b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* Hover overlay, desktop enhancement only. Everything essential lives in
+   the caption below, so touch devices lose nothing. */
+
+.sheet-card__ov {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 55, 72, 0.94);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 22px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sheet-card:hover .sheet-card__ov,
+.sheet-card:focus-visible .sheet-card__ov { opacity: 1; }
+
+.sheet-card__ov strong { font-size: 19px; font-weight: 900; }
+
+.sheet-card__ov .ov-meta {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.sheet-card__ov .ov-stat { font-size: 14px; color: var(--sand); }
+
+/* Caption below the screenshot, always visible, carries the essentials */
+
+.sheet-card__body { padding: 18px 22px 20px; flex: 1; }
+
+.sheet-card__body h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0 0 4px;
+}
+
+.sheet-card__sub { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+.sheet-card__sub em { font-style: normal; color: #8a6d3b; }
+
+/* Coming-soon cards: real content, not yet clickable */
+
+.sheet-card--soon { cursor: default; }
+
+/* --------------------------------------------------------------------
+   Case study header
+   -------------------------------------------------------------------- */
+
+.title-block { padding: 0 0 8px; }
+
+.title-block__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.title-block__name h1 {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.title-block__name p {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.title-block__stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.title-block__stamp span {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.title-block__stamp strong {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.title-block__fields {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.title-block__fields label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.title-block__fields strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* --------------------------------------------------------------------
+   Case study body
+   -------------------------------------------------------------------- */
+
+.case-body {
+  max-width: 680px;
+  padding: 40px 0 0;
+}
+
+.case-section { margin-bottom: 60px; }
+
+.case-section__label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.case-section__label .num { color: #8a6d3b; font-weight: 900; }
+
+.case-section__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.case-section h2 {
+  font-size: 25px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+
+.case-section p { margin: 0 0 16px; font-size: 17px; }
+
+.case-section blockquote {
+  margin: 28px 0;
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid var(--sand);
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.55;
+}
+
+.case-section ul, .case-section ol { padding-left: 22px; margin: 0 0 16px; }
+
+.case-section li { margin-bottom: 8px; }
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 24px 28px;
+  align-items: start;
+  margin: 24px 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.metric-row strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.15;
+}
+
+.metric-row span {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+table.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14.5px;
+}
+
+table.decision-table th, table.decision-table td {
+  border: 1px solid var(--hairline);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+table.decision-table th {
+  background: var(--sand-tint);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+}
+
+/* TBD placeholder, flags data gaps rather than hiding them */
+
+.tbd {
+  display: block;
+  margin: 12px 0;
+  padding: 12px 16px;
+  background: var(--sand-tint);
+  border: 1px dashed var(--sand);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8a6d3b;
+}
+
+.case-image {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  margin: 24px 0;
+  display: block;
+}
+
+.case-caption {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: -14px;
+  margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------
+   About
+   -------------------------------------------------------------------- */
+
+.about-body { max-width: 680px; }
+
+.about-body .portrait {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  margin: 0 0 32px;
+  display: block;
+}
+
+.about-body h1 {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+.contact-block {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+}
+
+.contact-block h2 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0 0 12px;
+}
+
+.contact-block a { font-weight: 700; }
+.contact-block a:hover { border-bottom: 2px solid var(--sand); }
+
+/* --------------------------------------------------------------------
+   Mobile, sidebar stacks on top, nav goes horizontal
+   -------------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .page { padding: 0 20px 60px; }
+
+  .topbar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 20px 20px;
+  }
+
+  .topnav { gap: 20px; flex-wrap: wrap; }
+
+  .hero { padding: 48px 0 40px; min-height: 70vh; }
+  .hero h1 { font-size: 30px; }
+  .hero-sub { font-size: 16px; }
+
+  .work { grid-template-columns: 1fr; gap: 26px; }
+
+  .card { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
+  .card__body { padding: 22px 20px; }
+  .card__body h2 { font-size: 21px; }
+  .card__media { aspect-ratio: 16 / 10; }
+
+  .foot { margin-top: 52px; gap: 20px; flex-wrap: wrap; }
+
+  .shell {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 36px 20px 56px;
+  }
+
+  .sidebar { position: static; }
+
+  .side-brand img { height: 36px; margin-bottom: 10px; }
+  .side-bio { margin-bottom: 20px; max-width: 480px; }
+
+  .side-nav { flex-direction: row; gap: 22px; }
+
+  .sheet-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .title-block__top { flex-direction: column-reverse; align-items: flex-start; gap: 16px; }
+  .title-block__stamp { align-items: flex-start; text-align: left; }
+  .title-block__name h1 { font-size: 32px; }
+  .title-block__fields { grid-template-columns: repeat(2, 1fr); }
+}

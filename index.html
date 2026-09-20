@@ -4,94 +4,151 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>David Boston, Senior Product Designer</title>
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
 
-<div class="shell">
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-mark.png" alt="">
+      <span class="wordmark">DAVID<b>BOSTON</b></span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html" aria-current="page">Work</a>
+      <a href="about.html">About</a>
+      <a class="topnav__res" href="resume.pdf">Resumé</a>
+    </nav>
+  </div>
+</header>
 
-<aside class="sidebar">
-  <a class="side-brand" href="index.html">
-    <img src="assets/logo-mark.png" alt="DB logo">
-    <span class="side-wordmark">DAVID<b>BOSTON</b></span>
-  </a>
-  <p class="side-role">Senior Product Designer</p>
-  <p class="side-bio">Senior Product Designer with 10+ years in digital product design and 8 years in B2B SaaS for construction. End-to-end ownership from discovery through ship, with recent focus on AI-assisted product experiences and the trust and transparency patterns that make them usable.</p>
-  <nav class="side-nav">
-    <a href="index.html" aria-current="page">Work</a>
-    <a href="about.html">About</a>
-    <a href="about.html#contact">Contact</a>
-    <a href="resume.pdf">Resumé</a>
-  </nav>
-</aside>
+<div class="page">
 
-<div class="content">
+  <section class="hero">
+    <h1>I design search and AI features that people have to trust with their judgment.</h1>
+    <p class="hero-sub">Senior Product Designer. Eight years shipping B2B SaaS for construction, most recently natural-language search and onboarding for a project intelligence platform. I prototype in code and work closest with engineers.</p>
+    <div class="hero-contact">
+      <a href="mailto:YOUR@EMAIL">Email</a>
+      <a href="https://www.linkedin.com/in/YOURHANDLE">LinkedIn</a>
+      <span>Atlanta · open to remote</span>
+    </div>
+  </section>
 
-<main class="sheet-grid">
+  <main class="work">
 
-  <a class="sheet-card" href="search-starter.html">
-    <div class="sheet-card__shot">
-      <img class="sheet-card__cover" src="assets/cover-onboarding.png" alt="Guided onboarding wizard confirmation screen">
-      <div class="sheet-card__ov">
-        <strong>Guided Onboarding</strong>
-        <span class="ov-meta">Dec 2025 – Jun 2026 · Shipped</span>
-        <span class="ov-stat">85.3% onboarding completion · 25.8% to first curated match</span>
+    <a class="card" href="search-assist.html">
+      <div class="card__media">
+        <img src="assets/cover-search-assist.png" alt="Search Assist panel open beside the search results page">
       </div>
-    </div>
-    <div class="sheet-card__body">
-      <h2>Guided Onboarding</h2>
-      <p class="sheet-card__sub">Guided onboarding for new users</p>
-    </div>
-  </a>
-
-  <a class="sheet-card" href="document-viewer.html">
-    <div class="sheet-card__shot">
-      <img class="sheet-card__cover" src="assets/cover-document-viewer.png" alt="Document Viewer with in-document search and purple keyword highlighting">
-      <div class="sheet-card__ov">
-        <strong>Document Viewer</strong>
-        <span class="ov-meta">Jan 2024 – Jul 2025 · Released Nov 2024</span>
-        <span class="ov-stat">25% smaller downloads · under 3s to first view</span>
+      <div class="card__body">
+        <p class="kicker">Search Assist · 2026 · Expanded beta</p>
+        <h2>Designing an AI search feature users would actually trust with their judgment</h2>
+        <ul class="tags">
+          <li>AI feature</li>
+          <li>B2B SaaS</li>
+          <li>0 → 1</li>
+        </ul>
+        <div class="strip">
+          <div><b>+10%</b><span>lift target vs control</span></div>
+          <div><b>≤5%</b><span>thumbs-down ceiling</span></div>
+        </div>
+        <span class="card__link">Read case study <span class="card__arrow" aria-hidden="true">→</span></span>
       </div>
-    </div>
-    <div class="sheet-card__body">
-      <h2>Document Viewer</h2>
-      <p class="sheet-card__sub">Faster access to construction documents</p>
-    </div>
-  </a>
+    </a>
 
-  <a class="sheet-card" href="search-assist.html">
-    <div class="sheet-card__shot">
-      <img class="sheet-card__cover" src="assets/cover-search-assist.png" alt="Search Assist panel open beside the search results page">
-      <div class="sheet-card__ov">
-        <strong>Search Assist</strong>
-        <span class="ov-meta">2026 · In expanded beta</span>
-        <span class="ov-stat">Rollout gated on quality thresholds, not calendar</span>
+    <a class="card" href="search-starter.html">
+      <div class="card__media">
+        <img src="assets/cover-onboarding.png" alt="Guided onboarding wizard confirmation screen">
       </div>
-    </div>
-    <div class="sheet-card__body">
-      <h2>Search Assist</h2>
-      <p class="sheet-card__sub">Natural language search over filters</p>
-    </div>
-  </a>
-
-  <a class="sheet-card" href="applied-filters.html">
-    <div class="sheet-card__shot">
-      <img class="sheet-card__cover" src="assets/cover-applied-filters.png" alt="Applied filter pills showing project value, category, and location">
-      <div class="sheet-card__ov">
-        <strong>Applied Filters</strong>
-        <span class="ov-meta">2026 · Audit complete, in triage</span>
-        <span class="ov-stat">3 of 8 gaps were functional, not cosmetic</span>
+      <div class="card__body">
+        <p class="kicker">Guided Onboarding · 2026 · Shipped</p>
+        <h2>Getting new users to a useful search before they gave up</h2>
+        <ul class="tags">
+          <li>Onboarding</li>
+          <li>B2B SaaS</li>
+          <li>Usability tested</li>
+        </ul>
+        <div class="strip">
+          <div><b>85.3%</b><span>onboarding completion</span></div>
+          <div><b>25.8%</b><span>reached a curated match</span></div>
+        </div>
+        <span class="card__link">Read case study <span class="card__arrow" aria-hidden="true">→</span></span>
       </div>
-    </div>
-    <div class="sheet-card__body">
-      <h2>Applied Filters</h2>
-      <p class="sheet-card__sub">Checking what shipped against what was designed</p>
-    </div>
-  </a>
+    </a>
 
-</main>
+    <a class="card" href="document-viewer.html">
+      <div class="card__media">
+        <img src="assets/cover-document-viewer.png" alt="Document Viewer with in-document search and keyword highlighting">
+      </div>
+      <div class="card__body">
+        <p class="kicker">Document Viewer · 2024 · Shipped</p>
+        <h2>Rebuilding a scanned-plan viewer that was costing contractors bids</h2>
+        <ul class="tags">
+          <li>Performance</li>
+          <li>Accessibility</li>
+          <li>Redesign</li>
+        </ul>
+        <div class="strip">
+          <div><b>25%</b><span>smaller downloads</span></div>
+          <div><b>&lt;3s</b><span>to first document view</span></div>
+          <div><b>10%+</b><span>faster performance</span></div>
+        </div>
+        <span class="card__link">Read case study <span class="card__arrow" aria-hidden="true">→</span></span>
+      </div>
+    </a>
+
+  </main>
 
 </div>
+
+<!--
+  Reference quote. Uncomment once Susan's quote is in hand.
+  Keep it to two sentences; wrap one phrase in <em> for the sand accent.
+
+<section class="quote-band">
+  <div class="quote-band__inner">
+    <blockquote>“QUOTE SENTENCE ONE. <em>Emphasized phrase</em> in sentence two.”
+      <cite>Susan LASTNAME, TITLE at Global Payments · <a href="https://www.linkedin.com/in/HANDLE">LinkedIn</a></cite>
+    </blockquote>
+  </div>
+</section>
+-->
+
+<div class="page">
+
+  <section class="how">
+    <h2>How I work</h2>
+    <ol>
+      <li><b>1</b><div><strong>Validate before building</strong><p>Every case study here starts with what users did, not what the team assumed. Early testing is cheaper than a wrong sprint.</p></div></li>
+      <li><b>2</b><div><strong>Degrade gracefully, don’t hide features</strong><p>When a user lacks access, the feature should still explain itself. Empty and disabled states are design, not edge cases.</p></div></li>
+      <li><b>3</b><div><strong>Make AI explain itself</strong><p>An AI feature people can’t audit is one they won’t use twice. Show the interpretation and let them correct it.</p></div></li>
+    </ol>
+  </section>
+
+<!--
+  Experience timeline. Fill in exact months from the resume, then uncomment.
+
+  <section class="timeline">
+    <h2>Eight years, one product</h2>
+    <ul>
+      <li><span>MON 2025 – now</span><div><b>Senior Product Designer</b><small>ConstructConnect · AI-assisted search</small></div></li>
+      <li><span>MON 2021 – MON 2025</span><div><b>Senior UI Designer</b><small>ConstructConnect · Document Viewer, filters, design system</small></div></li>
+      <li><span>2018 – MON 2021</span><div><b>UX Designer</b><small>ConstructConnect · search and project details</small></div></li>
+      <li><span>Before 2018</span><div><b>Broadcast production</b><small>WXIA-TV 11Alive</small></div></li>
+    </ul>
+  </section>
+-->
+
+  <footer class="foot">
+    <nav>
+      <a href="mailto:YOUR@EMAIL">Email</a>
+      <a href="https://www.linkedin.com/in/YOURHANDLE">LinkedIn</a>
+      <a href="resume.pdf">Resumé</a>
+    </nav>
+    <span>© 2026 David Boston</span>
+  </footer>
+
 </div>
 
 </body>

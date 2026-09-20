@@ -1,0 +1,559 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --navy: #2b3748;
+  --page: #faf8f4;
+  --sand: #e1c599;
+  --sand-tint: #f7efe1;
+  --gold: #8a6d3b;
+  --ink: #2c2c2a;
+  --ink-soft: #6b6a64;
+  --hairline: #e6e0d2;
+  --white: #ffffff;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-page: var(--page);
+  --color-sand: var(--sand);
+  --color-gold: var(--gold);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-hairline: var(--hairline);
+  --color-white: var(--white);
+
+  --animate-scroll: scroll var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
+
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  @view-transition {
+    navigation: none;
+  }
+}
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+/* --------------------------------------------------------------------
+   Case study pages.
+
+   Plain CSS, same reasoning as the mobile overrides below: these are
+   prose-heavy pages ported from the original static site, and the
+   BEM-style class names carry the original spacing/type rules 1:1
+   rather than re-deriving them as Tailwind utility soup.
+   -------------------------------------------------------------------- */
+
+.title-block {
+  padding: 0 0 8px;
+}
+
+.title-block__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.title-block__name h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.title-block__name p {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.title-block__stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.title-block__stamp span {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.title-block__stamp strong {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.title-block__fields {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.title-block__fields label {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.title-block__fields strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.case-body {
+  max-width: 680px;
+  padding: 40px 0 0;
+}
+
+.case-section {
+  margin-bottom: 60px;
+}
+
+.case-section__label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.case-section__label .num {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.case-section__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.case-section h2 {
+  font-size: 25px;
+  font-weight: 900;
+  margin: 0 0 14px;
+}
+
+.case-section p {
+  margin: 0 0 16px;
+  font-size: 17px;
+}
+
+.case-section blockquote {
+  margin: 28px 0;
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid var(--sand);
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.55;
+}
+
+.case-section ul,
+.case-section ol {
+  padding-left: 22px;
+  margin: 0 0 16px;
+}
+
+.case-section li {
+  margin-bottom: 8px;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 24px 28px;
+  align-items: start;
+  margin: 24px 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.metric-row strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.15;
+}
+
+.metric-row span {
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+table.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14.5px;
+}
+
+table.decision-table th,
+table.decision-table td {
+  border: 1px solid var(--hairline);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+table.decision-table th {
+  background: var(--sand-tint);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+}
+
+.case-image {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  margin: 24px 0;
+  display: block;
+}
+
+.case-caption {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: -14px;
+  margin-bottom: 24px;
+}
+
+/* Sticky pinned cover for the work section (components/work-sticky-scroll.tsx).
+   Clears the floating navbar pill, which — despite SiteNavbar passing
+   `top-0` — actually renders around y=100-146px (NavBody animates y:20 on
+   top of `.top-0`, and `cn` doesn't dedupe against a `.top-20` emitted
+   later in the compiled sheet). Falls back to vertical centering on tall
+   viewports once past that floor. */
+.work-media {
+  top: max(160px, calc(50vh - 170px));
+}
+
+/* --------------------------------------------------------------------
+   Mobile overrides.
+
+   Written as plain CSS rather than Tailwind's `max-[860px]:` arbitrary
+   variant: in this Tailwind v4 build the variant compiled correctly
+   (verified in the generated stylesheet, same cascade layer, later in
+   source order) but still lost to the unprefixed utility at a 375px
+   viewport in Chrome. Hand-written rules, keyed off stable class names
+   on the same elements, are the proven-working pattern from the
+   original static site and sidestep whatever that interaction was.
+   -------------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .page-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 48px;
+  }
+
+  .topbar-inner {
+    gap: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .brand-logo {
+    height: 26px;
+  }
+
+  .topnav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .hero {
+    padding-top: 48px;
+    padding-bottom: 40px;
+  }
+
+  .hero-h1 {
+    font-size: 38px;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+  }
+
+  .work-scroll-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .work-media {
+    display: none;
+  }
+
+  .work-step {
+    display: block;
+    min-height: 0;
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .work-step-media {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .work-step-title {
+    font-size: 26px;
+  }
+
+  /* Neutralize the desktop active/inactive color shift once steps are
+     stacked and read all at once rather than one-at-a-time via scroll. */
+  .work-step-title a {
+    color: var(--navy);
+  }
+
+  .work-step-stats {
+    gap: 20px;
+  }
+
+  .work-step-stat-value {
+    font-size: 26px;
+  }
+
+  .work-step-text::before {
+    display: none;
+  }
+
+  .how-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .how-title {
+    font-size: 30px;
+  }
+
+  .site-footer {
+    margin-top: 40px;
+  }
+
+  .title-block__top {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .title-block__stamp {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .title-block__name h1 {
+    font-size: 32px;
+  }
+
+  .title-block__fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
