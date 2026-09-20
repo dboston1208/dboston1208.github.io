@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { ProjectCard } from "@/components/project-card";
 import { HeroSection } from "@/components/hero-section";
 import { Recommendations } from "@/components/recommendations";
+import StickyScrollRevealDemo from "@/components/sticky-scroll-reveal-demo";
 
 const projects = [
   {
@@ -87,8 +88,8 @@ export default function Home() {
 
       <HeroSection />
 
-      <div className="page-container mx-auto max-w-[1080px] px-8 pb-16">
-        <main className="grid grid-cols-1">
+      <div className="page-container mx-auto max-w-[1080px] px-8 pt-6 pb-16">
+        <main className="grid grid-cols-1 gap-6">
           {projects.map((project) => (
             <ProjectCard key={project.href} {...project} />
           ))}
@@ -129,6 +130,10 @@ export default function Home() {
         </section>
 
         <Recommendations />
+
+        <section className="border-t border-hairline py-18">
+          <StickyScrollRevealDemo />
+        </section>
 
         {/*
           Experience timeline. Fill in exact months from the resume, then uncomment.

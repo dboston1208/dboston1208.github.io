@@ -22,17 +22,8 @@ export function ProjectCard({ href, kicker, title, tags, stats, image }: Project
       href={href}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.15 }}
-      className="work-card group grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] items-center gap-10 border-t border-hairline py-12 text-inherit first:border-t-0 first:pt-0"
+      className="work-card group grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] items-center gap-10 rounded-lg border border-hairline bg-white p-10 text-inherit transition-shadow duration-150 hover:shadow-md"
     >
-      <div className="aspect-[16/10] overflow-hidden border border-sand bg-white p-3.5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={image.src}
-          alt={image.alt}
-          className="h-full w-full object-cover object-top transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
-        />
-      </div>
-
       <div className="min-w-0">
         <p className="mb-2 text-sm text-ink-soft">{kicker}</p>
         <h2 className="work-card-title text-[32px] leading-[1.15] transition-colors duration-150 group-hover:text-gold">
@@ -67,6 +58,15 @@ export function ProjectCard({ href, kicker, title, tags, stats, image }: Project
             →
           </span>
         </span>
+      </div>
+
+      <div className="aspect-[16/10] overflow-hidden border border-sand bg-white p-3.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="h-full w-full object-cover object-top transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
+        />
       </div>
     </motion.a>
   );
