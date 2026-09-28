@@ -52,6 +52,7 @@
   --color-navy: var(--navy);
   --color-page: var(--page);
   --color-sand: var(--sand);
+  --color-sand-tint: var(--sand-tint);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -61,8 +62,8 @@
   --animate-scroll: scroll var(--animation-duration, 40s)
     var(--animation-direction, forwards) linear infinite;
 
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-serif: var(--font-geist), system-ui, sans-serif;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -112,6 +113,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sticky case-study nav is ~64px; keep anchored headings clear of it. */
+  scroll-padding-top: 104px;
 }
 
 @view-transition {
@@ -133,33 +136,76 @@ html {
   }
 }
 
-body {
-  background: var(--white);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.62;
-  -webkit-font-smoothing: antialiased;
+/* Element defaults live in @layer base so Tailwind's utilities can still
+   override them — unlayered rules outrank anything in a cascade layer. */
+@layer base {
+  body {
+    background: var(--page);
+    color: var(--ink-soft);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
 }
 
-a {
-  color: var(--navy);
-  text-decoration: none;
+/* --------------------------------------------------------------------
+   Hero glow.
+
+   Single soft sand radial in the top-right corner, fading to the page
+   color. Painted on a pseudo-element so it never affects layout and
+   can sit behind text without a stacking-context wrapper.
+   -------------------------------------------------------------------- */
+
+.no-scrollbar {
+  scrollbar-width: none;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 2px;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  color: var(--navy);
-  line-height: 1.1;
+.hero-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: -80px 0 auto 0;
+  height: 520px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    58% 70% at 86% 6%,
+    rgba(225, 197, 153, 0.5) 0%,
+    rgba(225, 197, 153, 0.24) 34%,
+    rgba(225, 197, 153, 0.08) 58%,
+    rgba(250, 248, 244, 0) 78%
+  );
 }
 
 /* --------------------------------------------------------------------
@@ -167,144 +213,95 @@ h3 {
 
    Plain CSS, same reasoning as the mobile overrides below: these are
    prose-heavy pages ported from the original static site, and the
-   BEM-style class names carry the original spacing/type rules 1:1
-   rather than re-deriving them as Tailwind utility soup.
+   BEM-style class names carry the spacing/type rules 1:1 rather than
+   re-deriving them as Tailwind utility soup.
+
+   Measure: prose sits in a 680px column, media stretches to the full
+   900px shell so images read wider than the text they support.
    -------------------------------------------------------------------- */
 
-.title-block {
-  padding: 0 0 8px;
-}
-
-.title-block__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 32px;
-}
-
-.title-block__name h1 {
-  font-size: 40px;
-  font-weight: 900;
-  margin: 0 0 8px;
-  letter-spacing: -0.01em;
-}
-
-.title-block__name p {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-.title-block__stamp {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.title-block__stamp span {
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.title-block__stamp strong {
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--navy);
-}
-
-.title-block__fields {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid var(--hairline);
-}
-
-.title-block__fields label {
-  display: block;
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 4px;
-}
-
-.title-block__fields strong {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--navy);
+.case-shell {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .case-body {
-  max-width: 680px;
-  padding: 40px 0 0;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .case-section {
-  margin-bottom: 60px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 72px 0 0;
+  border-top: 1px solid var(--hairline);
 }
 
-.case-section__label {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 18px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--navy);
+/* First section sits directly under the meta row, which already rules off. */
+.case-section:first-child {
+  padding-top: 56px;
+  border-top: none;
 }
 
-.case-section__label .num {
+.case-section__inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Two classes + type, so it outranks the `.case-section p` rule below
+   rather than tying with it and losing on source order. */
+.case-section p.case-section__label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--gold);
-  font-weight: 900;
 }
 
-.case-section__label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--hairline);
+.case-section p.case-section__label .num {
+  margin-right: 8px;
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
 }
 
 .case-section h2 {
-  font-size: 25px;
-  font-weight: 900;
-  margin: 0 0 14px;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0 0 18px;
+}
+
+.case-section h2 ~ h2 {
+  margin-top: 40px;
 }
 
 .case-section p {
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   font-size: 17px;
+  color: var(--ink-soft);
+}
+
+.case-section strong {
+  font-weight: 500;
+  color: var(--navy);
 }
 
 .case-section blockquote {
-  margin: 28px 0;
+  margin: 32px 0;
   padding: 4px 0 4px 22px;
-  border-left: 3px solid var(--sand);
-  font-size: 20px;
+  border-left: 1px solid var(--sand);
+  font-size: 21px;
   font-weight: 300;
-  font-style: italic;
   color: var(--navy);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .case-section ul,
 .case-section ol {
   padding-left: 22px;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
+  color: var(--ink-soft);
 }
 
 .case-section li {
@@ -316,63 +313,67 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 24px 28px;
   align-items: start;
-  margin: 24px 0;
-  padding: 22px 0;
+  margin: 32px 0;
+  padding: 26px 0;
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
 
 .metric-row strong {
   display: block;
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
   color: var(--navy);
   line-height: 1.15;
 }
 
 .metric-row span {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 table.decision-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 28px 0;
   font-size: 14.5px;
 }
 
 table.decision-table th,
 table.decision-table td {
   border: 1px solid var(--hairline);
-  padding: 10px 14px;
+  padding: 12px 14px;
   text-align: left;
+  color: var(--ink-soft);
 }
 
 table.decision-table th {
   background: var(--sand-tint);
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--navy);
 }
 
+.case-media {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 56px 0 0;
+}
+
 .case-image {
-  width: 100%;
-  border: 1px solid var(--hairline);
-  border-radius: 4px;
-  margin: 24px 0;
   display: block;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--sand-tint);
+  margin: 0;
 }
 
 .case-caption {
-  font-size: 13px;
+  max-width: 680px;
+  margin: 16px auto 0;
+  font-size: 13.5px;
   color: var(--ink-soft);
-  margin-top: -14px;
-  margin-bottom: 24px;
 }
 
 /* --------------------------------------------------------------------
@@ -394,87 +395,38 @@ table.decision-table th {
     padding-bottom: 48px;
   }
 
-  .topbar-inner {
-    gap: 16px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 16px;
-    padding-bottom: 16px;
+  .hero-glow::before {
+    height: 380px;
+    background: radial-gradient(
+      80% 60% at 82% 4%,
+      rgba(225, 197, 153, 0.44) 0%,
+      rgba(225, 197, 153, 0.18) 40%,
+      rgba(250, 248, 244, 0) 76%
+    );
   }
 
-  .brand-logo {
-    height: 26px;
+  .section-gap {
+    padding-top: 72px;
   }
 
-  .topnav {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .hero {
+  .case-section {
     padding-top: 48px;
-    padding-bottom: 40px;
   }
 
-  .hero-h1 {
-    font-size: 38px;
+  .case-section h2 {
+    font-size: 25px;
   }
 
-  .hero-sub {
-    font-size: 17px;
+  .case-media {
+    padding-top: 40px;
   }
 
-  .work-card {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding-top: 36px;
-    padding-bottom: 36px;
-  }
-
-  .work-card-title {
-    font-size: 26px;
-  }
-
-  .work-card-stats {
-    gap: 20px;
-  }
-
-  .work-card-stat-value {
-    font-size: 26px;
-  }
-
-  .how-section {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
-
-  .how-title {
-    font-size: 30px;
-  }
-
-  .site-footer {
-    margin-top: 40px;
-  }
-
-  .title-block__top {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .title-block__stamp {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .title-block__name h1 {
-    font-size: 32px;
-  }
-
-  .title-block__fields {
+  .metric-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metric-row strong {
+    font-size: 28px;
   }
 }
 
@@ -515,9 +467,6 @@ table.decision-table th {
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;

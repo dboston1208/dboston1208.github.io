@@ -5,34 +5,35 @@ export { CaseImage } from "./case-image";
 type Field = { label: string; value: string };
 
 type CaseStudyHeaderProps = {
+  eyebrow: string;
   title: string;
-  subtitle: string;
-  stampLabel: string;
-  stampValue: string;
+  summary: string;
+  hero?: { src: string; alt: string };
   fields: Field[];
 };
 
-export function CaseStudyHeader({ title, subtitle, stampLabel, stampValue, fields }: CaseStudyHeaderProps) {
+export function CaseStudyHeader({ eyebrow, title, summary, hero, fields }: CaseStudyHeaderProps) {
   return (
-    <header className="title-block">
-      <div className="title-block__top">
-        <div className="title-block__name">
-          <h1>{title}</h1>
-          <p>{subtitle}</p>
+    <header className="case-shell pt-8">
+      <p className="text-[15px] text-ink-soft">{eyebrow}</p>
+      <h1 className="mt-3 max-w-[20ch] text-[36px] leading-[1.06] text-navy sm:text-[52px]">{title}</h1>
+      <p className="mt-5 max-w-[68ch] text-[17px] text-ink-soft">{summary}</p>
+
+      {hero ? (
+        <div className="mt-12 overflow-hidden rounded-[16px] bg-sand-tint p-5 sm:p-7">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={hero.src} alt={hero.alt} className="w-full rounded-[10px] bg-white object-cover" />
         </div>
-        <div className="title-block__stamp">
-          <span>{stampLabel}</span>
-          <strong>{stampValue}</strong>
-        </div>
-      </div>
-      <div className="title-block__fields">
+      ) : null}
+
+      <dl className="case-meta mt-12 grid grid-cols-2 gap-8 border-b border-hairline pb-12 sm:grid-cols-4">
         {fields.map((field) => (
           <div key={field.label}>
-            <label>{field.label}</label>
-            <strong>{field.value}</strong>
+            <dt className="text-[15px] text-navy">{field.label}</dt>
+            <dd className="mt-1.5 text-[15px] text-ink-soft">{field.value}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </header>
   );
 }
@@ -40,16 +41,20 @@ export function CaseStudyHeader({ title, subtitle, stampLabel, stampValue, field
 type CaseSectionProps = {
   num: string;
   label: string;
+  id?: string;
   children: ReactNode;
 };
 
-export function CaseSection({ num, label, children }: CaseSectionProps) {
+export function CaseSection({ num, label, id, children }: CaseSectionProps) {
   return (
-    <section className="case-section">
-      <div className="case-section__label">
-        <span className="num">{num}</span> {label}
+    <section className="case-section" id={id}>
+      <div className="case-section__inner">
+        <p className="case-section__label">
+          <span className="num">{num}</span>
+          {label}
+        </p>
+        {children}
       </div>
-      {children}
     </section>
   );
 }

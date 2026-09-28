@@ -15,16 +15,11 @@ export function CaseImage({ src, alt, caption, className }: CaseImageProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <figure className={className ? `case-media ${className}` : "case-media"}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        onClick={() => setOpen(true)}
-        className={className ? `case-image cursor-zoom-in ${className}` : "case-image cursor-zoom-in"}
-      />
-      <p className="case-caption">{caption}</p>
+      <img src={src} alt={alt} onClick={() => setOpen(true)} className="case-image cursor-zoom-in" />
+      <figcaption className="case-caption">{caption}</figcaption>
       <Lightbox open={open} close={() => setOpen(false)} slides={[{ src, alt }]} />
-    </>
+    </figure>
   );
 }

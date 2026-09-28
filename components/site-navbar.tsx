@@ -18,7 +18,7 @@ type SiteNavbarProps = {
 const navLinks = [{ name: "Work", href: "/", current: "work" as const }];
 
 const linkClass =
-  "border-b-2 border-transparent pb-[3px] text-sm text-ink hover:text-gold aria-[current=page]:border-sand aria-[current=page]:text-navy";
+  "border-b-2 border-transparent pb-[3px] text-sm text-ink hover:text-gold aria-[current=page]:border-navy aria-[current=page]:text-navy";
 
 function Logo({ className }: { className?: string }) {
   return (
@@ -37,7 +37,7 @@ export function SiteNavbar({ current = "work" }: SiteNavbarProps) {
 
   return (
     <Navbar className="top-0">
-      <NavBody className="max-w-none border border-hairline px-6">
+      <NavBody className="max-w-none">
         <Logo />
 
         <div className="flex items-center gap-6">

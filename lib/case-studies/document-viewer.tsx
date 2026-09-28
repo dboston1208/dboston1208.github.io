@@ -14,12 +14,24 @@ const meta: CaseStudy["meta"] = {
     { label: "Timeline", value: "Jan 2024 – Jul 2025" },
     { label: "Released", value: "Nov 2024" },
   ],
+  eyebrow: "ConstructConnect · 2024",
+  summary: "Rebuilding a scanned-plan viewer that was costing contractors bids.",
+  hero: {
+    src: "/assets/cover-document-viewer.png",
+    alt: "Document Viewer with in-document search and keyword highlighting",
+  },
+  anchors: [
+    { id: "overview", label: "Overview" },
+    { id: "decisions", label: "Decisions" },
+    { id: "outcome", label: "Outcome" },
+    { id: "reflection", label: "Reflection" },
+  ],
 };
 
 function Body() {
   return (
     <>
-      <CaseSection num="01" label="Overview">
+      <CaseSection num="01" label="Overview" id="overview">
         <p>
           Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent
           projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned
@@ -112,7 +124,7 @@ function Body() {
         caption="Large document sets take real time to download, so progress needed its own states. The error state carries a retry rather than dead-ending the user."
       />
 
-      <CaseSection num="06" label="Key Design Decisions">
+      <CaseSection num="06" label="Key Design Decisions" id="decisions">
         <h2>Tab layout won testing, but didn&rsquo;t ship</h2>
         <p>
           Three layout directions were tested, including a tab layout, which won. It wasn&rsquo;t implemented; the
@@ -161,7 +173,7 @@ function Body() {
         caption="Search within the viewer, toggling between all documents and matching-only results, with per-document match counts."
       />
 
-      <CaseSection num="08" label="Outcome">
+      <CaseSection num="08" label="Outcome" id="outcome">
         <p>Released to Project Intelligence Pro users in November 2024. All three target metrics were hit.</p>
         <MetricRow
           metrics={[
@@ -185,7 +197,7 @@ function Body() {
         </p>
       </CaseSection>
 
-      <CaseSection num="09" label="Reflection">
+      <CaseSection num="09" label="Reflection" id="reflection">
         <p>
           <strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a
           repeat of years of user complaints about the old viewer.

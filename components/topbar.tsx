@@ -7,7 +7,7 @@ type TopbarProps = {
 export function Topbar({ current = "work" }: TopbarProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-hairline bg-white/92 backdrop-blur-[6px]">
-      <div className="topbar-inner mx-auto flex max-w-[1080px] items-center justify-between gap-8 px-8 py-[22px]">
+      <div className="topbar-inner mx-auto flex max-w-[1320px] items-center justify-between gap-8 px-8 py-[22px]">
         <Link className="flex items-center gap-3" href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/logo-mark.png" alt="" className="brand-logo h-[30px] w-auto" />

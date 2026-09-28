@@ -92,8 +92,10 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
         width: visible ? "40%" : "100%",
-        paddingTop: visible ? "8px" : "22px",
-        paddingBottom: visible ? "8px" : "22px",
+        paddingTop: visible ? "20px" : "22px",
+        paddingBottom: visible ? "20px" : "22px",
+        paddingLeft: visible ? "20px" : "24px",
+        paddingRight: visible ? "20px" : "24px",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -102,8 +104,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 50,
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start bg-transparent px-4 lg:flex",
-        visible && "bg-white/90",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start bg-transparent lg:flex",
+        visible && "rounded-[10px] bg-white/90",
         className,
       )}
     >
