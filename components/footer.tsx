@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { isRoute } from "@/components/site-nav";
+import { EMAIL, LINKEDIN_URL } from "@/lib/experience";
 
 const links = [
   { name: "Work", href: "/" },
@@ -8,8 +9,8 @@ const links = [
 ];
 
 const contact = [
-  { name: "YOUR@EMAIL", href: "mailto:YOUR@EMAIL" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/YOURHANDLE" },
+  { name: EMAIL, href: `mailto:${EMAIL}` },
+  { name: "LinkedIn", href: LINKEDIN_URL },
 ];
 
 export function Footer() {

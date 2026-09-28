@@ -1,3 +1,5 @@
+import { EMAIL } from "@/lib/experience";
+
 export function ProfileHeader() {
   return (
     <header className="pt-8 pb-4 sm:pt-12">
@@ -20,7 +22,7 @@ export function ProfileHeader() {
           See my work
         </a>
         <a
-          href="mailto:YOUR@EMAIL"
+          href={`mailto:${EMAIL}`}
           className="rounded-full border border-hairline bg-white px-5 py-2.5 text-[15px] text-navy transition-colors hover:border-sand"
         >
           Get in touch
