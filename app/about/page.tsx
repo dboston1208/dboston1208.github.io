@@ -18,37 +18,18 @@ export default function AboutPage() {
           <h1 className="text-[42px] leading-[1.05] text-navy sm:text-[56px]">About</h1>
         </header>
 
-        {/* Desktop is a 4-column grid on 180px rows; spans below place each tile.
-            Tablet collapses to 2 columns, mobile to a single stack. */}
+        {/* Fill a slot by giving it children. Empty slots are left out of the
+            build, and tile shapes are assigned from the filled count, in this
+            order, so put the slot you want largest first. */}
         <BentoGrid className="mt-12 sm:mt-16">
-          <BentoSlot
-            name="Portrait"
-            hint="headshot or working photo, square crop"
-            className="md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2"
-          />
-          <BentoSlot
-            name="Bio"
-            hint="2–3 sentence introduction"
-            className="md:col-span-2 lg:col-span-2"
-          />
+          <BentoSlot name="Portrait" hint="headshot or working photo, square crop" />
+          <BentoSlot name="Bio" hint="2–3 sentence introduction" />
           <BentoSlot name="Now" hint="current role and what you're working on" />
           <BentoSlot name="Location" hint="where you're based and availability" />
-          <BentoSlot
-            name="Approach"
-            hint="how you work, in a sentence or two"
-            className="md:col-span-2 lg:col-span-2"
-          />
-          <BentoSlot
-            name="Outside work"
-            hint="photo from life outside design, portrait crop"
-            className="md:row-span-2 lg:row-span-2"
-          />
+          <BentoSlot name="Approach" hint="how you work, in a sentence or two" />
+          <BentoSlot name="Outside work" hint="photo from life outside design, portrait crop" />
           <BentoSlot name="Contact" hint="email or a call-to-action" />
-          <BentoSlot
-            name="Background"
-            hint="path into design: education, earlier roles"
-            className="md:col-span-2 lg:col-span-2"
-          />
+          <BentoSlot name="Background" hint="path into design: education, earlier roles" />
           <BentoSlot name="Elsewhere" hint="LinkedIn, resume, other profiles" />
         </BentoGrid>
 
