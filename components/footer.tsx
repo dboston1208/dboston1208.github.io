@@ -4,7 +4,7 @@ import { EMAIL, LINKEDIN_URL } from "@/lib/experience";
 
 const links = [
   { name: "Work", href: "/" },
-  { name: "About", href: "/about.html" },
+  { name: "About", href: "/about" },
   { name: "Resume", href: "/resume" },
 ];
 

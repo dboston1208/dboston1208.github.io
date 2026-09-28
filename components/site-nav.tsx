@@ -6,7 +6,7 @@ type SiteNavProps = {
 
 const items = [
   { name: "Work", href: "/", key: "work" as const },
-  { name: "About", href: "/about.html", key: "about" as const },
+  { name: "About", href: "/about", key: "about" as const },
   { name: "Resume", href: "/resume", key: "resume" as const },
 ];
 
