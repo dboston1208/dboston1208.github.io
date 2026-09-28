@@ -30,7 +30,7 @@ export default function Home() {
       <div className="page-container mx-auto max-w-[1100px] px-8 pb-16">
         <ProfileHeader />
 
-        <main id="work" className="section-gap grid grid-cols-1 gap-x-6 gap-y-14 pt-[120px] md:grid-cols-2">
+        <main id="work" className="grid grid-cols-1 gap-x-6 gap-y-14 pt-12 sm:pt-20 md:grid-cols-2">
           {projects.map((project, i) => (
             <Reveal key={project.href} delay={(i % 2) * 0.08}>
               <WorkCard {...project} />
