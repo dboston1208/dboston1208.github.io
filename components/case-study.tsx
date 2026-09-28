@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { CaseThumbnail } from "@/components/case-thumbnail";
 
 export { CaseImage } from "./case-image";
 
@@ -20,10 +21,7 @@ export function CaseStudyHeader({ eyebrow, title, summary, hero, fields }: CaseS
       <p className="mt-5 max-w-[68ch] text-[17px] text-ink-soft">{summary}</p>
 
       {hero ? (
-        <div className="mt-12 overflow-hidden rounded-[16px] bg-surface p-5 sm:p-7">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={hero.src} alt={hero.alt} className="w-full rounded-[10px] bg-white object-cover" />
-        </div>
+        <CaseThumbnail src={hero.src} alt={hero.alt} className="mt-12" />
       ) : null}
 
       <dl className="case-meta mt-12 grid grid-cols-2 gap-8 border-b border-hairline pb-12 sm:grid-cols-4">

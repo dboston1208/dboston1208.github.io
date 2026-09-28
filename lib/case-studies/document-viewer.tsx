@@ -17,7 +17,7 @@ const meta: CaseStudy["meta"] = {
   eyebrow: "ConstructConnect · 2024",
   summary: "Rebuilding a scanned-plan viewer that was costing contractors bids.",
   hero: {
-    src: "/assets/cover-document-viewer.png",
+    src: "/assets/thumbs/document-viewer.png",
     alt: "Document Viewer with in-document search and keyword highlighting",
   },
   anchors: [

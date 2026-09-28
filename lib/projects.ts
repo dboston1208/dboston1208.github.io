@@ -17,7 +17,7 @@ export const projects: Project[] = [
     year: "2026",
     metric: "In expanded beta",
     image: {
-      src: "/assets/cover-search-assist.png",
+      src: "/assets/thumbs/search-assist.png",
       alt: "Search Assist panel open beside the search results page",
     },
   },
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     year: "2026",
     metric: "85.3% completed onboarding",
     image: {
-      src: "/assets/cover-onboarding.png",
+      src: "/assets/thumbs/onboarding.png",
       alt: "Guided onboarding wizard confirmation screen",
     },
   },
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     year: "2024",
     metric: "Under 3s to first document view",
     image: {
-      src: "/assets/cover-document-viewer.png",
+      src: "/assets/thumbs/document-viewer.png",
       alt: "Document Viewer with in-document search and keyword highlighting",
     },
   },
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     year: "2026",
     metric: "8 gaps found, 3 functional",
     image: {
-      src: "/assets/cover-applied-filters.png",
+      src: "/assets/thumbs/applied-filters.png",
       alt: "Applied filter pills showing project value, category, and location",
     },
   },
