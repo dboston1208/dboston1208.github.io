@@ -10,8 +10,8 @@ const items = [
   { name: "Resume", href: "/resume", key: "resume" as const },
 ];
 
-// App routes get client-side navigation; static files like /about.html and
-// /resume.pdf live in public/ outside the router and need a real request.
+// App routes get client-side navigation; static files like /resume.pdf
+// live in public/ outside the router and need a real request.
 export const isRoute = (href: string) => href.startsWith("/") && !href.includes(".");
 
 const linkClass =
