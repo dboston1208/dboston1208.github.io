@@ -1,4 +1,5 @@
 import { DevSlot } from "@/components/dev-slot";
+import { Reveal } from "@/components/reveal";
 import { hasQuote, type Testimonial } from "@/lib/testimonials";
 import { cn } from "@/lib/utils";
 
@@ -28,24 +29,28 @@ export function FeaturedTestimonial({ testimonial, className }: { testimonial: T
     .filter(Boolean)
     .join(", ");
 
+  // The reveal wrapper lives here, not at the call site, so an empty
+  // testimonial ships no element at all.
   return (
-    <section className={cn("rounded-[16px] bg-navy px-8 py-14 text-page sm:px-14 sm:py-18", className)}>
-      <blockquote className="max-w-[820px]">
-        <p className="text-[24px] leading-[1.35] font-light sm:text-[32px]">
-          &ldquo;{withEmphasis(testimonial.quote, testimonial.emphasis)}&rdquo;
-        </p>
-        <footer className="mt-6 text-[15px] text-sand">
-          {byline}
-          {testimonial.linkedin ? (
-            <>
-              {" · "}
-              <a href={testimonial.linkedin} className="border-b border-sand/50 text-sand hover:border-sand">
-                LinkedIn
-              </a>
-            </>
-          ) : null}
-        </footer>
-      </blockquote>
-    </section>
+    <Reveal className={className}>
+      <section className="rounded-[16px] bg-navy px-8 py-14 text-page sm:px-14 sm:py-18">
+        <blockquote className="max-w-[820px]">
+          <p className="text-[24px] leading-[1.35] font-light sm:text-[32px]">
+            &ldquo;{withEmphasis(testimonial.quote, testimonial.emphasis)}&rdquo;
+          </p>
+          <footer className="mt-6 text-[15px] text-sand">
+            {byline}
+            {testimonial.linkedin ? (
+              <>
+                {" · "}
+                <a href={testimonial.linkedin} className="border-b border-sand/50 text-sand hover:border-sand">
+                  LinkedIn
+                </a>
+              </>
+            ) : null}
+          </footer>
+        </blockquote>
+      </section>
+    </Reveal>
   );
 }

@@ -23,9 +23,7 @@ export default function Home() {
           ))}
         </main>
 
-        <Reveal>
-          <FeaturedTestimonial testimonial={featuredTestimonial} className="mt-[120px]" />
-        </Reveal>
+        <FeaturedTestimonial testimonial={featuredTestimonial} className="mt-[120px]" />
 
         <Footer />
       </div>
