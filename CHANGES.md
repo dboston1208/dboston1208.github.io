@@ -1,8 +1,9 @@
 # Changes — draft task pass (2026-09-28)
 
 All work is on `draft`. Nothing was pushed, merged to `main`, or deployed.
-`draft` is 15 commits ahead of `origin/draft` (the 4 earlier `redesign`
-commits, a baseline, the 9 tasks, and this file).
+`draft` is 20 commits ahead of `origin/draft` (the 4 earlier `redesign`
+commits, a baseline, the 9 tasks, this file, and the follow-up commits
+listed at the end).
 
 Everything below was checked in a real browser at 1440px and 390px, and
 `tsc`, `eslint` (on every changed file) and `next build` all pass.
@@ -99,9 +100,15 @@ Data is in `lib/experience.ts`, transcribed from `public/resume.pdf`.
 The other three case studies still use the old `CaseSection` layout, unchanged.
 
 ### 9 · `1e8d1df` About page bento grid
-`/about` has nine named, empty slots: Portrait, Bio, Now, Location, Approach,
-Outside work, Contact, Background, Elsewhere. On desktop they tile a gap-free
-4-column grid; tablet uses 2 columns, and mobile stacks.
+`/about` has nine named slots: Portrait, Bio, Now, Location, Approach,
+Outside work, Contact, Background, Elsewhere. The grid is 4 columns on
+desktop, 2 on tablet, and stacks on mobile.
+
+*Updated in follow-up `5121a93`:* empty slots now collapse. They aren't
+rendered in the build, and under `next dev` they move to a labeled strip
+below the grid. Filled slots take tile shapes from how many are filled, in
+page order, so the grid stays gap-free as it fills; every count from 1 to 9
+was measured with zero empty cells on both grid widths.
 
 ---
 
@@ -114,11 +121,12 @@ Outside work, Contact, Background, Elsewhere. On desktop they tile a gap-free
    hidden until a real one is added.
 3. **How empty content behaves.** Items 1, 2 and 9 follow one rule, so
    placeholder text never ships: under `next dev` you see a dashed, labeled
-   slot saying what goes there; the static export renders nothing for missing
-   testimonials, and blank tiles for the bento.
-4. **About is live-linked but empty.** Nav and footer now point to the new
-   `/about`, which exports as nine blank tiles. Fill the slots before
-   deploying, or point the link back at the legacy page.
+   slot saying what goes there; the static export renders nothing, for
+   missing testimonials and empty bento slots alike.
+4. **About is live-linked but empty.** Nav and footer point to `/about`,
+   which exports only its heading until slots are filled. Fill at least a
+   few slots before deploying. The legacy `about.html` is deleted, so there's
+   no older page to point back to.
 5. **The case-study section nav is still sticky.** "Static, not sticky"
    applied to the site nav, which was already static and is now also
    transparent. The per-page anchor pill (Overview / Problem / …) stays
@@ -148,14 +156,13 @@ Outside work, Contact, Background, Elsewhere. On desktop they tile a gap-free
   in `lib/testimonials.ts`.
 - **Recommendations:** quote, name, title, company → `resumeTestimonials` in
   the same file.
-- **About:** content for each of the nine slots → `app/about/page.tsx`. Pass
-  children to a `BentoSlot` and its dev label disappears.
-- **Document Viewer copy:** trim Problem and Research to budget.
+- **About:** content for the slots → `app/about/page.tsx`. Pass children to
+  a `BentoSlot` and it joins the grid (and leaves the dev strip). The first
+  filled slot gets the large tile, so order the slots by priority.
+- **Document Viewer copy:** a cut-only trim is drafted in
+  `drafts/document-viewer-trimmed.md` (see follow-up below); not yet applied.
 
 ## Pre-existing issues noticed, not changed
-- **`public/about.html` is silently shadowed.** `/about` also exports to
-  `out/about.html`, and the Next page currently wins. That depends on copy
-  order, so delete or rename the legacy file once you've pulled its content.
 - **Legacy pages still ship with placeholders.** `public/*.html` (old
   static-site pages) still export at their old URLs, and
   `public/document-viewer.html` shows `YOUR@EMAIL` / `YOURHANDLE`.
@@ -167,3 +174,31 @@ Outside work, Contact, Background, Elsewhere. On desktop they tile a gap-free
 - **Lint errors:** 4, all in untouched `components/ui/*` files.
 - **Not committed:** `reference/` (17MB of screenshots of a paid Framer
   template) is left untracked on purpose.
+
+---
+
+## Follow-up (after review)
+
+Your decisions: keep the email/LinkedIn and the sticky section nav as they
+are (no change needed); the rest below.
+
+- **`8fb761d` Empty testimonials render nothing.** The homepage still
+  shipped an invisible, empty animation wrapper where Susan's quote goes; it's
+  gone. `/resume` already rendered nothing. Dev labels are unchanged.
+- **`5121a93` Bento collapses and reflows.** See task 9 above.
+- **`b4a21bc` Deleted `public/about.html`.** It exported to the same
+  `out/about.html` as the new `/about`, and which won depended on copy
+  order. Legacy pages that link to `about.html` now reach the new page.
+  Recover the old copy with `git show 1e8d1df:public/about.html`.
+- **`4d53434` Trimmed Document Viewer draft** in
+  `drafts/document-viewer-trimmed.md`, not applied to the page. Cuts only,
+  checked word by word against the live copy.
+- **This commit.** Updates this file. In the draft, images and captions
+  now sit outside the word budget: the purple highlight is the main image
+  with its full caption restored, the download-button spec and progress bar
+  return as a two-up row with one-line captions (cut from the originals),
+  and the matching toggle stays cut. Text counts: Overview 149, Problem 178,
+  Research & solutions 172, Results 111, Impact 103.
+  - The page's `CaseSlide` still counts captions toward its over-length
+    marker, so it will disagree with the draft on Research until that rule
+    changes too.
