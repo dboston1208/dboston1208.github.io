@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { isRoute } from "@/components/site-nav";
 
 const links = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about.html" },
-  { name: "Resume", href: "/resume.pdf" },
+  { name: "Resume", href: "/resume" },
 ];
 
 const contact = [
@@ -35,7 +36,7 @@ export function Footer() {
         <ul className="mt-4 grid list-none gap-2.5 p-0">
           {links.map((link) => (
             <li key={link.href}>
-              {link.href === "/" ? (
+              {isRoute(link.href) ? (
                 <Link href={link.href} className="text-ink-soft transition-colors hover:text-navy">
                   {link.name}
                 </Link>

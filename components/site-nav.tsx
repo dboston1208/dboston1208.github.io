@@ -7,8 +7,12 @@ type SiteNavProps = {
 const items = [
   { name: "Work", href: "/", key: "work" as const },
   { name: "About", href: "/about.html", key: "about" as const },
-  { name: "Resume", href: "/resume.pdf", key: "resume" as const },
+  { name: "Resume", href: "/resume", key: "resume" as const },
 ];
+
+// App routes get client-side navigation; static files like /about.html and
+// /resume.pdf live in public/ outside the router and need a real request.
+export const isRoute = (href: string) => href.startsWith("/") && !href.includes(".");
 
 const linkClass =
   "border-b border-transparent pb-0.5 text-[14px] text-ink-soft transition-colors hover:border-sand hover:text-navy aria-[current=page]:border-sand aria-[current=page]:text-navy";
@@ -25,7 +29,7 @@ export function SiteNav({ current }: SiteNavProps) {
 
       <div className="flex items-center gap-6">
         {items.map((item) =>
-          item.href === "/" ? (
+          isRoute(item.href) ? (
             <Link
               key={item.key}
               href={item.href}
