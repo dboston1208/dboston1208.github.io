@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { CaseStudyHeader } from "@/components/case-study";
 import { CaseStudyNav } from "@/components/case-study-nav";
+import { SiteNav } from "@/components/site-nav";
 import { NextCaseCard } from "@/components/next-case-card";
 import { caseStudies } from "@/lib/case-studies";
 import { nextProject } from "@/lib/projects";
@@ -31,6 +32,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   return (
     <div className="hero-glow">
+      <SiteNav current="work" />
       <CaseStudyNav anchors={meta.anchors ?? []} />
 
       <div className="page-container mx-auto max-w-[1100px] px-8 pb-16">

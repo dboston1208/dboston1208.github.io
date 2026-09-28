@@ -1,4 +1,4 @@
-import { PillNav } from "@/components/pill-nav";
+import { SiteNav } from "@/components/site-nav";
 import { Footer } from "@/components/footer";
 import { WorkCard } from "@/components/work-card";
 import { ProfileHeader } from "@/components/profile-header";
@@ -25,7 +25,7 @@ const howIWork = [
 export default function Home() {
   return (
     <div className="hero-glow">
-      <PillNav current="work" />
+      <SiteNav current="work" />
 
       <div className="page-container mx-auto max-w-[1100px] px-8 pb-16">
         <ProfileHeader />

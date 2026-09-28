@@ -193,9 +193,13 @@ html {
   display: none;
 }
 
+/* Opaque background matters: isolation starts the group with a transparent
+   backdrop, and the nav logo's mix-blend-multiply needs the page color
+   underneath it to knock out its white fill. */
 .hero-glow {
   position: relative;
   isolation: isolate;
+  background: var(--page);
 }
 
 .hero-glow::before {
@@ -399,6 +403,11 @@ table.decision-table th {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 48px;
+  }
+
+  .site-nav {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .hero-glow::before {
