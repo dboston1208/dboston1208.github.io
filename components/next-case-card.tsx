@@ -14,7 +14,7 @@ export function NextCaseCard({ href, outcome, client, year, image }: NextCaseCar
       <h2 className="text-[17px] text-navy">What&rsquo;s next</h2>
 
       <Link href={href} className="group mt-6 block max-w-[440px] text-inherit">
-        <div className="overflow-hidden rounded-[16px] bg-sand-tint p-5">
+        <div className="overflow-hidden rounded-[16px] bg-surface p-5">
           <div className="overflow-hidden rounded-[10px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

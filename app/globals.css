@@ -5,33 +5,39 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Base: navy + warm neutrals. */
   --navy: #2b3748;
-  --page: #faf8f4;
-  --sand: #e1c599;
-  --sand-tint: #f7efe1;
-  --gold: #8a6d3b;
   --ink: #2c2c2a;
   --ink-soft: #6b6a64;
-  --hairline: #e6e0d2;
+  --page: #faf8f4;
+  --surface: #f1eee8;
   --white: #ffffff;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+
+  /* Accents. Sand is reserved for tags, hover states, and dividers — never
+     a surface. Gold is the text-safe accent, since sand fails contrast as text. */
+  --sand: #e1c599;
+  --gold: #8a6d3b;
+  --hairline: color-mix(in oklab, var(--sand) 48%, var(--page));
+
+  /* shadcn semantic roles, mapped onto the palette above. */
+  --background: var(--page);
+  --foreground: var(--ink);
+  --card: var(--white);
+  --card-foreground: var(--ink);
+  --popover: var(--white);
+  --popover-foreground: var(--ink);
+  --primary: var(--navy);
+  --primary-foreground: var(--page);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--navy);
+  --muted: var(--surface);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--sand);
+  --accent-foreground: var(--navy);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--navy);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -52,7 +58,7 @@
   --color-navy: var(--navy);
   --color-page: var(--page);
   --color-sand: var(--sand);
-  --color-sand-tint: var(--sand-tint);
+  --color-surface: var(--surface);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -349,7 +355,7 @@ table.decision-table td {
 }
 
 table.decision-table th {
-  background: var(--sand-tint);
+  background: var(--surface);
   font-size: 13px;
   font-weight: 500;
   color: var(--navy);
@@ -365,7 +371,7 @@ table.decision-table th {
   display: block;
   width: 100%;
   border-radius: 16px;
-  background: var(--sand-tint);
+  background: var(--surface);
   margin: 0;
 }
 

@@ -12,7 +12,7 @@ type WorkCardProps = {
 export function WorkCard({ href, outcome, client, year, metric, image }: WorkCardProps) {
   return (
     <Link href={href} className="group block text-inherit">
-      <div className="overflow-hidden rounded-[16px] bg-sand-tint p-5 sm:p-7">
+      <div className="overflow-hidden rounded-[16px] bg-surface p-5 sm:p-7">
         <div className="overflow-hidden rounded-[10px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
