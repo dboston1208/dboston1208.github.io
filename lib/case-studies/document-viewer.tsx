@@ -1,4 +1,5 @@
-import { CaseImage, CaseSection, MetricRow } from "@/components/case-study";
+import { CaseImage, MetricRow } from "@/components/case-study";
+import { CaseSlide, slideAnchors } from "@/components/case-slides";
 import type { CaseStudy } from "./types";
 
 const meta: CaseStudy["meta"] = {
@@ -20,18 +21,13 @@ const meta: CaseStudy["meta"] = {
     src: "/assets/thumbs/document-viewer.png",
     alt: "Document Viewer with in-document search and keyword highlighting",
   },
-  anchors: [
-    { id: "overview", label: "Overview" },
-    { id: "decisions", label: "Decisions" },
-    { id: "outcome", label: "Outcome" },
-    { id: "reflection", label: "Reflection" },
-  ],
+  anchors: slideAnchors,
 };
 
 function Body() {
   return (
     <>
-      <CaseSection num="01" label="Overview" id="overview">
+      <CaseSlide slide="overview">
         <p>
           Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent
           projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned
@@ -44,9 +40,16 @@ function Body() {
           stayed in daily use until July 2025, when it was rolled back at full exposure for reasons that had nothing
           to do with the design. More on that in the outcome.
         </p>
-      </CaseSection>
 
-      <CaseSection num="02" label="The Problem">
+        <h3>My Role</h3>
+        <p>
+          Paired with a UX design partner who led discovery interviews and journey mapping. I owned interaction and
+          visual design end to end across the search and download experiences, running multiple rounds of user
+          testing on both.
+        </p>
+      </CaseSlide>
+
+      <CaseSlide slide="problem">
         <p>
           Customers wanted to qualify projects faster. The existing document viewer worked against that goal at
           nearly every step: large documents sometimes took minutes to load, scrolling and zooming were clunky,
@@ -70,17 +73,10 @@ function Body() {
           before they could migrate off the legacy platform onto Project Intelligence. Fixing it had leverage across
           two initiatives, not one.
         </blockquote>
-      </CaseSection>
+      </CaseSlide>
 
-      <CaseSection num="03" label="My Role">
-        <p>
-          Paired with a UX design partner who led discovery interviews and journey mapping. I owned interaction and
-          visual design end to end across the search and download experiences, running multiple rounds of user
-          testing on both.
-        </p>
-      </CaseSection>
-
-      <CaseSection num="04" label="Discovery & Research">
+      <CaseSlide slide="research">
+        <h3>Discovery &amp; Research</h3>
         <p>
           My UX partner led VOC interviews and journey mapping; I sat in on sessions and worked from the output. The
           most useful finding wasn&rsquo;t anything users said directly. It was what they&rsquo;d built around the
@@ -96,9 +92,8 @@ function Body() {
           decides whether a project is worth pursuing. That reframed the work from &ldquo;make the viewer
           faster&rdquo; to &ldquo;stop breaking the handoff between two workflows.&rdquo;
         </p>
-      </CaseSection>
 
-      <CaseSection num="05" label="Process">
+        <h3>Process</h3>
         <p>
           Design went through four rounds of search-design iteration and two rounds on the download experience, each
           round tested before the next began rather than batched into a single validation at the end.
@@ -111,28 +106,27 @@ function Body() {
           selected, and the combinations of those. Specifying all of it is less exploratory than search design, and
           it is exactly the detail that decides whether the build matches the spec.
         </p>
-      </CaseSection>
 
-      <CaseImage
-        src="/assets/dv-download-spec.png"
-        alt="Download button spec sheet showing default, selected with counts, hover, tooltip hover, focus, disabled, mobile, and dropdown-active states, including the multi-page PDF versus zipped PDFs format choice"
-        caption="The download button, specified across every condition it can be in. The counts matter: a user selecting 2 documents and a user selecting 2,000 need the same control to behave sensibly."
-      />
-      <CaseImage
-        src="/assets/dv-progress.png"
-        alt="Progress bar component spec showing default, active with megabytes transferred, complete, and error states with cancel and retry actions"
-        caption="Large document sets take real time to download, so progress needed its own states. The error state carries a retry rather than dead-ending the user."
-      />
+        <CaseImage
+          src="/assets/dv-download-spec.png"
+          alt="Download button spec sheet showing default, selected with counts, hover, tooltip hover, focus, disabled, mobile, and dropdown-active states, including the multi-page PDF versus zipped PDFs format choice"
+          caption="The download button, specified across every condition it can be in. The counts matter: a user selecting 2 documents and a user selecting 2,000 need the same control to behave sensibly."
+        />
+        <CaseImage
+          src="/assets/dv-progress.png"
+          alt="Progress bar component spec showing default, active with megabytes transferred, complete, and error states with cancel and retry actions"
+          caption="Large document sets take real time to download, so progress needed its own states. The error state carries a retry rather than dead-ending the user."
+        />
 
-      <CaseSection num="06" label="Key Design Decisions" id="decisions">
-        <h2>Tab layout won testing, but didn&rsquo;t ship</h2>
+        <h3>Key Design Decisions</h3>
+        <h4>Tab layout won testing, but didn&rsquo;t ship</h4>
         <p>
           Three layout directions were tested, including a tab layout, which won. It wasn&rsquo;t implemented; the
           shipped version was a single-document view, cut before ship due to technical feasibility constraints given
           the build timeline. Everything else validated in testing shipped intact.
         </p>
 
-        <h2>Purple over yellow: an accessibility fix nobody asked for</h2>
+        <h4>Purple over yellow: an accessibility fix nobody asked for</h4>
         <p>
           Testing early let the team nail down the overall design as well as the keyword-highlight accessibility
           problem before shipping something that would draw complaints, or worse, go unused. Users had complained
@@ -144,15 +138,14 @@ function Body() {
           users with color vision deficiencies. Purple won. The reaction, internally and externally, exceeded
           expectations for what looked like a minor detail from the outside.
         </p>
-      </CaseSection>
 
-      <CaseImage
-        src="/assets/dv-highlight.png"
-        alt="Document viewer showing keyword matches for the term facility highlighted in purple across the results list and the document body, with desktop and mobile views side by side"
-        caption="The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision. Matches stay legible in the results list and inside the document itself."
-      />
+        <CaseImage
+          src="/assets/dv-highlight.png"
+          alt="Document viewer showing keyword matches for the term facility highlighted in purple across the results list and the document body, with desktop and mobile views side by side"
+          caption="The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision. Matches stay legible in the results list and inside the document itself."
+        />
 
-      <CaseSection num="07" label="The Solution">
+        <h3>The Solution</h3>
         <p>
           The rebuilt viewer opens large construction document sets in under three seconds, searches inside them with
           real keyword operators, and exports any combination of pages without leaving the app. Search results can be
@@ -165,15 +158,15 @@ function Body() {
           where there had been none. Individually minor, collectively the difference between a tool people worked
           around and one they worked in.
         </p>
-      </CaseSection>
 
-      <CaseImage
-        src="/assets/dv-matching-toggle.png"
-        alt="Document viewer search results showing matching-only toggle with per-document match counts"
-        caption="Search within the viewer, toggling between all documents and matching-only results, with per-document match counts."
-      />
+        <CaseImage
+          src="/assets/dv-matching-toggle.png"
+          alt="Document viewer search results showing matching-only toggle with per-document match counts"
+          caption="Search within the viewer, toggling between all documents and matching-only results, with per-document match counts."
+        />
+      </CaseSlide>
 
-      <CaseSection num="08" label="Outcome" id="outcome">
+      <CaseSlide slide="results">
         <p>Released to Project Intelligence Pro users in November 2024. All three target metrics were hit.</p>
         <MetricRow
           metrics={[
@@ -195,9 +188,10 @@ function Body() {
           accessibility work in particular outlived the rollback. Portfolios that only show work still standing
           aren&rsquo;t showing the job.
         </p>
-      </CaseSection>
+      </CaseSlide>
 
-      <CaseSection num="09" label="Reflection" id="reflection">
+      <CaseSlide slide="impact">
+        <h3>Reflection</h3>
         <p>
           <strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a
           repeat of years of user complaints about the old viewer.
@@ -213,7 +207,7 @@ function Body() {
           later became the internal proof that conversational AI worked for this user base, the argument that made
           Search Assist fundable.
         </p>
-      </CaseSection>
+      </CaseSlide>
     </>
   );
 }

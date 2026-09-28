@@ -46,7 +46,7 @@ type CaseSectionProps = {
 export function CaseSection({ num, label, id, children }: CaseSectionProps) {
   return (
     <section className="case-section" id={id}>
-      <div className="case-section__inner">
+      <div className="case-section__inner case-prose">
         <p className="case-section__label">
           <span className="num">{num}</span>
           {label}
