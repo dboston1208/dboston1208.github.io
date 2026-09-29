@@ -16,7 +16,7 @@ export default function ResumePage() {
       <SiteNav current="resume" />
 
       <div className="page-container mx-auto max-w-[1100px] px-8 pb-16">
-        <header className="pt-8 pb-4 sm:pt-12">
+        <header data-nav-hero className="pt-8 pb-4 sm:pt-12">
           <h1 className="text-[42px] leading-[1.05] text-navy sm:text-[56px]">Resume</h1>
           <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.55] text-balance text-ink-soft">{resumeSummary}</p>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { isRoute } from "@/components/site-nav";
+import { isRoute } from "@/lib/routes";
 import { EMAIL, LINKEDIN_URL } from "@/lib/experience";
 
 const links = [
@@ -15,7 +15,7 @@ const contact = [
 
 export function Footer() {
   return (
-    <footer className="site-footer mt-[120px] grid gap-12 border-t border-hairline pt-14 pb-6 text-[15px] sm:grid-cols-[1.4fr_1fr_1fr]">
+    <footer id="contact" className="site-footer mt-[120px] grid gap-12 border-t border-hairline pt-14 pb-6 text-[15px] sm:grid-cols-[1.4fr_1fr_1fr]">
       <div>
         <div className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}

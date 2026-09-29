@@ -33,7 +33,7 @@ export function CaseStudyNav({ anchors }: { anchors: CaseStudyAnchor[] }) {
   }, [anchors]);
 
   return (
-    <div className="sticky top-0 z-20 pt-5 pb-4">
+    <div className="case-study-nav sticky z-20 pt-5 pb-4">
       {/* Scrolls instead of widening the page: the full anchor set is
           ~450px, wider than a phone viewport. */}
       <div className="no-scrollbar overflow-x-auto px-5">

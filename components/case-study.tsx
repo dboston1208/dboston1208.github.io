@@ -15,7 +15,7 @@ type CaseStudyHeaderProps = {
 
 export function CaseStudyHeader({ eyebrow, title, summary, hero, fields }: CaseStudyHeaderProps) {
   return (
-    <header className="case-shell pt-8">
+    <header data-nav-hero className="case-shell pt-8">
       <p className="text-[15px] text-ink-soft">{eyebrow}</p>
       <h1 className="mt-3 max-w-[20ch] text-[36px] leading-[1.06] text-navy sm:text-[52px]">{title}</h1>
       <p className="mt-5 max-w-[68ch] text-[17px] text-ink-soft">{summary}</p>

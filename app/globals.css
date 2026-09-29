@@ -193,9 +193,8 @@ html {
   display: none;
 }
 
-/* Opaque background matters: isolation starts the group with a transparent
-   backdrop, and the nav logo's mix-blend-multiply needs the page color
-   underneath it to knock out its white fill. */
+/* Isolation keeps the glow's z-index:-1 inside this wrapper; the background
+   gives that group the page tone the gradient fades into. */
 .hero-glow {
   position: relative;
   isolation: isolate;
@@ -216,6 +215,197 @@ html {
     rgba(225, 197, 153, 0.08) 58%,
     rgba(250, 248, 244, 0) 78%
   );
+}
+
+/* --------------------------------------------------------------------
+   Site nav.
+
+   Fixed from first paint (a spacer holds its top-state height in flow),
+   so switching states never shifts layout. SiteNav toggles data-pill past
+   60px of scroll and data-hidden when scrolling down beyond the hero;
+   every visual change lives here. Transitions switch on with data-ready,
+   after the first measured state; the global prefers-reduced-motion rule
+   turns them all into instant switches.
+   -------------------------------------------------------------------- */
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  padding: 0 32px;
+}
+
+.site-nav__spacer {
+  height: 60px;
+}
+
+.site-nav__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1036px; /* the content column: 1100px container minus 32px gutters */
+  height: 60px;
+  margin: 0 auto;
+  padding: 28px 0 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.site-nav[data-pill] {
+  padding-top: 12px;
+}
+
+.site-nav[data-pill] .site-nav__bar {
+  height: 52px;
+  padding: 0 20px;
+  background: color-mix(in oklab, var(--navy) 70%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-color: color-mix(in oklab, var(--white) 14%, transparent);
+}
+
+.site-nav[data-hidden] {
+  transform: translateY(-100%);
+}
+
+/* Keyboard users tabbing into a hidden nav get it back. */
+.site-nav[data-hidden]:focus-within {
+  transform: none;
+}
+
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.site-nav__logo {
+  position: relative;
+  display: block;
+  height: 28px;
+}
+
+.site-nav__logo-img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.site-nav__logo-img--light {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.site-nav[data-pill] .site-nav__logo {
+  height: 24px;
+}
+
+.site-nav[data-pill] .site-nav__logo-img:not(.site-nav__logo-img--light) {
+  opacity: 0;
+}
+
+.site-nav[data-pill] .site-nav__logo-img--light {
+  opacity: 1;
+}
+
+.site-nav__name {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.site-nav__name b {
+  font-weight: 600;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.site-nav__link:hover {
+  color: var(--navy);
+  border-color: var(--sand);
+}
+
+.site-nav__link[aria-current="page"] {
+  color: var(--navy);
+  border-color: var(--sand);
+}
+
+.site-nav[data-pill] .site-nav__name {
+  color: var(--page);
+}
+
+.site-nav[data-pill] .site-nav__link {
+  color: color-mix(in oklab, var(--page) 78%, transparent);
+}
+
+.site-nav[data-pill] .site-nav__link:hover,
+.site-nav[data-pill] .site-nav__link[aria-current="page"] {
+  color: var(--page);
+}
+
+.site-nav[data-pill] a:focus-visible {
+  outline-color: var(--page);
+}
+
+.site-nav[data-ready] {
+  transition:
+    transform 300ms ease,
+    padding 300ms ease;
+}
+
+.site-nav[data-ready] .site-nav__bar {
+  transition:
+    height 300ms ease,
+    padding 300ms ease,
+    background-color 300ms ease,
+    border-color 300ms ease,
+    -webkit-backdrop-filter 300ms ease,
+    backdrop-filter 300ms ease;
+}
+
+.site-nav[data-ready] .site-nav__logo,
+.site-nav[data-ready] .site-nav__logo-img {
+  transition:
+    height 300ms ease,
+    opacity 300ms ease;
+}
+
+.site-nav[data-ready] .site-nav__name,
+.site-nav[data-ready] .site-nav__link {
+  transition:
+    color 300ms ease,
+    border-color 300ms ease;
+}
+
+/* The case-study section pill sits below the main nav, and tucks up to the
+   viewport top while the main nav is hidden. */
+.case-study-nav {
+  top: 64px;
+  transition: top 300ms ease;
+}
+
+html[data-nav-hidden] .case-study-nav {
+  top: 0;
 }
 
 /* --------------------------------------------------------------------
@@ -482,6 +672,19 @@ table.decision-table th {
     padding-right: 20px;
   }
 
+  .site-nav[data-pill] {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .site-nav[data-pill] .site-nav__bar {
+    padding: 0 16px;
+  }
+
+  .site-nav__links {
+    gap: 16px;
+  }
+
   .hero-glow::before {
     height: 380px;
     background: radial-gradient(
@@ -526,6 +729,14 @@ table.decision-table th {
 
   .metric-row strong {
     font-size: 28px;
+  }
+}
+
+/* Logo, name and four links need ~401px; the pill's inner width reaches
+   that at about 480px. Below it the mark stands alone. */
+@media (max-width: 479px) {
+  .site-nav__name {
+    display: none;
   }
 }
 

@@ -2,7 +2,7 @@ import { EMAIL } from "@/lib/experience";
 
 export function ProfileHeader() {
   return (
-    <header className="pt-8 pb-4 sm:pt-12">
+    <header data-nav-hero className="pt-8 pb-4 sm:pt-12">
       <h1 className="text-[42px] leading-[1.05] text-navy sm:text-[56px]">David Boston</h1>
 
       {/* Balanced wrapping keeps the role line from leaving a one- or

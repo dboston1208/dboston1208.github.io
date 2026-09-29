@@ -1,7 +1,7 @@
 # Changes — draft task pass (2026-09-28)
 
 All work is on `draft`. Nothing was pushed, merged to `main`, or deployed.
-`draft` is 20 commits ahead of `origin/draft` (the 4 earlier `redesign`
+`draft` is 21 commits ahead of `origin/draft` (the 4 earlier `redesign`
 commits, a baseline, the 9 tasks, this file, and the follow-up commits
 listed at the end).
 
@@ -46,6 +46,9 @@ Logo mark left (aligned to the content column), Work / About / Resume right.
 It sits in normal flow with no background, border or blur, and active/hover
 states use a sand underline. The nav now also appears on case-study pages.
 `pill-nav.tsx` was renamed to `site-nav.tsx`.
+
+*Superseded by the floating nav in the follow-up log below.* The nav is now
+fixed, not in normal flow, and becomes a navy pill on scroll.
 
 ### 4 · `f731a7a` Hero: −30% height, smaller byline, no orphans
 - Page top to first card: **572 → 400px desktop (−30%)**, **509 → 360px
@@ -193,7 +196,7 @@ are (no change needed); the rest below.
 - **`4d53434` Trimmed Document Viewer draft** in
   `drafts/document-viewer-trimmed.md`, not applied to the page. Cuts only,
   checked word by word against the live copy.
-- **This commit.** Updates this file. In the draft, images and captions
+- **`6b8249a` CHANGES.md and draft images.** Updates this file. In the draft, images and captions
   now sit outside the word budget: the purple highlight is the main image
   with its full caption restored, the download-button spec and progress bar
   return as a two-up row with one-line captions (cut from the originals),
@@ -202,3 +205,51 @@ are (no change needed); the rest below.
   - The page's `CaseSlide` still counts captions toward its over-length
     marker, so it will disagree with the draft on Research until that rule
     changes too.
+
+---
+
+## Floating nav (this commit)
+
+No screenshots came through with the request (`reference/` still holds
+only the Tabfolio captures), so this is built from the written spec.
+
+**Behavior, measured in Chrome:**
+- **Top of page:** fixed from first paint, transparent, no border, 60px
+  tall, spanning the content column. A spacer holds that 60px in flow, so
+  page layout is unchanged (first card still at 400px desktop, 360px mobile).
+- **Past 60px of scroll:** a pill 12px from the top, 52px tall, fully
+  rounded, 70% navy with `backdrop-filter: blur(12px)`, and a 1px border at
+  14% white. Desktop: it spans the content column, with contents inset
+  20px. Mobile: full width minus 16px margins.
+- **Hide/reveal:** hides when scrolling down past the page's hero, returns
+  on scroll up, and never hides while you're still inside the hero.
+  Scroll moves under 8px are ignored, so trackpad jitter doesn't flicker it.
+- **Motion:** everything eases over 300ms. With reduced motion on, the same
+  states switch instantly.
+- **Links:** Work, About, Resume, and Contact (jumps to the footer, now
+  `id="contact"`). The current page gets the sand underline.
+
+**Judgment calls to review:**
+1. **Name hidden below 480px.** Logo, name and four links need about 401px;
+   at 390px the pill has 326px. The mark stays; I didn't collapse the links
+   into a menu, since you didn't ask for one.
+2. **Name styling.** It uses your old wordmark treatment (DAVID light,
+   BOSTON bold, wide tracking), which matches `logo-full.png`.
+3. **Logo variants.** The mark was an opaque PNG relying on
+   `mix-blend-multiply`, which vanishes on navy and breaks under
+   `backdrop-filter`. `npm run logos` (`scripts/make-logo-variants.mjs`)
+   derives transparent navy and light versions from `logo-mark.png`, and
+   the nav crossfades between them.
+4. **"Narrower" pill.** The top state already aligns to the content column,
+   so the pill keeps that width and insets its contents. On mobile it's
+   genuinely narrower: 16px margins instead of the 20px gutter.
+5. **Case-study section nav.** It sits below the main pill (64px) and slides
+   to the top while the main nav is hidden, so the two never overlap.
+6. **Keyboard access.** Tabbing into a hidden nav brings it back.
+7. **Pill color.** 70% navy over the light page reads slightly slate. That's
+   the token at the opacity you specified; raise the opacity for deeper
+   navy.
+
+`isRoute` moved from `site-nav.tsx` to `lib/routes.ts`. The nav is now a
+client component, and the server-rendered footer can't call a function
+exported from one.

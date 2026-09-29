@@ -14,7 +14,7 @@ export default function AboutPage() {
       <SiteNav current="about" />
 
       <div className="page-container mx-auto max-w-[1100px] px-8 pb-16">
-        <header className="pt-8 pb-4 sm:pt-12">
+        <header data-nav-hero className="pt-8 pb-4 sm:pt-12">
           <h1 className="text-[42px] leading-[1.05] text-navy sm:text-[56px]">About</h1>
         </header>
 
