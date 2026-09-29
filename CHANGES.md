@@ -1,7 +1,7 @@
 # Changes — draft task pass (2026-09-28)
 
 All work is on `draft`. Nothing was pushed, merged to `main`, or deployed.
-`draft` is 21 commits ahead of `origin/draft` (the 4 earlier `redesign`
+`draft` is 22 commits ahead of `origin/draft` (the 4 earlier `redesign`
 commits, a baseline, the 9 tasks, this file, and the follow-up commits
 listed at the end).
 
@@ -208,18 +208,24 @@ are (no change needed); the rest below.
 
 ---
 
-## Floating nav (this commit)
+## Floating nav (`89fba68`, then corrected)
 
 No screenshots came through with the request (`reference/` still holds
 only the Tabfolio captures), so this is built from the written spec.
+
+**Correction (this commit):** the pill no longer turns navy with white
+text. It's glass now: a transparent background that only blurs what passes
+behind it, with the logo, name and links keeping their top-state colors.
+The description below reflects the corrected version.
 
 **Behavior, measured in Chrome:**
 - **Top of page:** fixed from first paint, transparent, no border, 60px
   tall, spanning the content column. A spacer holds that 60px in flow, so
   page layout is unchanged (first card still at 400px desktop, 360px mobile).
 - **Past 60px of scroll:** a pill 12px from the top, 52px tall, fully
-  rounded, 70% navy with `backdrop-filter: blur(12px)`, and a 1px border at
-  14% white. Desktop: it spans the content column, with contents inset
+  rounded, with a transparent background, `backdrop-filter: blur(12px)`,
+  and a 1px navy border at 12%. Logo, name and link colors are identical to
+  the top state. Desktop: it spans the content column, with contents inset
   20px. Mobile: full width minus 16px margins.
 - **Hide/reveal:** hides when scrolling down past the page's hero, returns
   on scroll up, and never hides while you're still inside the hero.
@@ -235,20 +241,21 @@ only the Tabfolio captures), so this is built from the written spec.
    into a menu, since you didn't ask for one.
 2. **Name styling.** It uses your old wordmark treatment (DAVID light,
    BOSTON bold, wide tracking), which matches `logo-full.png`.
-3. **Logo variants.** The mark was an opaque PNG relying on
-   `mix-blend-multiply`, which vanishes on navy and breaks under
-   `backdrop-filter`. `npm run logos` (`scripts/make-logo-variants.mjs`)
-   derives transparent navy and light versions from `logo-mark.png`, and
-   the nav crossfades between them.
+3. **Transparent logo.** The mark was an opaque PNG relying on
+   `mix-blend-multiply`, which breaks under `backdrop-filter`. `npm run
+   logos` (`scripts/make-logo-variants.mjs`) derives a transparent navy
+   version from `logo-mark.png`. The D's white face is transparent too, so
+   inside the pill it shows the blurred content behind it rather than a
+   white patch.
 4. **"Narrower" pill.** The top state already aligns to the content column,
    so the pill keeps that width and insets its contents. On mobile it's
    genuinely narrower: 16px margins instead of the 20px gutter.
 5. **Case-study section nav.** It sits below the main pill (64px) and slides
    to the top while the main nav is hidden, so the two never overlap.
 6. **Keyboard access.** Tabbing into a hidden nav brings it back.
-7. **Pill color.** 70% navy over the light page reads slightly slate. That's
-   the token at the opacity you specified; raise the opacity for deeper
-   navy.
+7. **Border kept, recolored.** The spec's 1px low-opacity border was white,
+   which is invisible on the light page, so it's now navy at 12%. Delete
+   `border-color` in the pill rule for pure borderless glass.
 
 `isRoute` moved from `site-nav.tsx` to `lib/routes.ts`. The nav is now a
 client component, and the server-rendered footer can't call a function

@@ -257,13 +257,14 @@ html {
   padding-top: 12px;
 }
 
+/* Glass, not a fill: the background stays transparent and only blurs what
+   passes behind, so the logo and text keep their top-state colors. */
 .site-nav[data-pill] .site-nav__bar {
   height: 52px;
   padding: 0 20px;
-  background: color-mix(in oklab, var(--navy) 70%, transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border-color: color-mix(in oklab, var(--white) 14%, transparent);
+  border-color: color-mix(in oklab, var(--navy) 12%, transparent);
 }
 
 .site-nav[data-hidden] {
@@ -283,33 +284,13 @@ html {
 }
 
 .site-nav__logo {
-  position: relative;
   display: block;
   height: 28px;
-}
-
-.site-nav__logo-img {
-  display: block;
-  height: 100%;
   width: auto;
-}
-
-.site-nav__logo-img--light {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
 }
 
 .site-nav[data-pill] .site-nav__logo {
   height: 24px;
-}
-
-.site-nav[data-pill] .site-nav__logo-img:not(.site-nav__logo-img--light) {
-  opacity: 0;
-}
-
-.site-nav[data-pill] .site-nav__logo-img--light {
-  opacity: 1;
 }
 
 .site-nav__name {
@@ -350,23 +331,6 @@ html {
   border-color: var(--sand);
 }
 
-.site-nav[data-pill] .site-nav__name {
-  color: var(--page);
-}
-
-.site-nav[data-pill] .site-nav__link {
-  color: color-mix(in oklab, var(--page) 78%, transparent);
-}
-
-.site-nav[data-pill] .site-nav__link:hover,
-.site-nav[data-pill] .site-nav__link[aria-current="page"] {
-  color: var(--page);
-}
-
-.site-nav[data-pill] a:focus-visible {
-  outline-color: var(--page);
-}
-
 .site-nav[data-ready] {
   transition:
     transform 300ms ease,
@@ -377,20 +341,15 @@ html {
   transition:
     height 300ms ease,
     padding 300ms ease,
-    background-color 300ms ease,
     border-color 300ms ease,
     -webkit-backdrop-filter 300ms ease,
     backdrop-filter 300ms ease;
 }
 
-.site-nav[data-ready] .site-nav__logo,
-.site-nav[data-ready] .site-nav__logo-img {
-  transition:
-    height 300ms ease,
-    opacity 300ms ease;
+.site-nav[data-ready] .site-nav__logo {
+  transition: height 300ms ease;
 }
 
-.site-nav[data-ready] .site-nav__name,
 .site-nav[data-ready] .site-nav__link {
   transition:
     color 300ms ease,

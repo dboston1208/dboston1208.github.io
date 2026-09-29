@@ -79,12 +79,8 @@ export function SiteNav({ current }: SiteNavProps) {
       >
         <nav aria-label="Main" className="site-nav__bar">
           <Link href="/" aria-label="David Boston, home" className="site-nav__brand">
-            <span className="site-nav__logo">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo-mark-navy.png" alt="" className="site-nav__logo-img" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo-mark-light.png" alt="" className="site-nav__logo-img site-nav__logo-img--light" />
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/logo-mark-navy.png" alt="" className="site-nav__logo" />
             <span className="site-nav__name" aria-hidden="true">
               DAVID<b>BOSTON</b>
             </span>
