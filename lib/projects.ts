@@ -5,7 +5,11 @@ export type Project = {
   client: string;
   year: string;
   metric: string;
-  image: { src: string; alt: string };
+  // `screen` means the cover is a card mockup with its screen knocked out
+  // (scripts/knockout-screen.mjs) and this clip plays behind it.
+  image: { src: string; alt: string; screen?: { src: string; poster: string } };
+  // Let this cover fill the whole thumbnail frame instead of sitting inset.
+  fill?: boolean;
 };
 
 export const projects: Project[] = [
@@ -17,9 +21,11 @@ export const projects: Project[] = [
     year: "2026",
     metric: "In expanded beta",
     image: {
-      src: "/assets/thumbs/search-assist.png",
-      alt: "Search Assist panel open beside the search results page",
+      src: "/assets/thumbs/search-assist-frame.png",
+      alt: "Search Assist turning a plain-language request into applied filters, on a tilted card",
+      screen: { src: "/assets/sa-hero.mp4", poster: "/assets/sa-hero-poster.jpg" },
     },
+    fill: true,
   },
   {
     slug: "search-starter",
@@ -29,21 +35,23 @@ export const projects: Project[] = [
     year: "2026",
     metric: "85.3% completed onboarding",
     image: {
-      src: "/assets/thumbs/onboarding.png",
+      src: "/assets/thumbs/search-starter-thumb.png",
       alt: "Guided onboarding wizard confirmation screen",
     },
+    fill: true,
   },
   {
     slug: "document-viewer",
     href: "/work/document-viewer",
-    outcome: "Rebuilding a scanned-plan viewer that was costing contractors bids",
+    outcome: "Getting contractors to the one page that decides a bid",
     client: "ConstructConnect",
     year: "2024",
     metric: "Under 3s to first document view",
     image: {
-      src: "/assets/thumbs/document-viewer.png",
+      src: "/assets/thumbs/document-viewer-thumb.png",
       alt: "Document Viewer with in-document search and keyword highlighting",
     },
+    fill: true,
   },
   {
     slug: "applied-filters",
@@ -53,9 +61,10 @@ export const projects: Project[] = [
     year: "2026",
     metric: "8 gaps found, 3 functional",
     image: {
-      src: "/assets/thumbs/applied-filters.png",
+      src: "/assets/thumbs/applied-filters-thumb.png",
       alt: "Applied filter pills showing project value, category, and location",
     },
+    fill: true,
   },
 ];
 

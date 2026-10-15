@@ -171,9 +171,11 @@ was measured with zero empty cells on both grid widths.
   `public/document-viewer.html` shows `YOUR@EMAIL` / `YOURHANDLE`.
 - **The Document Viewer cover is cropped at the top in the source image**,
   so its thumbnail cuts off there too.
-- **Dead components:** `hero-section`, `project-card`, `site-navbar`,
-  `topbar`, `timeline-demo`, `resizable-navbar(-demo)`, `floating-navbar`,
-  `ui/sticky-scroll-reveal`.
+- **Dead components:** `hero-section`, `timeline-demo`,
+  `resizable-navbar(-demo)`, `floating-navbar`, `ui/sticky-scroll-reveal`.
+  (`project-card`, `site-navbar` and `topbar` were in this list too; all
+  three have since been deleted — confirmed unimported, `tsc` and the
+  build still pass.)
 - **Lint errors:** 4, all in untouched `components/ui/*` files.
 - **Not committed:** `reference/` (17MB of screenshots of a paid Framer
   template) is left untracked on purpose.
@@ -260,3 +262,117 @@ The description below reflects the corrected version.
 `isRoute` moved from `site-nav.tsx` to `lib/routes.ts`. The nav is now a
 client component, and the server-rendered footer can't call a function
 exported from one.
+
+---
+
+## About page rebuilt on Aceternity's bento-grid-demo
+
+`npx shadcn@latest add @aceternity/bento-grid-demo`, then restyled to site
+tokens and re-plumbed into the existing empty-slot rules. The demo file
+(`components/bento-grid-demo.tsx`, sample copy on gradient skeletons) was
+deleted immediately, same as the floating-navbar demo earlier: nothing
+imports it.
+
+- **`components/ui/bento-grid.tsx`** (vendored): `bg-white` / `neutral-200`
+  border / `hover:shadow-xl` / `dark:` variants → `bg-surface`,
+  `border-hairline`, `rounded-[16px]`, no shadow. Title `font-medium
+  text-navy`; description `text-[14px] text-ink-soft`. Kept the
+  `group-hover/bento:translate-x-2` nudge — the site's global
+  `prefers-reduced-motion` rule already turns off all transitions, so it
+  needed no separate handling. `BentoGridItem` now spreads `...props`
+  (matching the pattern in `ui/button.tsx` and `ui/resizable-navbar.tsx`),
+  so `BentoSlot` can still tag each tile with `data-slot`.
+- **`components/bento.tsx`** (our wrapper, same public API): `BentoSlot` now
+  takes `title` / `description` / `header` / `icon` instead of `children`; a
+  slot counts as filled when any of the first three is set. The 4-column
+  layout table became a 3-column one (Aceternity's grid is `md:grid-cols-3
+  md:auto-rows-[18rem]`), with one gap-free arrangement per filled count,
+  1 through 9. Count 7 reuses Aceternity's own demo pattern (two
+  `md:col-span-2` tiles). Verified zero empty cells for every count, at
+  both the 3-column and mobile-stack widths.
+- **`app/about/page.tsx`:** only the fill-instruction comment changed, to
+  describe the new props.
+
+One TypeScript snag: `React.HTMLAttributes` has its own `title?: string`
+(the tooltip attribute), which collided with the component's `title?:
+ReactNode` heading prop once `...props` was added. Fixed with `Omit<...,
+"title">` on the HTML attributes.
+
+**Still true, unchanged by this swap:** empty slots render nothing in the
+build (verified: `/about` still exports only its `<h1>`, zero tiles, no
+`bento-grid-demo` sample copy anywhere in `out/`), and show a labeled,
+dev-only strip locally. Fill order still decides which slot gets the
+largest tile.
+
+---
+
+## Search Assist: scroll reveal
+
+**`components/scroll-reveal.tsx` + `.css`:** the React Bits ScrollReveal
+(JavaScript + CSS variant), ported to TSX with the source logic unchanged.
+Adds `gsap` ^3.15.0 as a dependency.
+
+**Placement:** replaces the Problem-section pull quote on
+`lib/case-studies/search-assist.tsx`. The copy is the same sentence, so no
+new content was added. Props follow the usage example (`baseOpacity={0}`,
+`blurStrength={2}`, `baseRotation={0}`).
+
+**Overrides in `globals.css`:** `.case-prose p` and `.case-prose h2` outrank
+the component's single-class rules, so scoped `.case-prose .scroll-reveal`
+selectors set size, colour and margin. Two deliberate deviations from the
+library defaults:
+- Weight 300, not 600, to match the site's headings.
+- Max size 2.6rem and line-height 1.3, not 3rem and 1.5, for the wider
+  measure of this layout.
+
+**Known limits:** the component renders `<p>` inside `<h2>`, which is
+invalid HTML and puts this sentence into the heading outline. Its cleanup
+also kills every ScrollTrigger on the page, which is fine while it is the
+only one. It does not check `prefers-reduced-motion`; it is scroll-linked,
+not autoplay.
+
+Verified: `tsc --noEmit`, `eslint` on both changed files, and `next build`
+all pass. Not checked in a browser.
+
+---
+
+## Document Viewer rebuilt on the Search Assist template (2026-10-15)
+
+`lib/case-studies/document-viewer.tsx` was replaced wholesale. It now uses the
+same shell as Search Assist: the local `Slide` helper (eyebrow + H2 inside
+`.case-slide__body type-body ink-body`), `CaseMediaGroup` with the clay
+`ground` and "Explored" labels, `CaseImage` (`shadow`, plus `wide` for the
+download strip), the `type-lead` pull quote, and `MetricRow`. `typeSystem` is
+on and the anchors are Problem / Discovery / Solution / Validation / Outcome.
+The old five-slide `CaseSlide` markup is gone, which leaves
+`components/case-slides.tsx` with no consumers.
+
+`lib/projects.ts`: the Document Viewer card's `outcome` now carries the new
+headline, "Getting contractors to the one page that decides a bid". Its
+thumbnail is unchanged, since the hero art is still a placeholder. The
+"What's next" card needed no edit; it already follows `nextProject()`.
+
+### Placeholder art
+
+None of the source exports named for this pass were in the repo, so every one
+of the nine image slots is a placeholder. Each is an SVG drawn at the exact
+ratio of the slot it sits in, under `public/assets/`:
+
+| Slot | Placeholder | Needs |
+| --- | --- | --- |
+| Hero band | `dv-hero-matching.svg` (3.2:1) | `final_matching only.png` |
+| Discovery pair | `dv-layout-static.svg`, `dv-layout-floating.svg` (16:10) | static and floating control layouts |
+| Decision 1 pair | `dv-toggle-all.svg`, `dv-toggle-matching.svg` (16:10) | `final_all docs.png`, `final_matching only.png` |
+| Decision 2 pair | `dv-highlight-yellow.svg`, `dv-highlight-purple.svg` (16:10) | yellow before, purple after |
+| Decision 3 | `dv-single-view.svg` (16:10) | `Complete expanded All docs.png` |
+| Validation (wide) | `dv-download-states.svg` (16:5) | `download.png` + `working.png` + `complete.png`, combined |
+
+Swapping one in is a two-step change: drop the `.png` into `public/assets/`
+under the same stem, then replace that slot's `ph("name")` call with the
+`/assets/name.png` path. The `ph()` helper at the top of the case-study file
+exists only to make the remaining placeholders easy to find.
+
+The older `dv-*.png` files still in `public/assets/` (`dv-matching-toggle`,
+`dv-highlight`, `dv-progress`, `dv-download-spec`) are not wired up. They are
+multi-panel composites rather than tight crops, and two of them show a project
+name and a test user name, which the crop rule for this pass rules out.

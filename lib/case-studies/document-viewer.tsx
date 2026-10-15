@@ -1,213 +1,274 @@
-import { CaseImage, MetricRow } from "@/components/case-study";
-import { CaseSlide, slideAnchors } from "@/components/case-slides";
-import type { CaseStudy } from "./types";
+import type { ReactNode } from "react";
+import { CaseImage, CaseMediaGroup, MetricRow } from "@/components/case-study";
+import type { CaseStudy, CaseStudyAnchor } from "./types";
+
+// The clay this case study is grounded in: the hero band, and the frames
+// behind the grouped screenshots. Same value as Search Assist, so the two
+// pages read as one system.
+const ground = "#c88268";
+
+// Placeholder art still stands in for every slot: the source exports named
+// in the brief aren't in the repo. Each file under /assets/dv-*.svg is drawn
+// at the ratio of the slot it sits in, so swapping in the real crop is a
+// path change here and nothing else. See CHANGES.md for the list.
+const ph = (name: string) => `/assets/${name}.svg`;
+
+// Section anchors double as the case-study nav, matching Search Assist.
+const anchors: CaseStudyAnchor[] = [
+  { id: "problem", label: "Problem" },
+  { id: "discovery", label: "Discovery" },
+  { id: "solution", label: "Solution" },
+  { id: "validation", label: "Validation" },
+  { id: "outcome", label: "Outcome" },
+];
 
 const meta: CaseStudy["meta"] = {
   slug: "document-viewer",
-  title: "Document Viewer",
-  subtitle: 'Epic PM-1534: "One Document Viewer to Rule Them All"',
+  // `title` is the rendered H1 and carries both halves: the short name,
+  // a colon, then the headline.
+  title: "Document Viewer: Getting contractors to the one page that decides a bid",
+  subtitle: "Document Viewer",
   stampLabel: "Case study 02",
-  stampValue: "Released Nov 2024",
-  description: "Rebuilding a scanned-plan viewer that was costing contractors bids.",
+  stampValue: "Shipped October 2024",
+  description:
+    "Rebuilding the document viewer contractors use to decide whether a project is worth bidding.",
   fields: [
-    { label: "Role", value: "Sr. UI Designer" },
-    { label: "Squad", value: "Unassigned (floater)" },
-    { label: "Timeline", value: "Jan 2024 – Jul 2025" },
-    { label: "Released", value: "Nov 2024" },
+    { label: "Role", value: "Sr. UI Designer, interaction and visual design" },
+    { label: "Team", value: "UX partner (discovery), me (UI and interaction)" },
+    { label: "Timeline", value: "2024" },
+    { label: "Status", value: "Shipped October 2024" },
   ],
-  eyebrow: "ConstructConnect · 2024",
-  summary: "Rebuilding a scanned-plan viewer that was costing contractors bids.",
-  hero: {
-    src: "/assets/thumbs/document-viewer.png",
-    alt: "Document Viewer with in-document search and keyword highlighting",
+  // No eyebrow: the short name is part of the H1 instead. Empty rather than
+  // removed, so the stampValue fallback in app/work/[slug]/page.tsx does not
+  // step in.
+  eyebrow: "",
+  summary:
+    "Project Intelligence gives contractors the plans and specs they need to decide whether a project is worth bidding. The old document viewer was so slow and clunky that people downloaded everything and opened it somewhere else. I designed the interaction and visual layer of its replacement: faster loading, search inside documents, and flexible downloads.",
+  heroImage: {
+    src: ph("dv-hero-matching"),
+    alt: "The shipped viewer filtered to matching documents only, with a match count on each document in the tree",
+    ground,
   },
-  anchors: slideAnchors,
+  anchors,
+  typeSystem: true,
 };
+
+function Slide({
+  id,
+  num,
+  label,
+  title,
+  children,
+}: {
+  id: string;
+  num: string;
+  label: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className="case-slide">
+      {/* Body copy inherits .type-body/.ink-body from here, so paragraphs
+          and lists only carry spacing. The shared .case-prose and
+          .case-slide__header rules are left off on purpose: both outrank
+          utility classes on the same elements. */}
+      <div className="case-slide__body type-body ink-body">
+        <header className="mb-7">
+          <p className="type-eyebrow ink-accent">
+            {num} · {label}
+          </p>
+          <h2 className="type-h2 ink-primary mt-2.5">{title}</h2>
+        </header>
+        {children}
+      </div>
+    </section>
+  );
+}
 
 function Body() {
   return (
     <>
-      <CaseSlide slide="overview">
-        <p>
-          Not squad-assigned during this project. UX and UI both worked as floaters across multiple concurrent
-          projects and apps. I paired with a UX design partner who led discovery and journey mapping, while I owned
-          interaction and visual design across the download and search experiences through multiple rounds of user
-          testing.
+      <Slide
+        id="problem"
+        num="01"
+        label="THE PROBLEM"
+        title="People had stopped trusting the viewer, so they worked around it"
+      >
+        <p className="mb-6">
+          Large documents could take minutes to load. Scrolling and zooming were clunky. There was no way to export
+          a multi-page PDF, and the document tree was so shallow that finding one spec meant downloading an entire
+          section.
         </p>
-        <p>
-          All three phases released: View &amp; Download, Search Within Viewer, then sharing and takeoff
-          integration. It reached Project Intelligence Pro users in November 2024 with every target metric hit, and
-          stayed in daily use until July 2025, when it was rolled back at full exposure for reasons that had nothing
-          to do with the design. More on that in the outcome.
+        <p className="mb-6">
+          So users built workarounds. Some downloaded files just to re-upload them into Bluebeam to mark them up.
+          Others downloaded to a phone and moved files to SharePoint. In interviews, several people independently
+          called the experience &ldquo;chaotic.&rdquo;
         </p>
+        <p className="mb-6">
+          One complaint was older than the project itself: keyword matches were highlighted in yellow, which is
+          nearly unreadable on the white pages most construction documents use.
+        </p>
+      </Slide>
 
-        <h3>My Role</h3>
-        <p>
-          Paired with a UX design partner who led discovery interviews and journey mapping. I owned interaction and
-          visual design end to end across the search and download experiences, running multiple rounds of user
-          testing on both.
+      <Slide
+        id="discovery"
+        num="02"
+        label="DISCOVERY"
+        title="Once people search, everything that doesn't match is noise"
+      >
+        <p className="mb-6">
+          Our discovery interviews ran to 20 against a goal of 10, across trade contractors, general contractors,
+          and building product manufacturers. People weren&rsquo;t browsing documents. They were hunting for the few
+          pages that decided whether to bid.
         </p>
-      </CaseSlide>
-
-      <CaseSlide slide="problem">
-        <p>
-          Customers wanted to qualify projects faster. The existing document viewer worked against that goal at
-          nearly every step: large documents sometimes took minutes to load, scrolling and zooming were clunky,
-          there was no multi-page PDF export, and the document tree only went two digits deep on CSI codes, forcing
-          users to download an entire division to find one spec.
+        <p className="mb-6">
+          That changed what search needed to do. Showing matching and non-matching documents together, which seemed
+          helpful on paper, confused people. Once you&rsquo;ve searched for a keyword, there&rsquo;s no reason to
+          keep showing documents that don&rsquo;t contain it.
         </p>
-        <p>
-          Users had built workarounds instead of reporting the problem as broken. Some downloaded from Project
-          Intelligence and re-uploaded into Bluebeam just to annotate. Others downloaded to a phone, then uploaded to
-          SharePoint, because the desktop viewer was too unreliable to trust. In VOC interviews, multiple users
-          independently described the experience as chaotic and unorganized.
+        <p className="type-lead ink-primary my-10 border-l-2 border-clay pl-6">
+          Search isn&rsquo;t a filter on the tree. It&rsquo;s a different way of reading the documents.
         </p>
-        <p>
-          The trigger to rebuild was infrastructure: a move to Elastic Search exposed use cases, like NOT/NEAR/AND
-          keyword operators, the old viewer couldn&rsquo;t support. But the opportunity was bigger than a technical
-          migration.
+        <p className="mb-6">
+          We tested three directions for the viewer shell: static controls, floating controls, and a tab layout. The
+          tab layout won because it let users open a spec and a plan page side by side, which is how estimators
+          actually work.
         </p>
-        <blockquote>
-          The document viewer wasn&rsquo;t a standalone feature. It was the connecting app between the qualification
-          workflow and the estimation workflow, and the surface Building Product Manufacturer accounts would need
-          before they could migrate off the legacy platform onto Project Intelligence. Fixing it had leverage across
-          two initiatives, not one.
-        </blockquote>
-      </CaseSlide>
-
-      <CaseSlide slide="research">
-        <h3>Discovery &amp; Research</h3>
-        <p>
-          My UX partner led VOC interviews and journey mapping; I sat in on sessions and worked from the output. The
-          most useful finding wasn&rsquo;t anything users said directly. It was what they&rsquo;d built around the
-          problem.
-        </p>
-        <p>
-          Nobody had filed the viewer as broken. That mattered more than any single complaint. Workarounds as
-          elaborate as the ones above tell you what the problem actually costs, because you can measure it in what
-          people are willing to do to avoid it.
-        </p>
-        <p>
-          Journey mapping placed the viewer at the seam between qualification and estimation, the point where a user
-          decides whether a project is worth pursuing. That reframed the work from &ldquo;make the viewer
-          faster&rdquo; to &ldquo;stop breaking the handoff between two workflows.&rdquo;
-        </p>
-
-        <h3>Process</h3>
-        <p>
-          Design went through four rounds of search-design iteration and two rounds on the download experience, each
-          round tested before the next began rather than batched into a single validation at the end.
-        </p>
-        <p>
-          The two tracks needed different things. Search was a comprehension problem. Could users tell which
-          documents matched, and why? Each round tested whether people could read the result set correctly. Download
-          was the opposite kind of work. Once export moved beyond one file at a time, the button had to account for
-          every condition it could be in: default, hover, focus, disabled, dropdown open, multiple documents
-          selected, and the combinations of those. Specifying all of it is less exploratory than search design, and
-          it is exactly the detail that decides whether the build matches the spec.
-        </p>
-
-        <CaseImage
-          src="/assets/dv-download-spec.png"
-          alt="Download button spec sheet showing default, selected with counts, hover, tooltip hover, focus, disabled, mobile, and dropdown-active states, including the multi-page PDF versus zipped PDFs format choice"
-          caption="The download button, specified across every condition it can be in. The counts matter: a user selecting 2 documents and a user selecting 2,000 need the same control to behave sensibly."
+        <CaseMediaGroup
+          ground={ground}
+          caption="Two directions that lost, one on contrast and one on controls covering the page."
+          items={[
+            {
+              label: "Explored",
+              src: ph("dv-layout-static"),
+              alt: "Viewer concept with static controls pinned above the document, holding a fixed strip of the page",
+            },
+            {
+              label: "Explored",
+              src: ph("dv-layout-floating"),
+              alt: "Viewer concept with floating controls that hover over the document and cover the page beneath them",
+            },
+          ]}
         />
-        <CaseImage
-          src="/assets/dv-progress.png"
-          alt="Progress bar component spec showing default, active with megabytes transferred, complete, and error states with cancel and retry actions"
-          caption="Large document sets take real time to download, so progress needed its own states. The error state carries a retry rather than dead-ending the user."
+      </Slide>
+
+      <Slide id="solution" num="03" label="THE SOLUTION" title="Three decisions that made it usable">
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">A toggle, not a split view</h3>
+        <p className="mb-6">
+          Search went through four design rounds: a dual view, a toggle with text snippets, a resizable split panel,
+          and finally a simple toggle between All Documents and Matching Only, with an accurate match count per
+          document. The tradeoff is that you can&rsquo;t see both at once. But side by side confused users twice, in
+          discovery and again in design testing.
+        </p>
+        <CaseMediaGroup
+          ground={ground}
+          caption="The final toggle shows only matching documents, with a match count on each, so users jump straight to the pages that matter."
+          items={[
+            {
+              src: ph("dv-toggle-all"),
+              alt: "The viewer set to All Documents, listing every document in the project tree whether or not it contains the keyword",
+            },
+            {
+              src: ph("dv-toggle-matching"),
+              alt: "The same tree set to Matching Only, showing just the documents that contain the keyword with a match count on each",
+            },
+          ]}
         />
 
-        <h3>Key Design Decisions</h3>
-        <h4>Tab layout won testing, but didn&rsquo;t ship</h4>
-        <p>
-          Three layout directions were tested, including a tab layout, which won. It wasn&rsquo;t implemented; the
-          shipped version was a single-document view, cut before ship due to technical feasibility constraints given
-          the build timeline. Everything else validated in testing shipped intact.
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">Treat the &ldquo;small&rdquo; fix as real research</h3>
+        <p className="mb-6">
+          Yellow highlighting had been a complaint for years, and it was easy to dismiss as a color-blindness edge
+          case. It wasn&rsquo;t. Yellow on white is hard for almost everyone to read. I tested several accessible
+          color combinations with people with typical color vision and people with color vision deficiencies. Purple
+          won clearly and shipped before launch.
         </p>
-
-        <h4>Purple over yellow: an accessibility fix nobody asked for</h4>
-        <p>
-          Testing early let the team nail down the overall design as well as the keyword-highlight accessibility
-          problem before shipping something that would draw complaints, or worse, go unused. Users had complained
-          about the previous document viewer&rsquo;s yellow-on-white keyword highlighting for a long time.
-          It&rsquo;s incredibly hard to see for people without any visual disabilities, let alone people with them.
-        </p>
-        <p>
-          Several web-accessible color combinations were tested with users who had typical color vision as well as
-          users with color vision deficiencies. Purple won. The reaction, internally and externally, exceeded
-          expectations for what looked like a minor detail from the outside.
-        </p>
-
-        <CaseImage
-          src="/assets/dv-highlight.png"
-          alt="Document viewer showing keyword matches for the term facility highlighted in purple across the results list and the document body, with desktop and mobile views side by side"
-          caption="The shipped purple highlight, tested against several web-accessible combinations with both typical and color-deficient vision. Matches stay legible in the results list and inside the document itself."
+        <CaseMediaGroup
+          ground={ground}
+          caption="Before and after: purple highlights stay readable on white spec pages where yellow disappeared."
+          items={[
+            {
+              src: ph("dv-highlight-yellow"),
+              alt: "Before: keyword matches highlighted in yellow on a white spec page, where the highlight nearly disappears",
+            },
+            {
+              src: ph("dv-highlight-purple"),
+              alt: "After: the same keyword matches highlighted in purple, clearly readable against the white page",
+            },
+          ]}
         />
 
-        <h3>The Solution</h3>
-        <p>
-          The rebuilt viewer opens large construction document sets in under three seconds, searches inside them with
-          real keyword operators, and exports any combination of pages without leaving the app. Search results can be
-          filtered to matching documents only, with per-document match counts, so a user scanning a hundred-file
-          project sees where the answer is instead of hunting for it.
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">Ship one view, sequence the rest</h3>
+        <p className="mb-6">
+          A tab layout that let users open a spec and a plan page side by side won testing against two other
+          directions. It was too big a lift for the build timeline, so we shipped a single-document view with
+          everything else testing validated. A faster viewer that shipped beat a better one that slipped. Twenty
+          user goals were mapped up front and none were dropped, only sequenced into later phases.
         </p>
-        <p>
-          The parts users noticed most weren&rsquo;t the big ones. Purple highlighting instead of yellow. A document
-          tree that goes deep enough to reach a single spec instead of an entire CSI division. Multi-page export
-          where there had been none. Individually minor, collectively the difference between a tool people worked
-          around and one they worked in.
-        </p>
-
         <CaseImage
-          src="/assets/dv-matching-toggle.png"
-          alt="Document viewer search results showing matching-only toggle with per-document match counts"
-          caption="Search within the viewer, toggling between all documents and matching-only results, with per-document match counts."
+          shadow
+          src={ph("dv-single-view")}
+          alt="The shipped single-document view, with a deep document tree on the left and one document open beside it"
+          caption="The shipped viewer: one document at a time, with a deeper document tree so users can find a single spec without downloading a whole section."
         />
-      </CaseSlide>
+      </Slide>
 
-      <CaseSlide slide="results">
-        <p>Released to Project Intelligence Pro users in November 2024. All three target metrics were hit.</p>
+      <Slide id="validation" num="04" label="VALIDATION" title="What testing taught us">
+        <p className="mb-6">
+          We tested in three rounds, each tied to one design question: the document tree, how search matches should
+          appear, and the overall layout plus downloads.
+        </p>
+        <ul className="mb-6 space-y-2 pl-6">
+          <li>
+            <strong className="font-medium ink-primary">Less on screen beat more context.</strong> Text snippets
+            under each match seemed useful, but users called them clutter in two separate rounds. We cut them and
+            kept the match count.
+          </li>
+        </ul>
+        <CaseImage
+          wide
+          shadow
+          src={ph("dv-download-states")}
+          alt="The download control across three states: ready to download, working with progress, and complete"
+          caption="Downloads say what's happening at every step."
+        />
+        {/* The remaining two findings. The list is split rather than the
+            figure floated, so the reading order stays finding, evidence,
+            finding. */}
+        <ul className="mb-6 space-y-2 pl-6">
+          <li>
+            <strong className="font-medium ink-primary">Clarity and simplicity don&rsquo;t have to compete.</strong>{" "}
+            For download formats, users understood explicit labels better but preferred the feel of a simple PDF/ZIP
+            toggle. We shipped the toggle and added hover tooltips and clear progress states to recover the clarity.
+          </li>
+          <li>
+            <strong className="font-medium ink-primary">The smallest change got the biggest reaction.</strong> The
+            purple highlight drew more positive response, internally and from customers, than anything else we
+            shipped. I didn&rsquo;t expect it to be a big deal.
+          </li>
+        </ul>
+      </Slide>
+
+      <Slide id="outcome" num="05" label="OUTCOME" title="Faster on every metric we set">
+        <p className="mb-6">The first release hit all three targets we set before launch.</p>
         <MetricRow
           metrics={[
             { value: "25%", label: "Smaller downloads" },
             { value: "10%+", label: "Faster performance" },
-            { value: "<3s", label: "Time to first document view" },
+            { value: "<3s", label: "To first document view" },
           ]}
         />
-        <p>
-          Then, in July 2025, after eight months at full exposure, the viewer was rolled back, not for anything in
-          the design, but for networking and security failures in the underlying infrastructure.
+        <p className="mb-6">
+          The viewer also became the foundation for later work, including an AI panel that lets users ask questions
+          about a project&rsquo;s documents.
         </p>
-        <blockquote>
-          Shipping isn&rsquo;t the finish line, and hitting your metrics doesn&rsquo;t make the work permanent. A
-          design can be validated, adopted, and still get pulled by a layer you don&rsquo;t own.
-        </blockquote>
-        <p>
-          I&rsquo;m including it anyway. The eight months it was live are real, the metrics held, and the
-          accessibility work in particular outlived the rollback. Portfolios that only show work still standing
-          aren&rsquo;t showing the job.
-        </p>
-      </CaseSlide>
 
-      <CaseSlide slide="impact">
-        <h3>Reflection</h3>
-        <p>
-          <strong>What worked:</strong> Early testing caught the highlight-color problem before ship, avoiding a
-          repeat of years of user complaints about the old viewer.
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">What I&rsquo;d do differently</h3>
+        <p className="mb-6">
+          The tab layout won testing and then quietly became &ldquo;later.&rdquo; Next time I&rsquo;d push for a
+          committed fast-follow with a date, not an open-ended backlog item. Research that wins should come with a
+          plan to ship it.
         </p>
-        <p>
-          <strong>What I&rsquo;d do differently:</strong> Push harder for research-validated features to ship as
-          designed, like the tab layout, or secure a committed fast-follow rather than an open-ended
-          &ldquo;later&rdquo; that risks never happening.
-        </p>
-        <p>
-          <strong>What this unlocked:</strong> A credible surface for Building Product Manufacturer accounts, the
-          foundation for the Ask Documents AI panel, and the migration effort off the legacy platform. Ask Documents
-          later became the internal proof that conversational AI worked for this user base, the argument that made
-          Search Assist fundable.
-        </p>
-      </CaseSlide>
+      </Slide>
     </>
   );
 }
