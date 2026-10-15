@@ -1,243 +1,286 @@
-import { CaseImage, CaseSection, MetricRow, DecisionTable } from "@/components/case-study";
-import type { CaseStudy } from "./types";
+import type { ReactNode } from "react";
+import {
+  CaseImage,
+  CaseMediaGroup,
+  DecisionTable,
+  MetricRow,
+} from "@/components/case-study";
+import type { CaseStudy, CaseStudyAnchor } from "./types";
+
+// The olive this case study is grounded in: the hero band, and the frames
+// behind the grouped screenshots. Read off the top corner of this case's
+// card on the homepage, so the page opens where the card left off.
+const ground = "#818d6e";
+
+// Slots with no source export in the repo yet. Each placeholder is drawn at
+// the ratio of the slot it sits in, so swapping in the real crop is a path
+// change here and nothing else. See CHANGES.md for the list.
+const ph = (name: string) => `/assets/${name}.svg`;
+
+// Section anchors double as the case-study nav, matching Search Assist.
+const anchors: CaseStudyAnchor[] = [
+  { id: "problem", label: "Problem" },
+  { id: "discovery", label: "Discovery" },
+  { id: "solution", label: "Solution" },
+  { id: "validation", label: "Validation" },
+  { id: "outcome", label: "Outcome" },
+];
 
 const meta: CaseStudy["meta"] = {
+  // The route stays /work/search-starter so existing links hold. The
+  // internal name is not used anywhere the reader can see it.
   slug: "search-starter",
-  title: "Guided Onboarding",
-  subtitle: "Onboarding wizard, Activation squad",
+  // `title` is the rendered H1 and carries both halves: the short name,
+  // a colon, then the headline.
+  title: "Guided Onboarding: Getting new users to a useful search before they gave up",
+  subtitle: "Guided Onboarding",
   stampLabel: "Case study 01",
   stampValue: "Shipped June 2026",
   description: "Getting new users to a useful search before they gave up.",
   fields: [
-    { label: "Role", value: "Sr. Product Designer" },
-    { label: "Squad", value: "Activation squad" },
-    { label: "Timeline", value: "Dec 2025 – Jun 2026" },
-    { label: "Shipped", value: "June 2026" },
+    { label: "Role", value: "Sr. Product Designer, end to end" },
+    { label: "Team", value: "Activation squad (PM, engineering), research partner" },
+    { label: "Timeline", value: "2025–2026" },
+    { label: "Status", value: "Shipped June 2026" },
   ],
+  // No eyebrow: the short name is part of the H1 instead. Empty rather than
+  // removed, so the stampValue fallback in app/work/[slug]/page.tsx does not
+  // step in.
+  eyebrow: "",
+  summary:
+    "Project Intelligence helps contractors find construction projects to bid on. Its search is powerful once it's set up, but new users couldn't set it up on their own. Many waited for a rep to do it for them, and some left first. I designed a guided setup that builds a user's first searches from a few plain questions.",
+  heroImage: {
+    src: "/assets/go-hero-role.png",
+    alt: "The first step of guided setup, asking which company type is closest to the user's day-to-day work",
+    ground,
+  },
+  anchors,
+  typeSystem: true,
 };
+
+function Slide({
+  id,
+  num,
+  label,
+  title,
+  children,
+}: {
+  id: string;
+  num: string;
+  label: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className="case-slide">
+      {/* Body copy inherits .type-body/.ink-body from here, so paragraphs
+          and lists only carry spacing. The shared .case-prose and
+          .case-slide__header rules are left off on purpose: both outrank
+          utility classes on the same elements. */}
+      <div className="case-slide__body type-body ink-body">
+        <header className="mb-7">
+          <p className="type-eyebrow ink-accent">
+            {num} · {label}
+          </p>
+          <h2 className="type-h2 ink-primary mt-2.5">{title}</h2>
+        </header>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+// Wraps a table so it scrolls sideways inside its own box on narrow screens.
+function ScrollTable({ children }: { children: ReactNode }) {
+  return <div className="table-scroll">{children}</div>;
+}
 
 function Body() {
   return (
     <>
-      <CaseSection num="01" label="Overview">
-        <p>
-          New Project Intelligence users were struggling to get started on their own. The product&rsquo;s search and
-          filtering capabilities are powerful, but only once you understand how to use them. Without guidance, new
-          users either leaned heavily on ConstructConnect reps to set up their first saved searches, or they left
-          before finding value.
+      <Slide id="problem" num="01" label="THE PROBLEM" title="New users needed a rep to find their first project">
+        <p className="mb-6">
+          Project Intelligence only proves its value once someone runs a search that fits their business. Getting
+          there meant understanding dozens of filters for trade, project stage, location, and category. New users
+          didn&rsquo;t, so they leaned on a rep to set up their first saved searches, or they left before seeing
+          what the product could do.
         </p>
-        <p>
-          I owned the design for Guided Onboarding, a 7-screen guided onboarding wizard with role- and
-          entitlement-based branching logic, in partnership with the Activation squad, outside my usual home base on
-          the search squad.
+        <p className="mb-6">
+          Support tickets and user interviews pointed the same way. For the business, activation that depended on a
+          person on a call couldn&rsquo;t scale.
         </p>
-      </CaseSection>
+      </Slide>
 
-      <CaseSection num="02" label="The Problem">
-        <p>
-          This created two problems. On the user side, a confusing first experience eroded trust before the product
-          could prove its worth. On the business side, activation that depended on human intervention wasn&rsquo;t
-          scalable.
+      <Slide id="discovery" num="02" label="DISCOVERY" title="One flow, 42 different users">
+        <p className="mb-6">
+          The product&rsquo;s value shows up after a user&rsquo;s first good search, not before. That gave
+          onboarding a single job.
         </p>
-        <p>
-          The pattern was well established going in, surfaced through both support ticket volume and user
-          interviews, not just anecdote.
+        <p className="type-lead ink-primary my-10 border-l-2 border-clay pl-6">
+          Onboarding had one job: get people to their first good search.
         </p>
-        <blockquote>
-          Project Intelligence&rsquo;s value only becomes visible once a user successfully completes a meaningful
-          search. Everything in onboarding needed to move them toward that moment faster.
-        </blockquote>
-      </CaseSection>
+        <p className="mb-6">
+          The hard part was who &ldquo;people&rdquo; meant. Seven company roles and six subscription tiers made 42
+          combinations, each with a different landing page, email behavior, and search scope. A manufacturer
+          tracking competitors needs a different first search than a plumber looking for bids. I mapped every
+          combination before designing a screen, so the flow could ask the same simple questions and still land each
+          user somewhere useful.
+        </p>
+        <CaseImage
+          shadow
+          src={ph("go-role-matrix")}
+          alt="Matrix mapping seven company roles against six subscription tiers, with the landing page and search scope for each combination"
+          caption="Seven roles and six tiers: one flow had to land 42 kinds of users in the right place."
+        />
+      </Slide>
 
-      <CaseSection num="03" label="My Role">
-        <p>
-          I owned the design end-to-end, including logic spanning 7 user roles and 6 entitlement tiers. My
-          responsibilities included running usability testing to validate the flow before build, coordinating with
-          engineering on the conditional logic driving what each user sees and where they land after onboarding, and
-          partnering with the PM throughout.
+      <Slide id="solution" num="03" label="THE SOLUTION" title="Three decisions that got people to value">
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">Show the search as a sentence</h3>
+        <p className="mb-6">
+          Every screen builds a plain-English summary at the top: &ldquo;I&rsquo;m a trade contractor specializing
+          in concrete, focused on bidding projects in Georgia.&rdquo; Users see exactly what each answer does to
+          their search and can edit any part before it runs. On the last step, AI suggests keywords from those
+          answers, capped at about 15 so they read as starting points, not homework. The tradeoff is screen space on
+          every step. It was the most praised part of testing: 6 of 10 participants called it out unprompted,
+          comparing it to a &ldquo;mad lib&rdquo; and a &ldquo;mission statement.&rdquo;
         </p>
-        <p>
-          I also co-ran usability testing with a fellow designer. The team had run studies in Maze before this, but
-          the newer UserTesting platform let us run unmoderated think-aloud sessions with real contractors, which is
-          what the branching logic needed to be tested against.
-        </p>
-      </CaseSection>
+        <CaseImage
+          shadow
+          src="/assets/go-summary-keywords.png"
+          alt="The keyword step, with the running profile summary above it and six suggested keywords below the input"
+          caption="The summary grows with every answer, and keyword suggestions stay short enough to scan."
+        />
 
-      <CaseImage
-        src="/assets/ss-company-type.png"
-        alt="Guided Onboarding onboarding wizard, first screen: company type selection"
-        caption="Screen 1 of 7, company type confirmation. Sets the branching path for the rest of the wizard."
-      />
-
-      <CaseSection num="04" label="Discovery & Research">
-        <p>
-          The dependency on reps for search setup was identified through a combination of support ticket volume and
-          user interviews. Evidence, not assumption, that new users were getting stuck.
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">Call it a profile, build a search</h3>
+        <p className="mb-6">
+          Testing exposed a split. Most participants understood they were setting up a saved search. A meaningful
+          minority thought they were creating a company profile they&rsquo;d never have to fill out again.
+          Rebuilding onboarding as a true profile would have been a big engineering lift. Instead, the flow updates
+          the user&rsquo;s profile and creates a saved search named &ldquo;My Profile Search.&rdquo; Users get the
+          mental model they expected, and the product keeps a search they can edit and reuse.
         </p>
-        <p>Rather than relying on discovery alone, the design was tested through structured usability testing before launch.</p>
-        <ul>
+        <CaseImage
+          wide
+          shadow
+          src="/assets/go-my-profile-search.png"
+          alt="The two saved searches the flow creates, the first named My Profile Search and the second My Keywords"
+          caption="The confirmation names the first search &ldquo;My Profile Search,&rdquo; matching how users described what they&rsquo;d done."
+        />
+
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">Same questions, different destinations</h3>
+        <p className="mb-6">
+          Every user sees the same start and finish, but what happens in between depends on role and tier. Users who
+          choose &ldquo;Other&rdquo; skip straight to the end instead of answering questions that don&rsquo;t apply.
+          Lower tiers still get the keyword step and a working search, just narrower in scope, instead of a hidden
+          step and a dead end. The tradeoff is more logic for engineering to maintain. The payoff is one flow
+          instead of 42.
+        </p>
+        <CaseMediaGroup
+          ground={ground}
+          caption="A manufacturer gets competitor and product tracking. A trade contractor gets a profile search and keywords."
+          items={[
+            {
+              src: ph("go-confirm-manufacturer"),
+              alt: "Confirmation for a manufacturer, listing the competitor and product tracking searches the flow created",
+            },
+            {
+              src: "/assets/go-confirm-contractor.png",
+              alt: "Confirmation for a trade contractor, listing the profile search and the keyword search the flow created",
+            },
+          ]}
+        />
+      </Slide>
+
+      <Slide id="validation" num="04" label="VALIDATION" title="What testing taught us">
+        <p className="mb-6">
+          We tested before build with 10 contractors, from 3 to 30+ years in the industry, across general
+          contracting, plumbing, HVAC, and roofing. Each one set up a search as a plumbing contractor in Atlanta,
+          thinking aloud. It was the team&rsquo;s first study on our new UserTesting license.
+        </p>
+        <ScrollTable>
+          <DecisionTable
+            headers={["Goal", "Target", "Result"]}
+            rows={[
+              ["Recalled the search steps", "60%", "100%"],
+              ["Predicted results as the next step", "75%", "90%"],
+              ["Felt confident running a search", "75%", "90%"],
+              ["Understood how answers shaped results", "75%", "100%"],
+            ]}
+          />
+        </ScrollTable>
+        <p className="mb-6">
+          Every participant finished, with an average ease rating of 4.6 out of 5 and no critical errors.
+        </p>
+        <ul className="mb-6 space-y-2 pl-6">
           <li>
-            <strong>Method:</strong> Unmoderated, think-aloud sessions via UserTesting
-          </li>
-          <li>
-            <strong>Participants:</strong> 10, spanning 3 to 30+ years of construction industry experience across
-            general contractors, plumbing, HVAC, and roofing trades
-          </li>
-          <li>
-            <strong>Task:</strong> &ldquo;You&rsquo;re a plumbing specialist in Atlanta looking for new projects to
-            bid on. Complete the onboarding to set up your search.&rdquo;
+            <strong className="font-medium ink-primary">Testing before build made fixes cheap.</strong> It caught a
+            bug in the trade dropdown and one participant who misread the flow&rsquo;s purpose. Both were fixed
+            before release, along with the profile-versus-search split above.
           </li>
         </ul>
-      </CaseSection>
+        <CaseMediaGroup
+          ground={ground}
+          caption="The same flow on mobile, with the summary still at the top."
+          items={[
+            {
+              src: ph("go-mobile-1"),
+              alt: "The first step of the flow on a phone, asking for company type",
+              fade: true,
+            },
+            {
+              src: "/assets/go-mobile-4.png",
+              alt: "A middle step of the flow on a phone, asking which project stages the user prefers, with the profile summary above it",
+              fade: true,
+            },
+            {
+              src: ph("go-mobile-7"),
+              alt: "The final step of the flow on a phone, confirming the searches it is about to create",
+              fade: true,
+            },
+          ]}
+        />
+        {/* The remaining two findings. The list is split rather than the
+            figure floated, so the reading order stays finding, evidence,
+            finding. */}
+        <ul className="mb-6 space-y-2 pl-6">
+          <li>
+            <strong className="font-medium ink-primary">Single select forced a guess.</strong> 20% of participants
+            wanted to pick more than one role. Single select made them choose a closest fit, which is a known gap
+            worth revisiting.
+          </li>
+          <li>
+            <strong className="font-medium ink-primary">We caught our own blind spot.</strong> General contractors
+            were originally left out of the trade step. We caught it during build and fixed it before release.
+          </li>
+        </ul>
+      </Slide>
 
-      <CaseImage
-        src="/assets/ss-trades.png"
-        alt="Trade and specialty selection screen"
-        caption="Trade selection, with specialties pulled from CSI codes."
-      />
-
-      <CaseSection num="05" label="Process">
-        <p>
-          The role and entitlement logic was mapped across 7 roles and 6 entitlement tiers, a matrix of 42
-          combinations, each with different landing pages, auto-email behavior, and search scope.
-        </p>
-        <p>
-          The flow itself moves through 7 screens: Company Role, Trade Selection, Project Stage Preferences, Service
-          Area, Project Category, Keywords, and Confirmation.
-        </p>
-
+      <Slide
+        id="outcome"
+        num="05"
+        label="OUTCOME"
+        title="Most new users finished, and a quarter found a match"
+      >
         <MetricRow
           metrics={[
-            { value: "100%", label: "Task completion" },
-            { value: "4.6/5", label: "Ease rating" },
-            { value: "0", label: "Critical errors" },
-            { value: "80%", label: "Would use it" },
+            { value: "85%", label: "Finished onboarding once they started" },
+            { value: "26%", label: "Went on to view a curated project match" },
+            { value: "12 min", label: "Median time to that first match" },
           ]}
         />
-
-        <DecisionTable
-          headers={["Metric", "Target", "Actual"]}
-          rows={[
-            ["Recall search steps", "60%", "100%"],
-            ["Predicted results as next step", "75%", "90%"],
-            ["Confidence conducting search", "75%", "90%"],
-            ["Understood input → output link", "75%", "100%"],
-          ]}
-        />
-
-        <p>
-          What testing surfaced went beyond pass/fail. Six of ten participants explicitly praised the
-          natural-language summary screen, unprompted, calling it a &ldquo;mad lib&rdquo; and a &ldquo;mission
-          statement.&rdquo; One participant fundamentally misunderstood the flow&rsquo;s purpose, flagged and
-          addressed before launch. A meaningful minority expected onboarding to set up a persistent profile, not a
-          per-search configuration, which became the project&rsquo;s central design decision. Twenty percent wanted
-          multi-role selection, and a trade-dropdown edit bug was caught in testing before it reached production.
-        </p>
-      </CaseSection>
-
-      <CaseImage
-        src="/assets/ss-keywords.png"
-        alt="Keyword selection screen with AI-suggested keywords"
-        caption="Keywords screen, AI-suggested terms capped at roughly 15, an explicit cost-versus-comprehensiveness tradeoff."
-      />
-
-      <CaseSection num="06" label="Key Design Decisions">
-        <h2>Resolving the &ldquo;profile vs. search&rdquo; mental model gap</h2>
-        <p>
-          Testing surfaced a real split in how users understood the flow. Most correctly treated it as configuring
-          one saved search. A meaningful minority expected onboarding to set up a persistent company profile
-          they&rsquo;d never have to re-enter. This wasn&rsquo;t a copy problem, it was a genuine fork in product
-          strategy: rebuild onboarding as a true profile, fix it through messaging alone, or land somewhere in
-          between.
-        </p>
-        <p>
-          We shipped both, cheaply. The wizard updates the user&rsquo;s actual profile and creates a default saved
-          search literally named &ldquo;My Profile.&rdquo; Users get the language and mental model they expected
-          while the underlying object stays a fully editable, reusable search. It&rsquo;s the hybrid the research
-          pointed to, solved through naming rather than a heavier rebuild.
+        <p className="mb-6">
+          These are early numbers from the first two weeks after launch, across 286 users. The 26% matters most,
+          because it measures value, not just a finished flow. 38% of those users got to a match within five
+          minutes, in the same session.
         </p>
 
-        <h2>Progressive reduction for low-fit roles</h2>
-        <p>
-          Users who select &ldquo;Other&rdquo; as their role skip all 5 middle screens, moving straight from Company
-          Role to Confirmation with no searches created. Rather than forcing irrelevant steps, the wizard still shows
-          a consistent start and end, so the completion pattern stays uniform across every role.
+        <h3 className="type-h3 ink-primary mt-11 mb-3.5">What I&rsquo;d do differently</h3>
+        <p className="mb-6">
+          Instrument before you replace. When I looked for a baseline, the old onboarding page had never been
+          tracked, so there was no &ldquo;before&rdquo; to compare against. The moment you know something is being
+          replaced is the moment to make sure you can still measure it.
         </p>
-
-        <h2>Caught our own assumption mid-build</h2>
-        <p>
-          General Contractors were originally excluded from the Trade Selection screen. We caught that restriction
-          ourselves during build and corrected it before it ever shipped, the kind of check that&rsquo;s easy to skip
-          under deadline pressure.
-        </p>
-
-        <h2>Entitlement-gated document search, not feature-hidden</h2>
-        <p>
-          Project Intelligence Starter users don&rsquo;t get Documents in keyword search results, but they still see
-          the Keywords screen and get a working search, just narrower in scope. The design choice was to degrade
-          gracefully rather than hide the step entirely.
-        </p>
-      </CaseSection>
-
-      <CaseImage
-        src="/assets/ss-confirmation.png"
-        alt="Confirmation screen showing My Profile Search and My Keywords saved searches"
-        caption='Confirmation screen. "My Profile Search" is the naming decision that resolved the mental model gap without an architecture change.'
-      />
-
-      <CaseSection num="07" label="The Solution">
-        <p>
-          Guided Onboarding walks new users through a 7-screen guided wizard covering role, trade, project stage,
-          location, category, and optional keywords, then closes with a natural-language summary of the search
-          it&rsquo;s about to create. Every field in that summary is directly editable before confirming, so the
-          &ldquo;black box&rdquo; feeling of an AI-assisted flow never sets in.
-        </p>
-      </CaseSection>
-
-      <CaseImage
-        src="/assets/ss-mobile.png"
-        alt="Mobile version of the onboarding wizard"
-        caption="The same flow, adapted for mobile."
-        className="mx-auto block max-w-[320px]"
-      />
-
-      <CaseSection num="08" label="Outcome">
-        <p>Shipped June 2026. Early results from Pendo, roughly two weeks post-launch based on 286 users:</p>
-        <MetricRow
-          metrics={[
-            { value: "85.3%", label: "Completed" },
-            { value: "25.8%", label: "Reached a match" },
-            { value: "12 min", label: "Median time" },
-            { value: "38%", label: "Within 5 minutes" },
-          ]}
-        />
-        <p>
-          25.8% of users who completed onboarding went on to view a curated project match afterward, the clearest
-          signal that onboarding led to real value, not just flow completion. Sample size is still small, worth
-          another pull once more time has passed post-launch for a sturdier read.
-        </p>
-      </CaseSection>
-
-      <CaseSection num="09" label="Reflection">
-        <p>
-          <strong>What worked:</strong> Partnering outside my usual squad forced a cleaner handoff discipline than
-          I&rsquo;m used to. Nothing could depend on context that only my own squad had. The usability testing
-          investment paid for itself directly: it surfaced the profile-vs-search tension before launch, not after,
-          and gave us a cheap way to resolve it through naming instead of a rebuild.
-        </p>
-        <p>
-          <strong>What I&rsquo;d do differently:</strong> Instrument before you replace, not after. When I went
-          looking for a baseline to measure Guided Onboarding against, the old onboarding page had never been tagged
-          in Pendo. There was no historical funnel to compare to. That&rsquo;s an easy trap: the moment you know
-          something&rsquo;s getting replaced is exactly the moment to make sure you can still measure what it used to
-          do.
-        </p>
-        <p>
-          <strong>What this unlocked:</strong> A repeatable template for testing onboarding work before it ships
-          rather than after, and a case for unmoderated think-aloud testing as a standard step rather than an
-          occasional one.
-        </p>
-      </CaseSection>
+      </Slide>
     </>
   );
 }

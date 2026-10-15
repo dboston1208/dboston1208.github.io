@@ -376,3 +376,56 @@ The older `dv-*.png` files still in `public/assets/` (`dv-matching-toggle`,
 `dv-highlight`, `dv-progress`, `dv-download-spec`) are not wired up. They are
 multi-panel composites rather than tight crops, and two of them show a project
 name and a test user name, which the crop rule for this pass rules out.
+
+---
+
+## Guided Onboarding rebuilt on the Search Assist template (2026-10-15)
+
+`lib/case-studies/search-starter.tsx` was replaced wholesale. The route stays
+`/work/search-starter`, so nothing that links here breaks, but the internal
+name appears nowhere a reader can see it: the H1 and `subtitle` both say
+"Guided Onboarding".
+
+It now uses the same shell as Search Assist: the local `Slide` helper, the
+`ScrollTable` + `DecisionTable` pair for the usability-test results,
+`CaseMediaGroup` on the case's own ground, `CaseImage` (`shadow`, plus `wide`
+for the saved-search strip), the `type-lead` pull quote, and `MetricRow`.
+`typeSystem` is on and the anchors are Problem / Discovery / Solution /
+Validation / Outcome. The old nine-section `CaseSection` markup is gone.
+
+The hero band's ground is `#818d6e`, sampled from the top corner of this
+case's card on the homepage, so the page opens on the colour the card left
+off on. Search Assist does the same with its clay.
+
+The homepage card needed no edit: its `outcome` already reads "Getting new
+users to a useful search before they gave up", which is the new headline. The
+"What's next" card follows `nextProject()` and shows that same string.
+
+### Art
+
+The source exports named for this pass were not in the repo, but the older
+`ss-*.png` screenshots are the same screens, so five of the nine slots were
+cropped from those rather than stubbed. Crops were taken with a small
+Chrome-based script (`sips` crops relative to the centre, which makes
+coordinates read off an image unusable), tight to the card so the text stays
+readable:
+
+| Slot | File | From |
+| --- | --- | --- |
+| Hero band | `go-hero-role.png` (3.2:1) | `ss-company-type.png`, both rows of role cards |
+| Decision 1 | `go-summary-keywords.png` | `ss-keywords.png`, summary bar through the suggestions |
+| Decision 2 | `go-my-profile-search.png` (wide strip) | `ss-confirmation.png`, the two saved-search rows |
+| Decision 3, right | `go-confirm-contractor.png` | `ss-confirmation.png`, the whole confirmation |
+| Validation, middle | `go-mobile-4.png` | `ss-mobile.png`, trimmed to the content |
+
+Four slots are still placeholders, each an SVG at the ratio of its slot:
+`go-role-matrix.svg`, `go-confirm-manufacturer.svg`, `go-mobile-1.svg` and
+`go-mobile-7.svg`. The two mobile ones carry their label in the top third,
+because `CaseMediaGroup`'s `fade` dissolves the bottom of a tall frame.
+
+Swapping one in is the same two-step change as Document Viewer: drop the
+`.png` into `public/assets/` under the same stem, then replace that slot's
+`ph("name")` call with the `/assets/name.png` path.
+
+The `ss-*.png` files are now unreferenced by any page, and are kept only as
+the crop sources for the above.
