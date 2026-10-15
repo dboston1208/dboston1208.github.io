@@ -21,9 +21,8 @@ export const projects: Project[] = [
     year: "2026",
     metric: "In expanded beta",
     image: {
-      src: "/assets/thumbs/search-assist-frame.png",
-      alt: "Search Assist turning a plain-language request into applied filters, on a tilted card",
-      screen: { src: "/assets/sa-hero.mp4", poster: "/assets/sa-hero-poster.jpg" },
+      src: "/assets/thumbs/search-assist.png",
+      alt: "Search Assist panel open beside the search results page",
     },
     fill: true,
   },
